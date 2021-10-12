@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class LoginPanel extends JPanel{
 
-    public LoginPanel(JButton register, JButton login){
+    public LoginPanel(JButton register, JButton login, JTextField id_enterField, JTextField password_enterField){
 
         // UI for Login
         this.setLayout(new GridLayout(6,1,0,0));
@@ -33,14 +33,12 @@ public class LoginPanel extends JPanel{
 
         JPanel login_entry_id = new JPanel();
         JLabel id_title = new JLabel("    User ID :");
-        JTextField id_enterField = new JTextField();
         id_enterField.setPreferredSize(new Dimension(250,25));
         login_entry_id.add(id_title);
         login_entry_id.add(id_enterField);
 
         JPanel login_entry_password = new JPanel();
         JLabel password_title = new JLabel("Password :");
-        JTextField password_enterField = new JTextField();
         password_enterField.setPreferredSize(new Dimension(250,25));
         login_entry_password.add(password_title);
         login_entry_password.add(password_enterField);

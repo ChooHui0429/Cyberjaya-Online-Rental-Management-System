@@ -12,6 +12,7 @@ public class RegisterPopOutWindow extends JFrame{
         ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
         this.setIconImage(logo.getImage());
 
+        // Panel for all the notice 
         JPanel notice_panel = new JPanel();
         notice_panel.setLayout(new GridLayout(2,1,1,1));
         JLabel notice1 = new JLabel("Please always check at the 'check user ID and password' for the registration status by using Email and Security Password");
@@ -28,6 +29,7 @@ public class RegisterPopOutWindow extends JFrame{
         Image Notice_image_resize = Image_Get_image.getScaledInstance(320, 220, java.awt.Image.SCALE_SMOOTH);
         Notice_image = new ImageIcon(Notice_image_resize);
 
+        // display notice image
         JLabel Notice_image_display = new JLabel();
         Notice_image_display.setIcon(Notice_image);
         Notice_image_display.setHorizontalAlignment(JLabel.CENTER);

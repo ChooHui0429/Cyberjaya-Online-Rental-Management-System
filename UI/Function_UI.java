@@ -14,7 +14,14 @@ public class Function_UI extends JPanel implements ActionListener{
     // Create Login Panel
     JButton register_LoginPage = new JButton("Register");
     JButton login_LoginPage = new JButton("Login");
-    LoginPanel LoginUI = new LoginPanel(register_LoginPage, login_LoginPage);
+
+    JTextField id_enterField_LoginPage = new JTextField();
+    JTextField password_enterField_LoginPage = new JTextField();
+
+    LoginPanel LoginUI = new LoginPanel(register_LoginPage, 
+                                        login_LoginPage, 
+                                        id_enterField_LoginPage, 
+                                        password_enterField_LoginPage);
 
     // Create Register Panel
     JButton register_RegisterPage = new JButton("Register");
@@ -34,8 +41,7 @@ public class Function_UI extends JPanel implements ActionListener{
                                                     email_enterField_RegisterPage, 
                                                     securityPassword_enterField_RegisterPage, 
                                                     errorMessage_RegistrationPage, 
-                                                    acc_type_selection_RegisterPage
-                                                );
+                                                    acc_type_selection_RegisterPage);
 
     // Create Pop Out window when registration successful
     JButton ok_PopOutRegister = new JButton("OK");
@@ -47,6 +53,8 @@ public class Function_UI extends JPanel implements ActionListener{
         this.setLayout(main_UI);
         this.add(LoginUI, "LoginUI");
         this.add(RegisterUI, "RegisterUI");
+
+        // Make Login page as first page when open the app 
         main_UI.show(this, "LoginUI");
 
         // Add listener to all button
@@ -54,6 +62,7 @@ public class Function_UI extends JPanel implements ActionListener{
 
         register_RegisterPage.addActionListener(this);
         back_RegisterPage.addActionListener(this);
+
         ok_PopOutRegister.addActionListener(this);
         
     }
@@ -62,19 +71,31 @@ public class Function_UI extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == register_LoginPage){
-            main_UI.show(this, "RegisterUI");
+
+            // Makesure all the textfield are empty 
             name_enterField_RegisterPage.setText("");
             email_enterField_RegisterPage.setText("");
             securityPassword_enterField_RegisterPage.setText("");
             acc_type_selection_RegisterPage.setSelectedItem("--------");
 
+            // Switch to register page
+            main_UI.show(this, "RegisterUI");
+
         }
 
         else if(e.getSource() == back_RegisterPage){
+            // Makesure all the textfield are empty 
+            id_enterField_LoginPage.setText("");
+            password_enterField_LoginPage.setText("");
+
+            // Switch to login page
             main_UI.show(this, "LoginUI");
+
+            
         }
         else if(e.getSource() == register_RegisterPage){
             
+            // Makesure all te required information are filled, else pop out error message
             if(name_enterField_RegisterPage.getText().equals("") || 
                 email_enterField_RegisterPage.getText().equals("") || 
                 securityPassword_enterField_RegisterPage.getText().equals("") ||
@@ -82,19 +103,30 @@ public class Function_UI extends JPanel implements ActionListener{
                 ){
                 errorMessage_RegistrationPage.setText("Please Complete all your registration information.");
             }
+            
             else{
+                // Register new data
                 RegisterDataToJson.dataToJson(name_enterField_RegisterPage.getText(), 
                                                 email_enterField_RegisterPage.getText(), 
                                                 securityPassword_enterField_RegisterPage.getText(), 
                                                 acc_type_selection_RegisterPage.getSelectedItem().toString()
                                             );
+
+                // Makesure all the textfield are empty 
+                id_enterField_LoginPage.setText("");
+                password_enterField_LoginPage.setText("");
+            
+                // Switch to login page
                 main_UI.show(this, "LoginUI");
+
+                // Pop out guide for new user
                 registerPopOutWindow.setVisible(true);
             }
             
         }
 
         else if(e.getSource() == ok_PopOutRegister){
+            // close the guide
             registerPopOutWindow.setVisible(false);
         }
 
