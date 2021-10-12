@@ -1,5 +1,8 @@
 package UI;
 import javax.swing.*;
+
+import Funtion.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,6 +83,11 @@ public class Function_UI extends JPanel implements ActionListener{
                 errorMessage_RegistrationPage.setText("Please Complete all your registration information.");
             }
             else{
+                RegisterDataToJson.dataToJson(name_enterField_RegisterPage.getText(), 
+                                                email_enterField_RegisterPage.getText(), 
+                                                securityPassword_enterField_RegisterPage.getText(), 
+                                                acc_type_selection_RegisterPage.getSelectedItem().toString()
+                                            );
                 main_UI.show(this, "LoginUI");
                 registerPopOutWindow.setVisible(true);
             }

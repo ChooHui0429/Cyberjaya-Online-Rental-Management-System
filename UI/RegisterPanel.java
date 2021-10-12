@@ -3,7 +3,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RegisterPanel extends JPanel{
-    public RegisterPanel(JButton register, JButton back, JTextField name_enterField, JTextField email_enterField, JTextField securityPassword_enterField, JLabel error_message, JComboBox<String> acc_type_selection){
+    public RegisterPanel(JButton register, 
+                            JButton back, 
+                            JTextField name_enterField, 
+                            JTextField email_enterField, 
+                            JTextField securityPassword_enterField, 
+                            JLabel error_message, 
+                            JComboBox<String> acc_type_selection
+                        ){
         // UI for Registration
         this.setLayout(new GridLayout(3,1,1,1));
 
