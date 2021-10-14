@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class LoginPanel extends JPanel{
 
-    public LoginPanel(JButton register, JButton login, JTextField id_enterField, JTextField password_enterField){
+    public LoginPanel(JButton register, JButton login, JTextField id_enterField, JTextField password_enterField, JLabel error_message, JLabel find_acc){
 
         // UI for Login
         this.setLayout(new GridLayout(6,1,0,0));
@@ -29,7 +29,7 @@ public class LoginPanel extends JPanel{
 
         // Panel for user login in Login Page
         JPanel login_entry = new JPanel();
-        login_entry.setLayout(new GridLayout(2,1,10,10));
+        login_entry.setLayout(new GridLayout(3,1,10,10));
 
         JPanel login_entry_id = new JPanel();
         JLabel id_title = new JLabel("    User ID :");
@@ -42,9 +42,13 @@ public class LoginPanel extends JPanel{
         password_enterField.setPreferredSize(new Dimension(250,25));
         login_entry_password.add(password_title);
         login_entry_password.add(password_enterField);
+
+        error_message.setForeground(Color.RED);
+        error_message.setHorizontalAlignment(JLabel.CENTER);
         
         login_entry.add(login_entry_id);
         login_entry.add(login_entry_password);
+        login_entry.add(error_message);
         this.add(login_entry);
 
         // Button for Login Page
@@ -54,19 +58,14 @@ public class LoginPanel extends JPanel{
         button_column1.add(register);
         button_column1.add(login);
 
-        JLabel find_acc = new JLabel("<html><u>Click here to check user ID and password</u></html>");
+        
         find_acc.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         find_acc.setForeground(Color.BLUE);
         find_acc.setHorizontalAlignment(JLabel.CENTER);
 
         button_panel.add(button_column1);
         button_panel.add(find_acc);
+
         this.add(button_panel);
-
-        
-
     }
-    
-    
-
 }

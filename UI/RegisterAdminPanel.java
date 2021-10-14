@@ -2,28 +2,27 @@ package UI;
 import javax.swing.*;
 import java.awt.*;
 
-public class RegisterPanel extends JPanel{
-    public RegisterPanel(
+public class RegisterAdminPanel extends JPanel{
+    public RegisterAdminPanel(
         JButton register, 
         JButton back, 
         JTextField name_enterField, 
         JTextField email_enterField, 
         JTextField securityPassword_enterField, 
-        JLabel error_message, 
-        JComboBox<String> acc_type_selection){
-        
-        // UI for Registration
+        JLabel error_message){
+
+        // UI for Admin Registration
         this.setLayout(new GridLayout(3,1,1,1));
 
-        // Title for Registration Page
-        JLabel title = new JLabel("REGISTRATION");
+        // Title for Admin Registration Page
+        JLabel title = new JLabel("REGISTRATION NEW ADMIN");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(new Font("MV Boli", Font.BOLD, 25));
         this.add(title);
 
         // Entry for registration information
         JPanel register_entry = new JPanel();
-        register_entry.setLayout(new GridLayout(5,1,10,10));
+        register_entry.setLayout(new GridLayout(4,1,10,10));
 
         JPanel register_entry_name = new JPanel();
         JLabel name_title = new JLabel("                        Name :");
@@ -42,28 +41,22 @@ public class RegisterPanel extends JPanel{
         securityPassword_enterField.setPreferredSize(new Dimension(250,25));
         register_entry_securityPassword.add(securityPassword_title);
         register_entry_securityPassword.add(securityPassword_enterField);
-
-        JPanel accType_entry_accType = new JPanel();
-        JLabel accType_title = new JLabel("Account Type :");
-        accType_entry_accType.add(accType_title);
-        accType_entry_accType.add(acc_type_selection);
-
-        // Error Message Label
+        
+        // Error message label
         error_message.setForeground(Color.RED);
         error_message.setHorizontalAlignment(JLabel.CENTER);
 
         register_entry.add(register_entry_name);
         register_entry.add(register_entry_email);
         register_entry.add(register_entry_securityPassword);
-        register_entry.add(accType_entry_accType);
         register_entry.add(error_message);
         this.add(register_entry);
 
-        // Button for Register Page
+        // Button for Admin Register Page
         JPanel button_panel = new JPanel();
         button_panel.add(back);
         button_panel.add(register);
 
-        this.add(button_panel);  
+        this.add(button_panel);
     }
 }
