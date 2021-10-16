@@ -43,10 +43,10 @@ public class RegisterPanel extends JPanel{
         register_entry_securityPassword.add(securityPassword_title);
         register_entry_securityPassword.add(securityPassword_enterField);
 
-        JPanel accType_entry_accType = new JPanel();
+        JPanel register_entry_accType = new JPanel();
         JLabel accType_title = new JLabel("Account Type :");
-        accType_entry_accType.add(accType_title);
-        accType_entry_accType.add(acc_type_selection);
+        register_entry_accType.add(accType_title);
+        register_entry_accType.add(acc_type_selection);
 
         // Error Message Label
         error_message.setForeground(Color.RED);
@@ -55,7 +55,7 @@ public class RegisterPanel extends JPanel{
         register_entry.add(register_entry_name);
         register_entry.add(register_entry_email);
         register_entry.add(register_entry_securityPassword);
-        register_entry.add(accType_entry_accType);
+        register_entry.add(register_entry_accType);
         register_entry.add(error_message);
         this.add(register_entry);
 

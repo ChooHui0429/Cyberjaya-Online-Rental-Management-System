@@ -39,10 +39,4 @@ public class RegisterData {
     public void setAccType(String acc_type){
         this.acc_type = acc_type;
     }
-
-    @Override
-    public String toString(){
-        return "\"RegisterData [Name ="+ name + ",Email =" + email + ",Security Password =" + securityPassword + ",Account Type =" + acc_type +"]";
-    }
-
 }

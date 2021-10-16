@@ -20,9 +20,4 @@ public class UserContactNumData {
     public void setContactNumber(String contactNumber){
         this.contactNumber = contactNumber;
     }
-
-    @Override
-    public String toString(){
-        return "\"UserContactNumData [User ID ="+ userID + ",Contact Number =" + contactNumber +"]";
-    }
 }

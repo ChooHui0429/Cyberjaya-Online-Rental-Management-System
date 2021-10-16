@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,13 +25,17 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import DataClass.AccountData;
+import DataClass.PropertyData;
 import DataClass.RegisterData;
+import DataClass.RentPropertyData;
 import DataClass.UserContactNumData;
 import Funtion.ApproveUser;
 import Funtion.CheckAccount;
 import Funtion.LoginChecking;
+import Funtion.PropertyDataFunction;
 import Funtion.RegisterDataToJson;
 import Funtion.RemoveUser;
+import Funtion.RentPropertFunction;
 import Funtion.UserProfileUpdate;
 
 
@@ -263,10 +268,88 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         contactNumber_enterField_userEditProfileUI,
         error_message_userEditProfileUI);
 
+    // Create User view Property Panel
+    JButton back_userViewProperty = new JButton("back");
+    // Table Column Name
+    String[] columnName_userViewProperty = {"Property ID", "Category", "Size (Square feet)"};
+    DefaultTableModel tableModel_userViewProperty = new DefaultTableModel(columnName_userViewProperty, 0){
+        @Override
+        public Class<?> getColumnClass(int column){
+            switch(column){
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return String.class;
+                default:
+                    return String.class;
+            }
+        }
+    };  
+    JTable data_display_userViewProperty = new JTable(tableModel_userViewProperty);
+
+    UserViewProperty userViewProperty = new UserViewProperty(back_userViewProperty, data_display_userViewProperty);
+
+    // Create User Rent Property Window
+    JButton back_userPropertyRentWindow = new JButton("back");
+    JButton rent_userPropertyRentWindow = new JButton("rent");
+
+    JLabel title_ID_userPropertyRentWindow = new JLabel ();
+    JLabel size_userPropertyRentWindow = new JLabel (); 
+    JLabel NumRoom_userPropertyRentWindow = new JLabel (); 
+    JLabel NumBathroom_userPropertyRentWindow = new JLabel ();
+    JLabel Condition_userPropertyRentWindow = new JLabel ();
+    JLabel ContactNum_userPropertyRentWindow = new JLabel ();
+    JLabel address_userPropertyRentWindow = new JLabel ();
+    JLabel facilities_userPropertyRentWindow = new JLabel ();
+    JLabel rentalAskFor_userPropertyRentWindow = new JLabel ();
+    JLabel propertyType_userPropertyRentWindow = new JLabel ();
+    JLabel owner_userPropertyRentWindow = new JLabel();
+    UserPropertyRentWindow userPropertyRentWindow = new UserPropertyRentWindow(
+        back_userPropertyRentWindow,
+        rent_userPropertyRentWindow,
+        title_ID_userPropertyRentWindow,
+        size_userPropertyRentWindow, 
+        NumRoom_userPropertyRentWindow, 
+        NumBathroom_userPropertyRentWindow,
+        Condition_userPropertyRentWindow,
+        ContactNum_userPropertyRentWindow,
+        address_userPropertyRentWindow,
+        facilities_userPropertyRentWindow,
+        rentalAskFor_userPropertyRentWindow,
+        propertyType_userPropertyRentWindow,
+        owner_userPropertyRentWindow);
+
+    // Create User View Rent Property Panel
+    JButton back_userViewRentUI =  new JButton("back");
+    JLabel notice_userViewRentUI = new JLabel(); 
+    // Table Column Name
+    String[] columnName_userViewRentUI = {"Property ID", "Agent/Owner Account", "Status"};
+    DefaultTableModel tableModel_userViewRentUI = new DefaultTableModel(columnName_userViewRentUI, 0){
+        @Override
+        public Class<?> getColumnClass(int column){
+            switch(column){
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return String.class;
+                default:
+                    return String.class;
+            }
+        }
+    };
+    JTable data_display_userViewRentUI = new JTable(tableModel_userViewRentUI);
+
+    UserViewRent userViewRentUI = new UserViewRent(back_userViewRentUI, notice_userViewRentUI, data_display_userViewRentUI);
+
     // Create Agent or Owner Home Page panel
     JButton uploadProperty_agentOwnerUI = new JButton("Upload New Property");
     JButton modifiedProperties_agentOwnerUI = new JButton("Modified Properties");
     JButton rentedPropertie_agentOwnerUI = new JButton("Rented Propertie");
+    JButton ViewPropertiesCommand_agentOwnerUI = new JButton("View Propertie Comments");
     JButton logout_agentOwnerUI = new JButton("Logout");
     JLabel title_agentOwnerUI = new JLabel("");
     JLabel welcome_name_agentOwnerUI = new JLabel("");
@@ -275,9 +358,110 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         uploadProperty_agentOwnerUI, 
         modifiedProperties_agentOwnerUI, 
         rentedPropertie_agentOwnerUI,
+        ViewPropertiesCommand_agentOwnerUI,
         logout_agentOwnerUI,
         title_agentOwnerUI,
         welcome_name_agentOwnerUI);
+
+    // Create Upload New Property Page panel
+    JButton back_uploadpropertyUI = new JButton ("Back");
+    JButton upload_uploadpropertyUI = new JButton ("Upload");
+
+    JTextField size_enterField_uploadpropertyUI = new JTextField();
+    JTextField NumRoom_enterField_uploadpropertyUI = new JTextField();
+    JTextField NumBathroom_enterField_uploadpropertyUI = new JTextField();
+    JTextField Condition_enterField_uploadpropertyUI = new JTextField();
+    JTextField ContactNum_enterField_uploadpropertyUI = new JTextField();
+
+    JLabel error_message_uploadpropertyUI = new JLabel(); 
+
+    JTextArea address_enterField_uploadpropertyUI = new JTextArea ();
+    JTextArea facilities_enterField_uploadpropertyUI = new JTextArea ();
+    JTextArea rentalAskFor_enterField_uploadpropertyUI = new JTextArea ();
+
+    String[] propertyType_uploadpropertyUI = {"--------", "Condominium", "Single Story", "Double Story", "Townhouse", "Bungalow"};
+    String[] status_uploadpropertyUI = {"--------", "Active", "Hide"};
+    JComboBox<String> propertyType_selection_uploadpropertyUI = new JComboBox<String>(propertyType_uploadpropertyUI);
+    JComboBox<String> status_selection_uploadpropertyUI = new JComboBox<String>(status_uploadpropertyUI);
+
+    UploadPropertyUI uploadpropertyUI =new UploadPropertyUI(
+        back_uploadpropertyUI, 
+        upload_uploadpropertyUI, 
+        size_enterField_uploadpropertyUI, 
+        NumRoom_enterField_uploadpropertyUI, 
+        NumBathroom_enterField_uploadpropertyUI, 
+        Condition_enterField_uploadpropertyUI, 
+        ContactNum_enterField_uploadpropertyUI, 
+        error_message_uploadpropertyUI, 
+        address_enterField_uploadpropertyUI, 
+        facilities_enterField_uploadpropertyUI, 
+        rentalAskFor_enterField_uploadpropertyUI, 
+        propertyType_selection_uploadpropertyUI, 
+        status_selection_uploadpropertyUI);
+
+    // Create Modified Property Page panel
+    JButton back_modifiedPropertyUI = new JButton ("Back");
+
+    // Table Column Name
+    String[] columnName_modifiedPropertyUI = {"Property ID", "Category", "Status"};
+    DefaultTableModel tableModel_modifiedPropertyUI = new DefaultTableModel(columnName_modifiedPropertyUI, 0){
+        @Override
+        public Class<?> getColumnClass(int column){
+            switch(column){
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return String.class;
+                default:
+                    return String.class;
+            }
+        }
+    };
+    JTable data_display_modifiedPropertyUI = new JTable(tableModel_modifiedPropertyUI);
+
+    JLabel notice_modifiedPropertyUI = new JLabel();
+
+    ModifiedPropertyPage modifiedPropertyUI = new ModifiedPropertyPage(
+        back_modifiedPropertyUI, 
+        data_display_modifiedPropertyUI,
+        notice_modifiedPropertyUI);
+
+    // Create Selected Modified Property Window
+    JLabel title_ID_modifiedPropertyWindow = new JLabel();
+    JLabel errorMessage_modifiedPropertyWindow = new JLabel();
+
+    JButton update_modifiedPropertyWindow = new JButton("Update");
+
+    JTextField size_enterField_modifiedPropertyWindow = new JTextField();
+    JTextField NumRoom_enterField_modifiedPropertyWindow = new JTextField();
+    JTextField NumBathroom_enterField_modifiedPropertyWindow = new JTextField();
+    JTextField Condition_enterField_modifiedPropertyWindow = new JTextField();
+    JTextField ContactNum_enterField_modifiedPropertyWindow = new JTextField();
+
+    JTextArea address_enterField_modifiedPropertyWindow = new JTextArea ();
+    JTextArea facilities_enterField_modifiedPropertyWindow = new JTextArea ();
+    JTextArea rentalAskFor_enterField_modifiedPropertyWindow = new JTextArea ();
+
+    String[] propertyType_modifiedPropertyWindow = {"--------", "Condominium", "Single Story", "Double Story", "Townhouse", "Bungalow"};
+    String[] status_modifiedPropertyWindow = {"--------", "Active", "Inactive", "Hide"};
+    JComboBox<String> propertyType_selection_modifiedPropertyWindow = new JComboBox<String>(propertyType_modifiedPropertyWindow);
+    JComboBox<String> status_selection_modifiedPropertyWindow = new JComboBox<String>(status_modifiedPropertyWindow);
+    ModifiedPropertyWindow modifiedPropertyWindow = new ModifiedPropertyWindow(
+        title_ID_modifiedPropertyWindow, 
+        errorMessage_modifiedPropertyWindow,
+        update_modifiedPropertyWindow,
+        size_enterField_modifiedPropertyWindow,
+        NumRoom_enterField_modifiedPropertyWindow,
+        NumBathroom_enterField_modifiedPropertyWindow,
+        Condition_enterField_modifiedPropertyWindow,
+        ContactNum_enterField_modifiedPropertyWindow,
+        address_enterField_modifiedPropertyWindow,
+        facilities_enterField_modifiedPropertyWindow,
+        rentalAskFor_enterField_modifiedPropertyWindow,
+        propertyType_selection_modifiedPropertyWindow,
+        status_selection_modifiedPropertyWindow);
 
     public Function_UI(JFrame frame){
         
@@ -290,15 +474,27 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         this.add(adminAprUI, "adminAprUI");
         this.add(adminRemoveUI, "adminRemoveUI");
         this.add(userUI, "userUI");
+        this.add(userViewProperty, "userViewProperty");
         this.add(userEditProfileUI,"userEditProfileUI");
+        this.add(userViewRentUI,"userViewRentUI");
         this.add(agentOwnerUI, "agentOwnerUI");
-        
+        this.add(uploadpropertyUI, "uploadpropertyUI");
+        this.add(modifiedPropertyUI, "modifiedPropertyUI");
 
         // Make Login page as first page when open the app 
         main_UI.show(this, "LoginUI");
 
-        //Add mouse listener to label
+        // Add mouse listener to label
+        // Label for Login Menu
         find_acc_LoginPage.addMouseListener(this);
+
+        // Table for User View Property Menu
+        data_display_userViewProperty.addMouseListener(this);
+
+        // Table for Modified Property Menu
+        data_display_modifiedPropertyUI.addMouseListener(this);
+
+        
 
         // Add action listener to all button
         // Button for Login page
@@ -349,14 +545,35 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         logout_userUI.addActionListener(this);
         editProfile_userUI.addActionListener(this);
 
+        // Button for User View Property Page
+        back_userViewProperty.addActionListener(this);
+
+        // Button for User View Property Rent Window
+        back_userPropertyRentWindow.addActionListener(this);
+        rent_userPropertyRentWindow.addActionListener(this);
+
         // Button for User Edit Profile Page
         update_userEditProfileUI.addActionListener(this);
 
+        // Button for User View Rent Page
+        back_userViewRentUI.addActionListener(this);
+        
         // Button for Agent or Owner Home page
         uploadProperty_agentOwnerUI.addActionListener(this); 
         modifiedProperties_agentOwnerUI.addActionListener(this); 
         rentedPropertie_agentOwnerUI.addActionListener(this);
+        ViewPropertiesCommand_agentOwnerUI.addActionListener(this);
         logout_agentOwnerUI.addActionListener(this);
+
+        // Button for Upload New Property Page panel
+        back_uploadpropertyUI.addActionListener(this);
+        upload_uploadpropertyUI.addActionListener(this);
+
+        // Button for Modified Property Page Panel
+        back_modifiedPropertyUI.addActionListener(this);
+
+        // Button for Modified Property Window
+        update_modifiedPropertyWindow.addActionListener(this);
     }
 
     // All Button action
@@ -370,6 +587,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             email_enterField_RegisterPage.setText("");
             securityPassword_enterField_RegisterPage.setText("");
             acc_type_selection_RegisterPage.setSelectedItem("--------");
+
+            // Makesure Error lable empty
+            errorMessage_RegistrationPage.setText("");
 
             // Switch to register page
             main_UI.show(this, "RegisterUI");
@@ -428,6 +648,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             id_enterField_LoginPage.setText("");
             password_enterField_LoginPage.setText("");
 
+            // Makesure Error lable empty
+            error_message_LoginPage.setText("");
+
             // Switch to login page
             main_UI.show(this, "LoginUI");   
         }
@@ -458,6 +681,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                             // Makesure all the textfield are empty 
                             id_enterField_LoginPage.setText("");
                             password_enterField_LoginPage.setText("");
+
+                            // Makesure Error lable empty
+                            error_message_LoginPage.setText("");
             
                             // Switch to login page
                             main_UI.show(this, "LoginUI");
@@ -513,6 +739,8 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
         // Button event for Admin Home Page
         else if(e.getSource() == approveRegister_AdminPage){
+            // Makesure notice empty
+            notice_adminAprUI.setText("");
             // Create Json instance
             Gson gson = new Gson();
 
@@ -530,6 +758,13 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 }
                 // insert data into table
                 else{
+                    // Makesure table empty
+                    if(tableModel_adminAprUI.getRowCount() != 0){
+                        Integer row = tableModel_adminAprUI.getRowCount();
+                        for(int i = 0; i < row; i++){
+                            tableModel_adminAprUI.removeRow(0);
+                        }
+                    }
                     for (RegisterData registerData : registerDatas){
                         Object[] data = new Object[5];
                         data[0] = registerData.getName();
@@ -554,10 +789,15 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             email_enterField_AdminRegPage.setText("");
             securityPassword_enterField_AdminRegPage.setText("");
 
+            // Makesure error message empty
+            errorMessage_AdminRegPage.setText("");
+
             // Switch to admin register page
             main_UI.show(this, "RegAdminUI");
         }
         else if(e.getSource() == removeAccount_AdminPage){
+            // Makesure notice empty
+            notice_adminRemoveUI.setText("");
             // Create Json instance
             Gson gson = new Gson();
 
@@ -568,6 +808,14 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 // Convert JSON array to list of account datas
                 List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>(){}.getType());
                 reader.close();
+
+                // Makesure table empty
+                if(tableModel_adminRemoveUI.getRowCount() != 0){
+                    Integer row = tableModel_adminRemoveUI.getRowCount();
+                    for(int i = 0; i < row; i++){
+                        tableModel_adminRemoveUI.removeRow(0);
+                    }
+                }
 
                 // insert data into table
                 for (AccountData accountData : accountDatas){
@@ -597,6 +845,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Makesure all the textfield are empty 
             id_enterField_LoginPage.setText("");
             password_enterField_LoginPage.setText("");
+
+            // Makesure Error lable empty
+            error_message_LoginPage.setText("");
 
             // Switch to login page
             main_UI.show(this, "LoginUI");
@@ -758,7 +1009,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
             // If there is no selection, show notice
             if (!checkerControl){
-                notice_adminAprUI.setText("There is no selection available");
+                notice_adminRemoveUI.setText("There is no selection available");
             }   
         }
         else if(e.getSource() == back_adminRemoveUI){
@@ -776,21 +1027,133 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 email_enterField_userEditProfileUI.setText(acc_data.getEmail());
                 contactNumber_enterField_userEditProfileUI.setText(contact_data.getContactNumber());
 
+                // Makesure error message empty
+                error_message_userEditProfileUI.setText("");
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             // Switch to User Edit Profile Page
             main_UI.show(this, "userEditProfileUI"); 
         }
+        else if(e.getSource() == viewProperties_userUI){
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                // Convert JSON array to list of property datas
+                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>(){}.getType());
+                reader.close();
+
+                // Makesure table empty
+                if(tableModel_userViewProperty.getRowCount() != 0){
+                    Integer row = tableModel_userViewProperty.getRowCount();
+                    for(int i = 0; i < row; i++){
+                        tableModel_userViewProperty.removeRow(0);
+                    }
+                }
+
+                for (PropertyData propertyData : propertyDatas){
+                    if(propertyData.getStatus().equals("Active")){
+                        Object[] data = new Object[3];
+                        data[0] = propertyData.getPropertyID();
+                        data[1] = propertyData.getCategory();
+                        data[2] = propertyData.getSize();
+                        tableModel_userViewProperty.addRow(data);
+                    }
+                }
+                // Switch to User View Property page
+                main_UI.show(this, "userViewProperty");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else if(e.getSource() == rentedProperty_userUI){
+            // Makesure notice is empty
+            notice_userViewRentUI.setText("");
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rentPropertyData.json"));
+                // Convert JSON array to list of rented property datas
+                List<RentPropertyData> rentedpropertyDatas = gson.fromJson(reader, new TypeToken<List<RentPropertyData>>(){}.getType());
+                reader.close();
+
+                // Makesure table empty
+                if(tableModel_userViewRentUI.getRowCount() != 0){
+                    Integer row = tableModel_userViewRentUI.getRowCount();
+                    for(int i = 0; i < row; i++){
+                        tableModel_userViewRentUI.removeRow(0);
+                    }
+                }
+
+                for (RentPropertyData rentedpropertyData : rentedpropertyDatas){
+                    if(rentedpropertyData.getUserID().equals(login_acc)){
+                        Object[] data = new Object[3];
+                        data[0] = rentedpropertyData.getPropertyID();
+                        data[1] = rentedpropertyData.getOwnerAgentID();
+                        data[2] = rentedpropertyData.getStatus();
+                        tableModel_userViewRentUI.addRow(data);
+                    }
+                }
+
+                if (tableModel_userViewRentUI.getRowCount() == 0){
+                    notice_userViewRentUI.setText("You are not rented any property");
+                }
+                // Switch to User View Rented page
+                main_UI.show(this, "userViewRentUI");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
         else if(e.getSource() == logout_userUI){
             // Makesure all the textfield are empty 
             id_enterField_LoginPage.setText("");
             password_enterField_LoginPage.setText("");
 
+            // Makesure Error lable empty
+            error_message_LoginPage.setText("");
+
             // Switch to login page
             main_UI.show(this, "LoginUI");
         }
 
+        // Button event for User View Property Page
+        else if(e.getSource() == back_userViewProperty){
+            // Switch to User home page
+            main_UI.show(this, "userUI");
+        }
+        
+        // Button event for User View Property Rent Window
+        else if(e.getSource() == back_userPropertyRentWindow){
+            // Close Pop out for User Rent Property Window
+            userPropertyRentWindow.setVisible(false);
+        }
+        else if(e.getSource() == rent_userPropertyRentWindow){
+            try {
+                RentPropertFunction.NewRentData(login_acc, title_ID_userPropertyRentWindow.getText());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+            // Close Pop out for User Rent Property Window
+            userPropertyRentWindow.setVisible(false);
+            // Switch to User home page
+            main_UI.show(this, "userUI");
+        }
+
+        // Button event for User View Rented Property
+        else if(e.getSource() == back_userViewRentUI){
+            // Switch to User home page
+            main_UI.show(this, "userUI");
+        }
+        
         // Button event for User Edit Profile Page
         else if(e.getSource() == update_userEditProfileUI){
             // Show error message when there is empty text field 
@@ -813,23 +1176,239 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         }
 
         // Button event for Agent or Owner Home page
+        else if(e.getSource() == uploadProperty_agentOwnerUI){
+            // Makesure all the textfield are empty 
+            size_enterField_uploadpropertyUI.setText("");
+            NumRoom_enterField_uploadpropertyUI.setText("");
+            NumBathroom_enterField_uploadpropertyUI.setText("");
+            Condition_enterField_uploadpropertyUI.setText("");
+            ContactNum_enterField_uploadpropertyUI.setText("");
+            address_enterField_uploadpropertyUI.setText("");
+            facilities_enterField_uploadpropertyUI.setText("");
+            rentalAskFor_enterField_uploadpropertyUI.setText("");
+            propertyType_selection_uploadpropertyUI.setSelectedItem("--------");
+            status_selection_uploadpropertyUI.setSelectedItem("--------");
+
+            // Makesure error message empty
+            error_message_uploadpropertyUI.setText("");
+
+            // Switch to Upload New Property Page
+            main_UI.show(this, "uploadpropertyUI");
+        }
+        else if(e.getSource() == modifiedProperties_agentOwnerUI){
+            // Makesure notice empty
+            notice_modifiedPropertyUI.setText("");
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                // Convert JSON array to list of property datas
+                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>(){}.getType());
+                reader.close();
+
+                // Makesure table empty
+                if(tableModel_modifiedPropertyUI.getRowCount() != 0){
+                    Integer row = tableModel_modifiedPropertyUI.getRowCount();
+                    for(int i = 0; i < row; i++){
+                        tableModel_modifiedPropertyUI.removeRow(0);
+                    }
+                }
+
+                for (PropertyData propertyData : propertyDatas){
+                    if(propertyData.getAgentOwnerAcc().equals(login_acc)){
+                        Object[] data = new Object[3];
+                        data[0] = propertyData.getPropertyID();
+                        data[1] = propertyData.getCategory();
+                        data[2] = propertyData.getStatus();
+                        tableModel_modifiedPropertyUI.addRow(data);
+                    }
+                }
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            if (tableModel_modifiedPropertyUI.getRowCount() == 0){
+                notice_modifiedPropertyUI.setText("You don't have any uploaded property.");
+            }
+
+            // Switch to Upload New Property Page
+            main_UI.show(this, "modifiedPropertyUI");
+        }
+        
         else if(e.getSource() == logout_agentOwnerUI){
             // Makesure all the textfield are empty 
             id_enterField_LoginPage.setText("");
             password_enterField_LoginPage.setText("");
 
+            // Makesure Error lable empty
+            error_message_LoginPage.setText("");
+
             // Switch to login page
             main_UI.show(this, "LoginUI");
         }  
+
+        // Button event for Upload New Property Page panel
+        else if(e.getSource() == upload_uploadpropertyUI){
+            if(
+                size_enterField_uploadpropertyUI.getText().equals("") || 
+                NumRoom_enterField_uploadpropertyUI.getText().equals("") || 
+                NumBathroom_enterField_uploadpropertyUI.getText().equals("") ||
+                Condition_enterField_uploadpropertyUI.getText().equals("") || 
+                ContactNum_enterField_uploadpropertyUI.getText().equals("") || 
+                address_enterField_uploadpropertyUI.getText().equals("") ||
+                facilities_enterField_uploadpropertyUI.getText().equals("") ||
+                rentalAskFor_enterField_uploadpropertyUI.getText().equals("") ||
+                propertyType_selection_uploadpropertyUI.getSelectedItem().toString().equals("--------") ||
+                status_selection_uploadpropertyUI.getSelectedItem().toString().equals("--------")
+                ){
+                error_message_uploadpropertyUI.setText("Please Complete all your new property information.");
+            }
+            else{
+                try {
+                    PropertyDataFunction.NewPropertyUpload(
+                        login_acc, 
+                        size_enterField_uploadpropertyUI.getText(), 
+                        Integer.parseInt(NumRoom_enterField_uploadpropertyUI.getText()), 
+                        Integer.parseInt(NumBathroom_enterField_uploadpropertyUI.getText()),
+                        Condition_enterField_uploadpropertyUI.getText(), 
+                        ContactNum_enterField_uploadpropertyUI.getText(), 
+                        address_enterField_uploadpropertyUI.getText(), 
+                        facilities_enterField_uploadpropertyUI.getText(), 
+                        rentalAskFor_enterField_uploadpropertyUI.getText(), 
+                        propertyType_selection_uploadpropertyUI.getSelectedItem().toString(), 
+                        status_selection_uploadpropertyUI.getSelectedItem().toString());
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                // Switch to Agent or Owner Home page
+                main_UI.show(this, "agentOwnerUI");
+            }
+            
+        }
+        else if(e.getSource() == back_uploadpropertyUI){
+            // Switch to Agent or Owner Home page
+            main_UI.show(this, "agentOwnerUI");
+        }
+
+        // Button event for Modified Property Page Panel
+        else if(e.getSource() == back_modifiedPropertyUI){
+            // Switch to Agent or Owner Home page
+            main_UI.show(this, "agentOwnerUI");
+        }
+        
+        // Button event for Modified Property Window
+        else if(e.getSource() == update_modifiedPropertyWindow){
+            if(
+                size_enterField_modifiedPropertyWindow.getText().equals("") || 
+                NumRoom_enterField_modifiedPropertyWindow.getText().equals("") || 
+                NumBathroom_enterField_modifiedPropertyWindow.getText().equals("") ||
+                Condition_enterField_modifiedPropertyWindow.getText().equals("") || 
+                ContactNum_enterField_modifiedPropertyWindow.getText().equals("") || 
+                address_enterField_modifiedPropertyWindow.getText().equals("") ||
+                facilities_enterField_modifiedPropertyWindow.getText().equals("") ||
+                rentalAskFor_enterField_modifiedPropertyWindow.getText().equals("") ||
+                propertyType_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("--------") ||
+                status_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("--------")
+                ){
+                errorMessage_modifiedPropertyWindow.setText("Please Complete all your property information.");
+            }
+            else{
+                try {
+                    PropertyDataFunction.PropertyUpdate(
+                        title_ID_modifiedPropertyWindow.getText(),
+                        size_enterField_modifiedPropertyWindow.getText(),
+                        Integer.parseInt(NumRoom_enterField_modifiedPropertyWindow.getText()),
+                        Integer.parseInt(NumBathroom_enterField_modifiedPropertyWindow.getText()),
+                        Condition_enterField_modifiedPropertyWindow.getText(),
+                        ContactNum_enterField_modifiedPropertyWindow.getText(),
+                        address_enterField_modifiedPropertyWindow.getText(),
+                        facilities_enterField_modifiedPropertyWindow.getText(),
+                        rentalAskFor_enterField_modifiedPropertyWindow.getText(),
+                        propertyType_selection_modifiedPropertyWindow.getSelectedItem().toString(), 
+                        status_selection_modifiedPropertyWindow.getSelectedItem().toString());
+                } catch (NumberFormatException e1) {
+                e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                modifiedPropertyWindow.setVisible(false);
+                // Switch to Agent or Owner Home page
+                main_UI.show(this, "agentOwnerUI");
+            }
+            
+        }
+        
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        // Mouse event for Login Page
         if(e.getSource() == find_acc_LoginPage){
             // Open Check Account Pop Out
             email_enterField_checkAccUI.setText("");
             password_enterField_checkAccUI.setText("");
+
+            // Makesure error message empty
+            error_message_checkAccUI.setText("");
             checkAccUI.setVisible(true);
+        }
+
+        // Mouse event for User View Property Menu
+        else if(e.getSource() == data_display_userViewProperty){
+            Integer selectedRow = data_display_userViewProperty.getSelectedRow();
+            String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
+
+            try {
+                PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
+                title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
+                size_userPropertyRentWindow.setText("                                                      Size : " + selected_data.getSize()); 
+                NumRoom_userPropertyRentWindow.setText("                                                      Number Room : " + selected_data.getNumberRoom().toString()); 
+                NumBathroom_userPropertyRentWindow.setText("                                                      Number Bathroom : " + selected_data.getNumberBathroom().toString());
+                Condition_userPropertyRentWindow.setText("                                                      Condition : " + selected_data.getCondition());
+                ContactNum_userPropertyRentWindow.setText("                                                      Contact Number : " + selected_data.getContactNumber());
+                address_userPropertyRentWindow.setText("                                                      Address : " + selected_data.getAddress());
+                facilities_userPropertyRentWindow.setText("                                                      Facilities : " + selected_data.getFacilities());
+                rentalAskFor_userPropertyRentWindow.setText("                                                      Rental Ask For (Fee) : " + selected_data.getRentalAskFor());
+                propertyType_userPropertyRentWindow.setText("                                                      Category : " + selected_data.getCategory());
+                owner_userPropertyRentWindow.setText("                                                      Agent/Owner : " + selected_data.getAgentOwnerAcc());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            // Pop out for User Rent Property Window
+            userPropertyRentWindow.setVisible(true);
+        }
+        
+
+        // Mouse event for Modified Property Page Panel
+        else if(e.getSource() == data_display_modifiedPropertyUI){
+            errorMessage_modifiedPropertyWindow.setText("");
+
+            Integer selectedRow = data_display_modifiedPropertyUI.getSelectedRow();
+            String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
+            try {
+                PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
+                title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());
+                size_enterField_modifiedPropertyWindow.setText(selected_data.getSize());
+                NumRoom_enterField_modifiedPropertyWindow.setText(selected_data.getNumberRoom().toString());
+                NumBathroom_enterField_modifiedPropertyWindow.setText(selected_data.getNumberBathroom().toString());
+                Condition_enterField_modifiedPropertyWindow.setText(selected_data.getCondition());
+                ContactNum_enterField_modifiedPropertyWindow.setText(selected_data.getContactNumber());
+                address_enterField_modifiedPropertyWindow.setText(selected_data.getAddress());
+                facilities_enterField_modifiedPropertyWindow.setText(selected_data.getFacilities());
+                rentalAskFor_enterField_modifiedPropertyWindow.setText(selected_data.getRentalAskFor());
+                propertyType_selection_modifiedPropertyWindow.setSelectedItem(selected_data.getCategory());
+                status_selection_modifiedPropertyWindow.setSelectedItem(selected_data.getStatus());
+                
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            // Pop out Property Modified Window
+            modifiedPropertyWindow.setVisible(true);
         }
     }
 
@@ -843,6 +1422,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        // Mouse event for Login Page
         if(e.getSource() == find_acc_LoginPage){
             find_acc_LoginPage.setForeground(Color.GREEN);
         }
@@ -850,6 +1430,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void mouseExited(MouseEvent e) {
+        // Mouse event for Login Page
         if(e.getSource() == find_acc_LoginPage){
             find_acc_LoginPage.setForeground(Color.BLUE);
         }

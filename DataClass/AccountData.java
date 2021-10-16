@@ -56,12 +56,5 @@ public class AccountData {
 
     public void setloginPassword(String loginPassword){
         this.loginPassword = loginPassword;
-    }
-
-    @Override
-    public String toString(){
-        return "\"RegisterData [User ID =" + userID + ", Login Password =" + loginPassword + ",Name ="+ name + ",Email =" + email + ",Security Password =" + securityPassword + ",Account Type =" + acc_type +"]";
-    }
-
-    
+    }    
 }
