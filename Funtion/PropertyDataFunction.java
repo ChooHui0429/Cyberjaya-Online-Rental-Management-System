@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 public class PropertyDataFunction {
     public static void NewPropertyUpload(
         String owner_name, 
+        Integer rentalFee,
         String size, 
         Integer NumRoom,
         Integer NumBathroom,
@@ -40,7 +41,7 @@ public class PropertyDataFunction {
             while(!id_valid){
                 Boolean id_exist = false;
                 String id_string = String.format("%04d", id_Num);
-                String new_ID = owner_name + "#" + id_string + "_" + propertyType;
+                String new_ID = owner_name + "#" + id_string;
                 for(PropertyData propertyData : propertyDatas){
                     if(propertyData.getPropertyID().equals(new_ID)){
                         id_Num = id_Num + 1; 
@@ -60,6 +61,7 @@ public class PropertyDataFunction {
             new_data.setPropertyID(new_ID);
         }
 
+        new_data.setRentalFee(rentalFee);
         new_data.setCategory(propertyType);
         new_data.setStatus(status);
         new_data.setAddress(address);
@@ -104,7 +106,8 @@ public class PropertyDataFunction {
 
     public static void PropertyUpdate(
         String propertyID, 
-        String size, 
+        String size,
+        Integer rentalfee,
         Integer NumRoom,
         Integer NumBathroom,
         String condition,
@@ -136,7 +139,8 @@ public class PropertyDataFunction {
                 propertyData.setFacilities(facilities);
                 propertyData.setCondition(condition);
                 propertyData.setRentalAskFor(rentalAskFor);
-                propertyData.setContactNumber(contactNum);   
+                propertyData.setContactNumber(contactNum); 
+                propertyData.setRentalFee(rentalfee);  
             }
         }
 

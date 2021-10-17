@@ -14,6 +14,7 @@ public class PropertyData {
     private String rental_ask_for;
     private String contact_Number;
     private String agent_owner_acc;
+    private Integer rental_fee;
 
     public String getPropertyID(){
         return propertyID;
@@ -109,5 +110,13 @@ public class PropertyData {
 
     public void setAgentOwnerAcc(String agent_owner_acc){
         this.agent_owner_acc = agent_owner_acc;
+    }
+
+    public Integer getRentalFee(){
+        return rental_fee;
+    }
+
+    public void setRentalFee(Integer rental_fee){
+        this.rental_fee = rental_fee;
     }
 }

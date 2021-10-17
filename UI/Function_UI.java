@@ -296,6 +296,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton rent_userPropertyRentWindow = new JButton("rent");
 
     JLabel title_ID_userPropertyRentWindow = new JLabel ();
+    JLabel rentalFee_userPropertyRentWindow = new JLabel ();
     JLabel size_userPropertyRentWindow = new JLabel (); 
     JLabel NumRoom_userPropertyRentWindow = new JLabel (); 
     JLabel NumBathroom_userPropertyRentWindow = new JLabel ();
@@ -310,6 +311,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         back_userPropertyRentWindow,
         rent_userPropertyRentWindow,
         title_ID_userPropertyRentWindow,
+        rentalFee_userPropertyRentWindow,
         size_userPropertyRentWindow, 
         NumRoom_userPropertyRentWindow, 
         NumBathroom_userPropertyRentWindow,
@@ -372,6 +374,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JTextField NumBathroom_enterField_uploadpropertyUI = new JTextField();
     JTextField Condition_enterField_uploadpropertyUI = new JTextField();
     JTextField ContactNum_enterField_uploadpropertyUI = new JTextField();
+    JTextField rentalFee_enterField_uploadpropertyUI = new JTextField();
 
     JLabel error_message_uploadpropertyUI = new JLabel(); 
 
@@ -391,7 +394,8 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         NumRoom_enterField_uploadpropertyUI, 
         NumBathroom_enterField_uploadpropertyUI, 
         Condition_enterField_uploadpropertyUI, 
-        ContactNum_enterField_uploadpropertyUI, 
+        ContactNum_enterField_uploadpropertyUI,
+        rentalFee_enterField_uploadpropertyUI, 
         error_message_uploadpropertyUI, 
         address_enterField_uploadpropertyUI, 
         facilities_enterField_uploadpropertyUI, 
@@ -434,6 +438,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     JButton update_modifiedPropertyWindow = new JButton("Update");
 
+    JTextField rentalFee_enterField_modifiedPropertyWindow  = new JTextField();
     JTextField size_enterField_modifiedPropertyWindow = new JTextField();
     JTextField NumRoom_enterField_modifiedPropertyWindow = new JTextField();
     JTextField NumBathroom_enterField_modifiedPropertyWindow = new JTextField();
@@ -446,12 +451,14 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     String[] propertyType_modifiedPropertyWindow = {"--------", "Condominium", "Single Story", "Double Story", "Townhouse", "Bungalow"};
     String[] status_modifiedPropertyWindow = {"--------", "Active", "Inactive", "Hide"};
+    String status_before_modifiedPropertyWindow = new String();
     JComboBox<String> propertyType_selection_modifiedPropertyWindow = new JComboBox<String>(propertyType_modifiedPropertyWindow);
     JComboBox<String> status_selection_modifiedPropertyWindow = new JComboBox<String>(status_modifiedPropertyWindow);
     ModifiedPropertyWindow modifiedPropertyWindow = new ModifiedPropertyWindow(
         title_ID_modifiedPropertyWindow, 
         errorMessage_modifiedPropertyWindow,
         update_modifiedPropertyWindow,
+        rentalFee_enterField_modifiedPropertyWindow,
         size_enterField_modifiedPropertyWindow,
         NumRoom_enterField_modifiedPropertyWindow,
         NumBathroom_enterField_modifiedPropertyWindow,
@@ -461,7 +468,52 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         facilities_enterField_modifiedPropertyWindow,
         rentalAskFor_enterField_modifiedPropertyWindow,
         propertyType_selection_modifiedPropertyWindow,
-        status_selection_modifiedPropertyWindow);
+        status_selection_modifiedPropertyWindow,
+        status_before_modifiedPropertyWindow);
+
+    // Create Agent/Owner View Rent Property Panel
+    JButton back_agentOwnerViewRentUI =  new JButton("back");
+    JLabel notice_agentOwnerViewRentUI = new JLabel(); 
+    // Table Column Name
+    String[] columnName_agentOwnerViewRentUI = {"Property ID", "Potential Tenant Account", "Status"};
+    DefaultTableModel tableModel_agentOwnerViewRentUI = new DefaultTableModel(columnName_agentOwnerViewRentUI, 0){
+        @Override
+        public Class<?> getColumnClass(int column){
+            switch(column){
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return String.class;
+                default:
+                    return String.class;
+            }
+        }
+    };
+    JTable data_display_agentOwnerViewRentUI = new JTable(tableModel_agentOwnerViewRentUI);
+
+    UserViewRent agentOwnerViewRentUI = new UserViewRent(back_agentOwnerViewRentUI, notice_agentOwnerViewRentUI, data_display_agentOwnerViewRentUI);
+
+    // Create Agent/Owner Rent Property Window
+    JButton back_agentOwnerRentWindow = new JButton("back");
+    JButton rent_agentOwnerRentWindow = new JButton("rent");
+    JButton reject_agentOwnerRentWindow = new JButton("reject");
+    JLabel title_ID_agentOwnerRentWindow = new JLabel();
+    JLabel userID_agentOwnerRentWindow = new JLabel();
+    JLabel userContact_agentOwnerRentWindow = new JLabel();
+    JLabel email_agentOwnerRentWindow = new JLabel();
+    String selected_user_agentOwnerRentWindow = new String();
+
+    AgentOwnerRentWindow agentOwnerRentWindow = new AgentOwnerRentWindow(
+        back_agentOwnerRentWindow,
+        rent_agentOwnerRentWindow,
+        reject_agentOwnerRentWindow,
+        title_ID_agentOwnerRentWindow,
+        userID_agentOwnerRentWindow,
+        userContact_agentOwnerRentWindow,
+        email_agentOwnerRentWindow,
+        selected_user_agentOwnerRentWindow);
 
     public Function_UI(JFrame frame){
         
@@ -480,6 +532,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         this.add(agentOwnerUI, "agentOwnerUI");
         this.add(uploadpropertyUI, "uploadpropertyUI");
         this.add(modifiedPropertyUI, "modifiedPropertyUI");
+        this.add(agentOwnerViewRentUI, "agentOwnerViewRentUI");
 
         // Make Login page as first page when open the app 
         main_UI.show(this, "LoginUI");
@@ -493,6 +546,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
         // Table for Modified Property Menu
         data_display_modifiedPropertyUI.addMouseListener(this);
+
+        // Table for Agent/Owner View Property Menu
+        data_display_agentOwnerViewRentUI.addMouseListener(this);
 
         
 
@@ -574,6 +630,14 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
         // Button for Modified Property Window
         update_modifiedPropertyWindow.addActionListener(this);
+
+        // Button for Owner/Agent View Rent Page
+        back_agentOwnerViewRentUI.addActionListener(this);
+
+        // Button for Owner/Agent View Rent Window
+        back_agentOwnerRentWindow.addActionListener(this);
+        rent_agentOwnerRentWindow.addActionListener(this);
+        reject_agentOwnerRentWindow.addActionListener(this);
     }
 
     // All Button action
@@ -1186,6 +1250,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             address_enterField_uploadpropertyUI.setText("");
             facilities_enterField_uploadpropertyUI.setText("");
             rentalAskFor_enterField_uploadpropertyUI.setText("");
+            rentalFee_enterField_uploadpropertyUI.setText("");
             propertyType_selection_uploadpropertyUI.setSelectedItem("--------");
             status_selection_uploadpropertyUI.setSelectedItem("--------");
 
@@ -1236,6 +1301,46 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Switch to Upload New Property Page
             main_UI.show(this, "modifiedPropertyUI");
         }
+        else if(e.getSource() == rentedPropertie_agentOwnerUI){
+            // Makesure notice is empty
+            notice_agentOwnerViewRentUI.setText("");
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rentPropertyData.json"));
+                // Convert JSON array to list of  rent property datas
+                List<RentPropertyData> rentpropertyDatas = gson.fromJson(reader, new TypeToken<List<RentPropertyData>>(){}.getType());
+                reader.close();
+
+                // Makesure table empty
+                if(tableModel_agentOwnerViewRentUI.getRowCount() != 0){
+                    Integer row = tableModel_agentOwnerViewRentUI.getRowCount();
+                    for(int i = 0; i < row; i++){
+                        tableModel_agentOwnerViewRentUI.removeRow(0);
+                    }
+                }
+
+                for (RentPropertyData rentPropertyData : rentpropertyDatas){
+                    if(rentPropertyData.getOwnerAgentID().equals(login_acc)){
+                        Object[] data = new Object[3];
+                        data[0] = rentPropertyData.getPropertyID();
+                        data[1] = rentPropertyData.getUserID();
+                        data[2] = rentPropertyData.getStatus();
+                        tableModel_agentOwnerViewRentUI.addRow(data);
+                    }
+                }
+                if (tableModel_agentOwnerViewRentUI.getRowCount() == 0){
+                    notice_agentOwnerViewRentUI.setText("You are not rented any property");
+                }
+                // Switch to User View Property page
+                main_UI.show(this, "agentOwnerViewRentUI");
+
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
         
         else if(e.getSource() == logout_agentOwnerUI){
             // Makesure all the textfield are empty 
@@ -1260,6 +1365,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 address_enterField_uploadpropertyUI.getText().equals("") ||
                 facilities_enterField_uploadpropertyUI.getText().equals("") ||
                 rentalAskFor_enterField_uploadpropertyUI.getText().equals("") ||
+                rentalFee_enterField_uploadpropertyUI.getText().equals("") ||
                 propertyType_selection_uploadpropertyUI.getSelectedItem().toString().equals("--------") ||
                 status_selection_uploadpropertyUI.getSelectedItem().toString().equals("--------")
                 ){
@@ -1269,6 +1375,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 try {
                     PropertyDataFunction.NewPropertyUpload(
                         login_acc, 
+                        Integer.parseInt(rentalFee_enterField_uploadpropertyUI.getText()),
                         size_enterField_uploadpropertyUI.getText(), 
                         Integer.parseInt(NumRoom_enterField_uploadpropertyUI.getText()), 
                         Integer.parseInt(NumBathroom_enterField_uploadpropertyUI.getText()),
@@ -1287,7 +1394,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 // Switch to Agent or Owner Home page
                 main_UI.show(this, "agentOwnerUI");
             }
-            
         }
         else if(e.getSource() == back_uploadpropertyUI){
             // Switch to Agent or Owner Home page
@@ -1311,6 +1417,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 address_enterField_modifiedPropertyWindow.getText().equals("") ||
                 facilities_enterField_modifiedPropertyWindow.getText().equals("") ||
                 rentalAskFor_enterField_modifiedPropertyWindow.getText().equals("") ||
+                rentalFee_enterField_modifiedPropertyWindow.getText().equals("") ||
                 propertyType_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("--------") ||
                 status_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("--------")
                 ){
@@ -1321,6 +1428,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                     PropertyDataFunction.PropertyUpdate(
                         title_ID_modifiedPropertyWindow.getText(),
                         size_enterField_modifiedPropertyWindow.getText(),
+                        Integer.parseInt(rentalFee_enterField_modifiedPropertyWindow.getText()),
                         Integer.parseInt(NumRoom_enterField_modifiedPropertyWindow.getText()),
                         Integer.parseInt(NumBathroom_enterField_modifiedPropertyWindow.getText()),
                         Condition_enterField_modifiedPropertyWindow.getText(),
@@ -1330,6 +1438,11 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                         rentalAskFor_enterField_modifiedPropertyWindow.getText(),
                         propertyType_selection_modifiedPropertyWindow.getSelectedItem().toString(), 
                         status_selection_modifiedPropertyWindow.getSelectedItem().toString());
+
+                    // Reset all property data from incative to active
+                    if(status_before_modifiedPropertyWindow.equals("Inactive") && status_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("Active")){
+                        RentPropertFunction.resetProperty(title_ID_modifiedPropertyWindow.getText());
+                    }
                 } catch (NumberFormatException e1) {
                 e1.printStackTrace();
                 } catch (IOException e1) {
@@ -1342,6 +1455,39 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             
         }
         
+        // Button event for Owner/Agent View Rent Page
+        else if(e.getSource() == back_agentOwnerViewRentUI){
+            // Switch to Agent or Owner Home page
+            main_UI.show(this, "agentOwnerUI");
+        }
+    
+        // Button event for Owner/Agent View Rent Window
+        else if(e.getSource() == back_agentOwnerRentWindow){
+            // Close Pop out for Admin/Owner Rent Property Window
+            agentOwnerRentWindow.setVisible(false);
+        }
+        else if(e.getSource() == rent_agentOwnerRentWindow){
+            try {
+                RentPropertFunction.rentProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            // Close Pop out for Admin/Owner Rent Property Window
+            agentOwnerRentWindow.setVisible(false);
+            // Switch to Agent or Owner Home page
+            main_UI.show(this, "agentOwnerUI");
+        }
+        else if(e.getSource() == reject_agentOwnerRentWindow){
+            try {
+                RentPropertFunction.rejectProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            // Close Pop out for Admin/Owner Rent Property Window
+            agentOwnerRentWindow.setVisible(false);
+            // Switch to Agent or Owner Home page
+            main_UI.show(this, "agentOwnerUI");
+        }
     }
 
     @Override
@@ -1366,6 +1512,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             try {
                 PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
                 title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
+                rentalFee_userPropertyRentWindow.setText("                                                      Rental Fee : RM " + selected_data.getRentalFee());
                 size_userPropertyRentWindow.setText("                                                      Size : " + selected_data.getSize()); 
                 NumRoom_userPropertyRentWindow.setText("                                                      Number Room : " + selected_data.getNumberRoom().toString()); 
                 NumBathroom_userPropertyRentWindow.setText("                                                      Number Bathroom : " + selected_data.getNumberBathroom().toString());
@@ -1383,15 +1530,17 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             userPropertyRentWindow.setVisible(true);
         }
         
-
         // Mouse event for Modified Property Page Panel
         else if(e.getSource() == data_display_modifiedPropertyUI){
             errorMessage_modifiedPropertyWindow.setText("");
 
             Integer selectedRow = data_display_modifiedPropertyUI.getSelectedRow();
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
+            
             try {
                 PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
+                status_before_modifiedPropertyWindow = selected_data.getStatus();
+
                 title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());
                 size_enterField_modifiedPropertyWindow.setText(selected_data.getSize());
                 NumRoom_enterField_modifiedPropertyWindow.setText(selected_data.getNumberRoom().toString());
@@ -1401,8 +1550,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 address_enterField_modifiedPropertyWindow.setText(selected_data.getAddress());
                 facilities_enterField_modifiedPropertyWindow.setText(selected_data.getFacilities());
                 rentalAskFor_enterField_modifiedPropertyWindow.setText(selected_data.getRentalAskFor());
+                rentalFee_enterField_modifiedPropertyWindow.setText(selected_data.getRentalFee().toString());
                 propertyType_selection_modifiedPropertyWindow.setSelectedItem(selected_data.getCategory());
                 status_selection_modifiedPropertyWindow.setSelectedItem(selected_data.getStatus());
+                
                 
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -1410,6 +1561,27 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Pop out Property Modified Window
             modifiedPropertyWindow.setVisible(true);
         }
+    
+        // Mouse event for Agent/Owner View Property Page Panel
+        else if(e.getSource() == data_display_agentOwnerViewRentUI){
+            Integer selectedRow = data_display_agentOwnerViewRentUI.getSelectedRow();
+            String selectedPropertyID = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 0).toString();
+            title_ID_agentOwnerRentWindow.setText(selectedPropertyID);
+            selected_user_agentOwnerRentWindow = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 1).toString();
+
+            try {
+                UserContactNumData selected_data = UserProfileUpdate.getContactData(selected_user_agentOwnerRentWindow);
+                AccountData selected_acc = UserProfileUpdate.getAccData(selected_user_agentOwnerRentWindow);
+                userID_agentOwnerRentWindow.setText("                                        User Account : " + selected_data.getUserID());
+                userContact_agentOwnerRentWindow.setText("                         User Contact Number : " + selected_data.getContactNumber());
+                email_agentOwnerRentWindow.setText("                                            User Email : " + selected_acc.getEmail());     
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            // Pop out for Admin/Owner Rent Property Window
+            agentOwnerRentWindow.setVisible(true);
+        }
+    
     }
 
     @Override

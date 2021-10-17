@@ -11,6 +11,7 @@ public class UploadPropertyUI extends JPanel{
         JTextField NumBathroom_enterField,
         JTextField Condition_enterField,
         JTextField ContactNum_enterField,
+        JTextField rentalFee_enterField,
         JLabel error_message,
         JTextArea address_enterField,
         JTextArea facilities_enterField,
@@ -80,7 +81,7 @@ public class UploadPropertyUI extends JPanel{
         info_entry_Condition.add(Condition_enterField);
 
         JPanel info_entry_rentalAskFor = new JPanel();
-        JLabel rentalAskFor_title = new JLabel("Rental Asking For (Fee) :");
+        JLabel rentalAskFor_title = new JLabel("Rental Asking For:");
         rentalAskFor_enterField.setPreferredSize(new Dimension(250,25));
         rentalAskFor_enterField.setRows(2);
         info_entry_rentalAskFor.add(rentalAskFor_title);
@@ -91,6 +92,12 @@ public class UploadPropertyUI extends JPanel{
         ContactNum_enterField.setPreferredSize(new Dimension(250,25));
         info_entry_ContactNum.add(ContactNum_title);
         info_entry_ContactNum.add(ContactNum_enterField);
+
+        JPanel info_entry_rentalFee = new JPanel();
+        JLabel rentalFee_title = new JLabel("  Rental Fee (RM) :");
+        rentalFee_enterField.setPreferredSize(new Dimension(250,25));
+        info_entry_rentalFee.add(rentalFee_title);
+        info_entry_rentalFee.add(rentalFee_enterField);
 
         // Error Message Label
         error_message.setForeground(Color.RED);
@@ -106,6 +113,7 @@ public class UploadPropertyUI extends JPanel{
         info_entry.add(info_entry_facilities);
         info_entry.add(info_entry_rentalAskFor);
         info_entry.add(info_entry_ContactNum);
+        info_entry.add(info_entry_rentalFee);
         info_entry.add(error_message);
         this.add(info_entry);
 

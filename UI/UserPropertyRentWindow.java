@@ -7,6 +7,7 @@ public class UserPropertyRentWindow extends JFrame{
         JButton back,
         JButton rent,
         JLabel title_ID,
+        JLabel rentalFee, 
         JLabel size, 
         JLabel NumRoom, 
         JLabel NumBathroom,
@@ -23,6 +24,7 @@ public class UserPropertyRentWindow extends JFrame{
         this.setSize(850,850);
         ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
         this.setIconImage(logo.getImage());
+        this.setResizable(false);
 
         this.setLayout(new GridLayout(3,1,1,1));
 
@@ -32,10 +34,11 @@ public class UserPropertyRentWindow extends JFrame{
         this.add(title_ID);
 
         JPanel info_display = new JPanel();
-        info_display.setLayout(new GridLayout(10,1,1,1));
+        info_display.setLayout(new GridLayout(11,1,1,1));
         info_display.add(size);
         info_display.add(NumRoom);
         info_display.add(NumBathroom);
+        info_display.add(rentalFee);
         info_display.add(Condition);
         info_display.add(ContactNum);
         info_display.add(address);

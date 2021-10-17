@@ -7,6 +7,7 @@ public class ModifiedPropertyWindow extends JFrame{
         JLabel title_ID,
         JLabel error_message,
         JButton update,
+        JTextField rentalFee_enterField,
         JTextField size_enterField, 
         JTextField NumRoom_enterField, 
         JTextField NumBathroom_enterField,
@@ -16,7 +17,8 @@ public class ModifiedPropertyWindow extends JFrame{
         JTextArea facilities_enterField,
         JTextArea rentalAskFor_enterField,
         JComboBox<String> propertyType_selection,
-        JComboBox<String> status_selection){
+        JComboBox<String> status_selection,
+        String status_before){
         // Main Frame for Modified Property Window
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -95,6 +97,12 @@ public class ModifiedPropertyWindow extends JFrame{
         info_entry_ContactNum.add(ContactNum_title);
         info_entry_ContactNum.add(ContactNum_enterField);
 
+        JPanel info_entry_rentalFee = new JPanel();
+        JLabel rentalFee_title = new JLabel("  Rental Fee (RM) :");
+        rentalFee_enterField.setPreferredSize(new Dimension(250,25));
+        info_entry_rentalFee.add(rentalFee_title);
+        info_entry_rentalFee.add(rentalFee_enterField);
+
         // Error Message Label
         error_message.setForeground(Color.RED);
         error_message.setHorizontalAlignment(JLabel.CENTER);
@@ -109,6 +117,7 @@ public class ModifiedPropertyWindow extends JFrame{
         info_entry.add(info_entry_facilities);
         info_entry.add(info_entry_rentalAskFor);
         info_entry.add(info_entry_ContactNum);
+        info_entry.add(info_entry_rentalFee);
         info_entry.add(error_message);
         this.add(info_entry);
 
