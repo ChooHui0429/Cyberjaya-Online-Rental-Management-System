@@ -6,8 +6,7 @@ public class AdminPage extends JPanel{
     public AdminPage(
         JButton approveRegister, 
         JButton createAdmin, 
-        JButton removeAccount, 
-        JButton manageProperties, 
+        JButton removeAccount,  
         JButton viewReport, 
         JButton Logout,
         JLabel welcome_name){
@@ -46,21 +45,17 @@ public class AdminPage extends JPanel{
         JPanel buttonPanel2 = new JPanel();
         buttonPanel2.setLayout(new GridLayout(2,1,1,1));
         buttonPanel2.add(removeAccount);
-        buttonPanel2.add(manageProperties);
+        buttonPanel2.add(viewReport);
 
         JPanel buttonRow1 = new JPanel();
         buttonRow1.add(buttonPanel1);
         buttonRow1.add(buttonPanel2);
 
         JPanel buttonRow2 = new JPanel();
-        buttonRow2.add(viewReport);
-
-        JPanel buttonRow3 = new JPanel();
-        buttonRow3.add(Logout);
+        buttonRow2.add(Logout);
 
         buttonPanel.add(buttonRow1);
         buttonPanel.add(buttonRow2);
-        buttonPanel.add(buttonRow3);
 
         this.add(buttonPanel);
     }   

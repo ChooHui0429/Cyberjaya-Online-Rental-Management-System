@@ -7,7 +7,6 @@ public class AgentOwnerPage extends JPanel{
         JButton uploadProperty, 
         JButton modifiedProperties, 
         JButton rentedProperties, 
-        JButton ViewPropertiesCommand,
         JButton logout, 
         JLabel title, 
         JLabel welcome_name){
@@ -36,25 +35,19 @@ public class AgentOwnerPage extends JPanel{
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(3,1,1,1));
 
-        JPanel buttonPanel1 = new JPanel();
-        buttonPanel1.setLayout(new GridLayout(2,1,1,1));
-        buttonPanel1.add(uploadProperty);
-        buttonPanel1.add(rentedProperties);
-
-        JPanel buttonPanel2 = new JPanel();
-        buttonPanel2.setLayout(new GridLayout(2,1,1,1));
-        buttonPanel2.add(modifiedProperties);
-        buttonPanel2.add(ViewPropertiesCommand);
-
         JPanel buttonRow1 = new JPanel();
-        buttonRow1.add(buttonPanel1);
-        buttonRow1.add(buttonPanel2);
+        buttonRow1.add(uploadProperty);
+        buttonRow1.add(modifiedProperties);
 
         JPanel buttonRow2 = new JPanel();
-        buttonRow2.add(logout);
+        buttonRow2.add(rentedProperties);
+
+        JPanel buttonRow3 = new JPanel();
+        buttonRow3.add(logout);
 
         buttonPanel.add(buttonRow1);
         buttonPanel.add(buttonRow2);
+        buttonPanel.add(buttonRow3);
 
         this.add(buttonPanel);
     }

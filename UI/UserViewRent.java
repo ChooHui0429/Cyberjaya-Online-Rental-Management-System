@@ -15,6 +15,7 @@ public class UserViewRent extends JPanel{
 
         // Table display for rented property data
         data_display.getTableHeader().setReorderingAllowed(false);
+        data_display.setAutoCreateRowSorter(true);
         JScrollPane scrollPane = new JScrollPane(data_display);
         this.add(scrollPane);
 

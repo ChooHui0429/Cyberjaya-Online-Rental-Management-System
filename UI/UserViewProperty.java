@@ -5,19 +5,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UserViewProperty extends JPanel{
-    public UserViewProperty(JButton back, JTable data_display){
+    public UserViewProperty(JButton back, JTable data_display, JLabel title){
         // User View Property UI
         this.setLayout(new GridLayout(4,1,1,1));
 
         // Title for View Property Page
-        JLabel title = new JLabel("PROPERTY AVAILABLE");
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setFont(new Font("MV Boli", Font.BOLD, 25));
         this.add(title);
 
         // Table display for property data
         data_display.getTableHeader().setReorderingAllowed(false);
-        JScrollPane scrollPane = new JScrollPane(data_display);
+        data_display.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        data_display.setAutoCreateRowSorter(true);
+        JScrollPane scrollPane = new JScrollPane(data_display, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane);
 
         // Button for Modified Property Page

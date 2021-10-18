@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import DataClass.PropertyData;
+import DataClass.PropertyRateData;
 import DataClass.RentPropertyData;
 
 public class RentPropertFunction {
@@ -52,8 +53,7 @@ public class RentPropertFunction {
         // Convert property datas to Json file
         gson.toJson(rentPropertyDatas, writer);
         writer.close();
-    }
-    
+    }  
     public static void rentProperty(String propertyID, String userID)throws IOException{
         // Create Json instance
         Gson gson = new Gson();
@@ -129,16 +129,17 @@ public class RentPropertFunction {
         gson.toJson(rentPropertyDatas, writerRentPropertyDatas);
         writerRentPropertyDatas.close();
     }
-
     public static void resetProperty(String propertyID)throws IOException{
         // Create Json instance
         Gson gson = new Gson();
 
         // Create a reader 
         Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
- 
+        Reader readerWaitRateList = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
         // Convert JSON array to list of datas
         List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas, new TypeToken<List<RentPropertyData>>(){}.getType());
+        List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList, new TypeToken<List<RentPropertyData>>(){}.getType());
+        readerWaitRateList.close();
         readerRentPropertyDatas.close();
 
          // Remove rent data
@@ -146,6 +147,7 @@ public class RentPropertFunction {
          for(RentPropertyData rentPropertyData : rentPropertyDatas){
              if(rentPropertyData.getPropertyID().equals(propertyID)){
                 garbage_data.add(rentPropertyData);
+                waitRateList.add(rentPropertyData);
                 break;
              }
          }
@@ -154,8 +156,42 @@ public class RentPropertFunction {
         // Write data
         // Create writer
         Writer writerRentPropertyDatas = Files.newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Writer writerWaitRateList = Files.newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
         // Convert datas to Json file
         gson.toJson(rentPropertyDatas, writerRentPropertyDatas);
+        gson.toJson(waitRateList, writerWaitRateList);
         writerRentPropertyDatas.close();
+        writerWaitRateList.close();
+    }
+    public static void rateProperty(String propertyID, Integer mark)throws IOException{
+        // Create Json instance
+        Gson gson = new Gson();
+        // Create a reader 
+        Reader reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+        List<PropertyRateData> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRateData>>(){}.getType());
+
+        Boolean property_exist = false;
+        for (PropertyRateData propertyRateData : propertyRateDatas){
+            if(propertyRateData.getPropertyID().equals(propertyID)){
+                Integer new_mark = propertyRateData.getRateMark() + mark;
+                Integer newTotalRent = propertyRateData.getRentedNum() + 1;
+                propertyRateData.setRateMark(new_mark);
+                propertyRateData.setRentedNum(newTotalRent);
+                property_exist = true;
+                break;
+            }
+        }
+        if(!property_exist){
+            PropertyRateData new_data = new PropertyRateData();
+            new_data.setPropertyID(propertyID);
+            new_data.setRateMark(mark);
+            new_data.setRentedNum(1);
+            propertyRateDatas.add(new_data);
+        }
+
+        // Create writer
+        Writer writer = Files.newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+        gson.toJson(propertyRateDatas, writer);
+        writer.close();
     }
 }

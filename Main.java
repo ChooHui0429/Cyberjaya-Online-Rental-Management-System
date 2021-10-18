@@ -1,9 +1,5 @@
 import javax.swing.*;
-
-import com.google.gson.Gson;
-
 import UI.*;
-import java.awt.*;
 import java.io.*;
 
 
@@ -19,14 +15,6 @@ public class Main{
         frame.setIconImage(logo.getImage());
 
         Function_UI main_UI = new Function_UI(frame);
-
-        
-
-
-
-
-        
-
         frame.add(main_UI);
         frame.setVisible(true);          
     }

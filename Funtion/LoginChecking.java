@@ -39,7 +39,6 @@ public class LoginChecking {
         }
         return acc_type_or_invalid;    
     }
-
     public static String userNameReturn(String userID) throws IOException{
         String name = new String();
         // Create Json instance

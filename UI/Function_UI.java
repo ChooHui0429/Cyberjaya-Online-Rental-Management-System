@@ -7,8 +7,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -20,12 +22,12 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import DataClass.AccountData;
 import DataClass.PropertyData;
+import DataClass.PropertyRateData;
 import DataClass.RegisterData;
 import DataClass.RentPropertyData;
 import DataClass.UserContactNumData;
@@ -41,6 +43,9 @@ import Funtion.UserProfileUpdate;
 
 
 public class Function_UI extends JPanel implements ActionListener, MouseListener {
+
+    // Main Frame
+    JFrame frame = new JFrame();
 
     // Containter for Card Layout
     CardLayout main_UI = new CardLayout();
@@ -118,7 +123,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton approveRegister_AdminPage = new JButton("Approve Registration");
     JButton createAdmin_AdminPage = new JButton("Create New Admin");
     JButton removeAccount_AdminPage = new JButton("Remove Account");
-    JButton manageProperties_AdminPage = new JButton("Manage Properties");
     JButton viewReport_AdminPage = new JButton("View Report");
     JButton Logout_AdminPage = new JButton("Logout");
 
@@ -128,7 +132,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         approveRegister_AdminPage, 
         createAdmin_AdminPage, 
         removeAccount_AdminPage, 
-        manageProperties_AdminPage, 
         viewReport_AdminPage, 
         Logout_AdminPage,
         welcome_name_AdminPage);
@@ -237,6 +240,64 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         data_display_adminRemoveUI,
         notice_adminRemoveUI);
 
+    // Create Admin Report Window
+    JButton listProperty_reportListUI = new JButton ("List of All Properties");
+    JButton listActive_reportListUI = new JButton ("List of Active Properties");
+    JButton listInactive_reportListUI = new JButton ("List of Inactive Properties");
+    JButton listRate_reportListUI = new JButton ("List of Property rate");
+
+    ReportListUI reportListUI = new ReportListUI(listProperty_reportListUI, listActive_reportListUI, listInactive_reportListUI, listRate_reportListUI);
+
+    // Create empty Report Display Panel
+    JButton back_adminemptyReportUI = new JButton("back");
+    JTable data_display_adminemptyReportUI = new JTable();
+    JLabel title_adminemptyReportUI = new JLabel();
+
+    UserViewProperty adminemptyReportUI = new UserViewProperty(back_adminemptyReportUI, data_display_adminemptyReportUI,title_adminemptyReportUI);
+
+    // Create All Properties Report Display Panel
+    JButton back_adminAllReportUI = new JButton("back");
+    Object[] columnNames_adminAllReportUI = {"Property ID", "Category", "Address", "Size", "Number of Room", "Number of Bathroom", "Facilities", "Condition", "Rental Fee", "Contact Number", "Rental Ask For", "Agent / Owner Account","Status"};
+    DefaultTableModel tableModel_adminAllReportUI = new DefaultTableModel(columnNames_adminAllReportUI, 0);
+    JTable data_display_adminAllReportUI = new JTable(tableModel_adminAllReportUI);
+    JLabel title_adminAllReportUI = new JLabel("ALL PROPERTIES REPORT");
+
+    UserViewProperty adminAllReportUI = new UserViewProperty(back_adminAllReportUI, data_display_adminAllReportUI,title_adminAllReportUI);
+
+    // Create Active or Inactive Properties Report Display Panel
+    JButton back_adminStatusReportUI = new JButton("back");
+    Object[] columnNames_adminStatusReportUI = {"Property ID", "Category", "Address", "Size", "Number of Room", "Number of Bathroom", "Facilities", "Condition", "Rental Fee", "Contact Number", "Rental Ask For", "Agent / Owner Account"};
+    DefaultTableModel tableModel_adminStatusReportUI = new DefaultTableModel(columnNames_adminStatusReportUI, 0);
+    JTable data_display_adminStatusReportUI = new JTable(tableModel_adminStatusReportUI);
+    JLabel title_adminStatusReportUI = new JLabel();
+
+    UserViewProperty adminStatusReportUI = new UserViewProperty(back_adminStatusReportUI, data_display_adminStatusReportUI,title_adminStatusReportUI);
+
+    // Create Active or Inactive Properties Report Display Panel
+    JButton back_adminPropertyRateReportUI = new JButton("back");
+    Object[] columnNames_adminPropertyRateReportUI = {"Property ID", "Total Rental", "Average Rental Rate"};
+    DefaultTableModel tableModel_adminPropertyRateReportUI = new DefaultTableModel(columnNames_adminPropertyRateReportUI, 0);
+    JTable data_display_adminPropertyRateReportUI = new JTable(tableModel_adminPropertyRateReportUI);
+    JLabel title_adminPropertyRateReportUI = new JLabel("ALL PROPERTIES RENTAL RATE");
+
+    UserViewProperty adminPropertyRateReportUI = new UserViewProperty(back_adminPropertyRateReportUI, data_display_adminPropertyRateReportUI,title_adminPropertyRateReportUI);
+
+    // Create Rate Property Window
+    JButton one_ratePropertyWindow = new JButton ("1");
+    JButton two_ratePropertyWindow = new JButton ("2");
+    JButton three_ratePropertyWindow = new JButton ("3");
+    JButton four_ratePropertyWindow = new JButton ("4");
+    JButton five_ratePropertyWindow = new JButton ("5"); 
+    JLabel title_ID_ratePropertyWindow = new JLabel();
+
+    RatePropertyWindow ratePropertyWindow = new RatePropertyWindow(
+        one_ratePropertyWindow,
+        two_ratePropertyWindow,
+        three_ratePropertyWindow,
+        four_ratePropertyWindow,
+        five_ratePropertyWindow,
+        title_ID_ratePropertyWindow);
+
     // Create User Home page panel
     JButton viewProperties_userUI = new JButton("View Properties");
     JButton rentedProperty_userUI = new JButton("Rented Properties");
@@ -288,8 +349,9 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         }
     };  
     JTable data_display_userViewProperty = new JTable(tableModel_userViewProperty);
+    JLabel title_userViewProperty = new JLabel("AVAILABLE PROPERTY");
 
-    UserViewProperty userViewProperty = new UserViewProperty(back_userViewProperty, data_display_userViewProperty);
+    UserViewProperty userViewProperty = new UserViewProperty(back_userViewProperty, data_display_userViewProperty,title_userViewProperty);
 
     // Create User Rent Property Window
     JButton back_userPropertyRentWindow = new JButton("back");
@@ -351,7 +413,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton uploadProperty_agentOwnerUI = new JButton("Upload New Property");
     JButton modifiedProperties_agentOwnerUI = new JButton("Modified Properties");
     JButton rentedPropertie_agentOwnerUI = new JButton("Rented Propertie");
-    JButton ViewPropertiesCommand_agentOwnerUI = new JButton("View Propertie Comments");
     JButton logout_agentOwnerUI = new JButton("Logout");
     JLabel title_agentOwnerUI = new JLabel("");
     JLabel welcome_name_agentOwnerUI = new JLabel("");
@@ -360,7 +421,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         uploadProperty_agentOwnerUI, 
         modifiedProperties_agentOwnerUI, 
         rentedPropertie_agentOwnerUI,
-        ViewPropertiesCommand_agentOwnerUI,
         logout_agentOwnerUI,
         title_agentOwnerUI,
         welcome_name_agentOwnerUI);
@@ -514,9 +574,12 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         userContact_agentOwnerRentWindow,
         email_agentOwnerRentWindow,
         selected_user_agentOwnerRentWindow);
+    
+    JPanel empty = new JPanel();
 
     public Function_UI(JFrame frame){
-        
+
+        frame = this.frame;
         // Add all UI in one card layout panel
         this.setLayout(main_UI);
         this.add(LoginUI, "LoginUI");
@@ -525,6 +588,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         this.add(RegAdminUI, "RegAdminUI");
         this.add(adminAprUI, "adminAprUI");
         this.add(adminRemoveUI, "adminRemoveUI");
+        this.add(adminemptyReportUI, "adminemptyReportUI");
+        this.add(adminAllReportUI, "adminAllReportUI");
+        this.add(adminStatusReportUI, "adminStatusReportUI");
+        this.add(adminPropertyRateReportUI, "adminPropertyRateReportUI");
         this.add(userUI, "userUI");
         this.add(userViewProperty, "userViewProperty");
         this.add(userEditProfileUI,"userEditProfileUI");
@@ -533,6 +600,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         this.add(uploadpropertyUI, "uploadpropertyUI");
         this.add(modifiedPropertyUI, "modifiedPropertyUI");
         this.add(agentOwnerViewRentUI, "agentOwnerViewRentUI");
+        
 
         // Make Login page as first page when open the app 
         main_UI.show(this, "LoginUI");
@@ -575,7 +643,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         approveRegister_AdminPage.addActionListener(this);
         createAdmin_AdminPage.addActionListener(this);
         removeAccount_AdminPage.addActionListener(this);
-        manageProperties_AdminPage.addActionListener(this); 
         viewReport_AdminPage.addActionListener(this);
         Logout_AdminPage.addActionListener(this);
 
@@ -594,6 +661,25 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         // Button for Admin remove user page
         back_adminRemoveUI.addActionListener(this); 
         removeUserBtn_adminRemoveUI.addActionListener(this);
+
+        // Button for Admin view report control window
+        listProperty_reportListUI.addActionListener(this);
+        listActive_reportListUI.addActionListener(this);
+        listInactive_reportListUI.addActionListener(this);
+        listRate_reportListUI.addActionListener(this);
+
+        // Button for Admin view report page
+        back_adminemptyReportUI.addActionListener(this);
+        back_adminAllReportUI.addActionListener(this);
+        back_adminStatusReportUI.addActionListener(this);
+        back_adminPropertyRateReportUI.addActionListener(this);
+
+        // Button for rate property window
+        one_ratePropertyWindow.addActionListener(this);
+        two_ratePropertyWindow.addActionListener(this);
+        three_ratePropertyWindow.addActionListener(this);
+        four_ratePropertyWindow.addActionListener(this);
+        five_ratePropertyWindow.addActionListener(this);
 
         // Button for User Home page
         viewProperties_userUI.addActionListener(this);
@@ -618,7 +704,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         uploadProperty_agentOwnerUI.addActionListener(this); 
         modifiedProperties_agentOwnerUI.addActionListener(this); 
         rentedPropertie_agentOwnerUI.addActionListener(this);
-        ViewPropertiesCommand_agentOwnerUI.addActionListener(this);
         logout_agentOwnerUI.addActionListener(this);
 
         // Button for Upload New Property Page panel
@@ -679,7 +764,26 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                         welcome_name_userUI.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         // Switch to User home page
-                        main_UI.show(this, "userUI");  
+                        main_UI.show(this, "userUI");
+                        
+                        // Create Json instance
+                        Gson gson = new Gson();
+                        Reader readerWaitRateList = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+                        List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList, new TypeToken<List<RentPropertyData>>(){}.getType());
+                        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
+                        for(RentPropertyData waitRateData : waitRateList){
+                            if(waitRateData.getUserID().equals(login_acc)){
+                                garbage_data.add(waitRateData);
+                                title_ID_ratePropertyWindow.setText(waitRateData.getPropertyID());
+                                ratePropertyWindow.setVisible(true);
+                                break;
+                            }
+                        }
+                        waitRateList.removeAll(garbage_data);
+                        Writer writerWaitRateList = Files.newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+                        gson.toJson(waitRateList, writerWaitRateList);
+                        writerWaitRateList.close();
+                        
                     }
                     else if (acc_type_or_invalid.equals("Owner")){
                         String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
@@ -899,12 +1003,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Switch to Admin Remove User Page
             main_UI.show(this, "adminRemoveUI");
         }
-
-
-
-
-
-        
+        else if(e.getSource() == viewReport_AdminPage){
+            main_UI.show(this, "adminemptyReportUI"); 
+            reportListUI.setVisible(true);
+        }
         else if(e.getSource() == Logout_AdminPage){
             // Makesure all the textfield are empty 
             id_enterField_LoginPage.setText("");
@@ -1079,6 +1181,234 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         else if(e.getSource() == back_adminRemoveUI){
             // Switch to Admin Home Page
             main_UI.show(this, "AdminUI"); 
+        }
+
+        // Button event for Admin view report page
+        else if(e.getSource() == back_adminemptyReportUI){
+            main_UI.show(this, "AdminUI"); 
+            reportListUI.setVisible(false);
+        }
+        else if(e.getSource() == back_adminAllReportUI){
+            main_UI.show(this, "AdminUI"); 
+            reportListUI.setVisible(false);
+        }
+        else if(e.getSource() == back_adminStatusReportUI){
+            main_UI.show(this, "AdminUI"); 
+            reportListUI.setVisible(false);
+        }
+        else if(e.getSource() == back_adminPropertyRateReportUI){
+            main_UI.show(this, "AdminUI"); 
+            reportListUI.setVisible(false);
+        }
+        
+        
+
+
+        // Button event for Admin view report control window
+        else if(e.getSource() == listProperty_reportListUI){
+            // Makesure table empty
+            if(tableModel_adminAllReportUI.getRowCount() != 0){
+                Integer row = tableModel_adminAllReportUI.getRowCount();
+                for(int i = 0; i < row; i++){
+                    tableModel_adminAllReportUI.removeRow(0);
+                }
+            }
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                // Convert JSON array to list of property datas
+                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>(){}.getType());
+                reader.close();
+
+                // insert data into table
+                for (PropertyData propertyData : propertyDatas){
+                    Object[] data = new Object[13];
+                    data[0] = propertyData.getPropertyID();
+                    data[1] = propertyData.getCategory();
+                    data[2] = propertyData.getAddress();
+                    data[3] = propertyData.getSize();
+                    data[4] = propertyData.getNumberRoom();
+                    data[5] = propertyData.getNumberBathroom();
+                    data[6] = propertyData.getFacilities();
+                    data[7] = propertyData.getCondition();
+                    data[8] = propertyData.getRentalFee();
+                    data[9] = propertyData.getContactNumber();
+                    data[10] = propertyData.getRentalAskFor();
+                    data[11] = propertyData.getAgentOwnerAcc();
+                    data[12] = propertyData.getStatus();
+                    tableModel_adminAllReportUI.addRow(data);
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }  
+            main_UI.show(this, "adminAllReportUI"); 
+        }
+        else if(e.getSource() == listActive_reportListUI){
+            
+            title_adminStatusReportUI.setText("ALL ACTIVE PROPERTIES REPORT");
+
+            // Makesure table empty
+            if(tableModel_adminStatusReportUI.getRowCount() != 0){
+                Integer row = tableModel_adminStatusReportUI.getRowCount();
+                for(int i = 0; i < row; i++){
+                    tableModel_adminStatusReportUI.removeRow(0);
+                }
+            }
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                // Convert JSON array to list of property datas
+                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>(){}.getType());
+                reader.close();
+
+                // insert data into table
+                for (PropertyData propertyData : propertyDatas){
+                    if (propertyData.getStatus().equals("Active")){
+                        Object[] data = new Object[12];
+                        data[0] = propertyData.getPropertyID();
+                        data[1] = propertyData.getCategory();
+                        data[2] = propertyData.getAddress();
+                        data[3] = propertyData.getSize();
+                        data[4] = propertyData.getNumberRoom();
+                        data[5] = propertyData.getNumberBathroom();
+                        data[6] = propertyData.getFacilities();
+                        data[7] = propertyData.getCondition();
+                        data[8] = propertyData.getRentalFee();
+                        data[9] = propertyData.getContactNumber();
+                        data[10] = propertyData.getRentalAskFor();
+                        data[11] = propertyData.getAgentOwnerAcc();
+                        tableModel_adminStatusReportUI.addRow(data);
+                    }
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }  
+            main_UI.show(this, "adminStatusReportUI");
+            
+        }
+        else if(e.getSource() == listInactive_reportListUI){
+            title_adminStatusReportUI.setText("ALL INACTIVE PROPERTIES REPORT");
+
+            // Makesure table empty
+            if(tableModel_adminStatusReportUI.getRowCount() != 0){
+                Integer row = tableModel_adminStatusReportUI.getRowCount();
+                for(int i = 0; i < row; i++){
+                    tableModel_adminStatusReportUI.removeRow(0);
+                }
+            }
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                // Convert JSON array to list of property datas
+                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>(){}.getType());
+                reader.close();
+
+                // insert data into table
+                for (PropertyData propertyData : propertyDatas){
+                    if (propertyData.getStatus().equals("Inactive")){
+                        Object[] data = new Object[12];
+                        data[0] = propertyData.getPropertyID();
+                        data[1] = propertyData.getCategory();
+                        data[2] = propertyData.getAddress();
+                        data[3] = propertyData.getSize();
+                        data[4] = propertyData.getNumberRoom();
+                        data[5] = propertyData.getNumberBathroom();
+                        data[6] = propertyData.getFacilities();
+                        data[7] = propertyData.getCondition();
+                        data[8] = propertyData.getRentalFee();
+                        data[9] = propertyData.getContactNumber();
+                        data[10] = propertyData.getRentalAskFor();
+                        data[11] = propertyData.getAgentOwnerAcc();
+                        tableModel_adminStatusReportUI.addRow(data);
+                    }
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }  
+            main_UI.show(this, "adminStatusReportUI");
+
+        }
+        else if(e.getSource() == listRate_reportListUI){
+            // Makesure table empty
+            if(tableModel_adminPropertyRateReportUI.getRowCount() != 0){
+                Integer row = tableModel_adminPropertyRateReportUI.getRowCount();
+                for(int i = 0; i < row; i++){
+                    tableModel_adminPropertyRateReportUI.removeRow(0);
+                }
+            }
+            // Create Json instance
+            Gson gson = new Gson();
+            // Create a reader 
+            Reader reader;
+            try {
+                reader = Files.newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+                List<PropertyRateData> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRateData>>(){}.getType());
+                reader.close();
+
+                // insert data into table
+                for (PropertyRateData propertyRateData : propertyRateDatas){
+                    Object[] data = new Object[3];
+                    data[0] = propertyRateData.getPropertyID();
+                    data[1] = propertyRateData.getRentedNum();
+                    int Avg_Mark = propertyRateData.getRateMark() / propertyRateData.getRentedNum();
+                    data[2] = Avg_Mark;
+                    tableModel_adminPropertyRateReportUI.addRow(data);
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }  
+            main_UI.show(this, "adminPropertyRateReportUI");
+        }
+
+        // Button event for rate property window
+        else if(e.getSource() == one_ratePropertyWindow){
+            try {
+                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 1);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ratePropertyWindow.setVisible(false);
+        }
+        else if(e.getSource() == two_ratePropertyWindow){
+            try {
+                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 2);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ratePropertyWindow.setVisible(false);
+        }
+        else if(e.getSource() == three_ratePropertyWindow){
+            try {
+                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 3);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ratePropertyWindow.setVisible(false);
+        }
+        else if(e.getSource() == four_ratePropertyWindow){
+            try {
+                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 4);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ratePropertyWindow.setVisible(false);
+        }
+        else if(e.getSource() == five_ratePropertyWindow){
+            try {
+                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 5);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            ratePropertyWindow.setVisible(false);
         }
 
         // Button event for User Home page
@@ -1341,7 +1671,6 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                 e1.printStackTrace();
             }
         }
-        
         else if(e.getSource() == logout_agentOwnerUI){
             // Makesure all the textfield are empty 
             id_enterField_LoginPage.setText("");
