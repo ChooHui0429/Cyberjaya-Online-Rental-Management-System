@@ -17,10 +17,8 @@ public class UserProfileUpdate {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerAcc = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
-        Reader readerContactNum = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/userContactNumber.json"));
+        Reader readerAcc = Files.newBufferedReader(Paths.get("Data/accountData.json"));
+        Reader readerContactNum = Files.newBufferedReader(Paths.get("Data/userContactNumber.json"));
 
         // Convert JSON array to list
         List<AccountData> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<AccountData>>() {
@@ -47,15 +45,13 @@ public class UserProfileUpdate {
         }
 
         // Create writer
-        Writer writerContactNum = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/userContactNumber.json"));
+        Writer writerContactNum = Files.newBufferedWriter(Paths.get("Data/userContactNumber.json"));
         // Convert new user contact datas to Json file
         gson.toJson(userContactDatas, writerContactNum);
         writerContactNum.close();
 
         // Create writer
-        Writer writerAcc = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+        Writer writerAcc = Files.newBufferedWriter(Paths.get("Data/accountData.json"));
         // Convert new account datas to Json file
         gson.toJson(accountDatas, writerAcc);
         writerAcc.close();
@@ -68,8 +64,7 @@ public class UserProfileUpdate {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
         // Convert JSON array to list of account datas
         List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -95,8 +90,7 @@ public class UserProfileUpdate {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/userContactNumber.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/userContactNumber.json"));
 
         // Convert JSON array to list of user contact datas
         List<UserContactNumData> userContactDatas = gson.fromJson(reader, new TypeToken<List<UserContactNumData>>() {
@@ -117,8 +111,7 @@ public class UserProfileUpdate {
             userContactDatas.add(contact_data);
 
             // Create writer
-            Writer writer = Files.newBufferedWriter(
-                    Paths.get("Cyberjaya-Online-Rental-Management-System/Data/userContactNumber.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/userContactNumber.json"));
             // Convert new user contact datas to Json file
             gson.toJson(userContactDatas, writer);
             writer.close();

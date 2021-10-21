@@ -699,8 +699,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
                         // Create Json instance
                         Gson gson = new Gson();
-                        Reader readerWaitRateList = Files.newBufferedReader(
-                                Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+                        Reader readerWaitRateList = Files.newBufferedReader(Paths.get("Data/WaitRateList.json"));
                         List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList,
                                 new TypeToken<List<RentPropertyData>>() {
                                 }.getType());
@@ -714,8 +713,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                             }
                         }
                         waitRateList.removeAll(garbage_data);
-                        Writer writerWaitRateList = Files.newBufferedWriter(
-                                Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+                        Writer writerWaitRateList = Files.newBufferedWriter(Paths.get("Data/WaitRateList.json"));
                         gson.toJson(waitRateList, writerWaitRateList);
                         writerWaitRateList.close();
 
@@ -842,8 +840,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/registerData.json"));
                 // Convert JSON array to list of register datas
                 List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
                 }.getType());
@@ -899,8 +896,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
                 // Convert JSON array to list of account datas
                 List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
                 }.getType());
@@ -1135,8 +1131,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
                 // Convert JSON array to list of property datas
                 List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
                 }.getType());
@@ -1180,8 +1175,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
                 // Convert JSON array to list of property datas
                 List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
                 }.getType());
@@ -1226,8 +1220,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
                 // Convert JSON array to list of property datas
                 List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
                 }.getType());
@@ -1270,8 +1263,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/PropertyRateData.json"));
                 List<PropertyRateData> propertyRateDatas = gson.fromJson(reader,
                         new TypeToken<List<PropertyRateData>>() {
                         }.getType());
@@ -1354,8 +1346,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
                 // Convert JSON array to list of property datas
                 List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
                 }.getType());
@@ -1392,8 +1383,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rentPropertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/rentPropertyData.json"));
                 // Convert JSON array to list of rented property datas
                 List<RentPropertyData> rentedpropertyDatas = gson.fromJson(reader,
                         new TypeToken<List<RentPropertyData>>() {
@@ -1516,8 +1506,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
                 // Convert JSON array to list of property datas
                 List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
                 }.getType());
@@ -1558,8 +1547,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             // Create a reader
             Reader reader;
             try {
-                reader = Files.newBufferedReader(
-                        Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rentPropertyData.json"));
+                reader = Files.newBufferedReader(Paths.get("Data/rentPropertyData.json"));
                 // Convert JSON array to list of rent property datas
                 List<RentPropertyData> rentpropertyDatas = gson.fromJson(reader,
                         new TypeToken<List<RentPropertyData>>() {

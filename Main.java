@@ -10,7 +10,7 @@ public class Main {
         frame.setTitle("Cyberjaya Online Rental Management System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(850, 850);
-        ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
+        ImageIcon logo = new ImageIcon("Icons/Logo.png");
         frame.setIconImage(logo.getImage());
 
         Function_UI main_UI = new Function_UI(frame);

@@ -24,8 +24,7 @@ public class RentPropertFunction {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerpropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Reader readerpropertyDatas = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
 
         // Convert JSON array to list of property datas
         List<PropertyData> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<PropertyData>>() {
@@ -40,8 +39,7 @@ public class RentPropertFunction {
         }
 
         // Create a reader
-        Reader readerRentPropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("Data/RentPropertyData.json"));
 
         // Convert JSON array to list of Rent Property datas
         List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
@@ -53,8 +51,7 @@ public class RentPropertFunction {
         rentPropertyDatas.add(new_data);
 
         // Create writer
-        Writer writer = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Writer writer = Files.newBufferedWriter(Paths.get("Data/RentPropertyData.json"));
         // Convert property datas to Json file
         gson.toJson(rentPropertyDatas, writer);
         writer.close();
@@ -65,10 +62,8 @@ public class RentPropertFunction {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerpropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
-        Reader readerRentPropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Reader readerpropertyDatas = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
+        Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("Data/RentPropertyData.json"));
 
         // Convert JSON array to list of datas
         List<PropertyData> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<PropertyData>>() {
@@ -101,10 +96,8 @@ public class RentPropertFunction {
 
         // Write data
         // Create writer
-        Writer writerpropertyDatas = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
-        Writer writerRentPropertyDatas = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Writer writerpropertyDatas = Files.newBufferedWriter(Paths.get("Data/propertyData.json"));
+        Writer writerRentPropertyDatas = Files.newBufferedWriter(Paths.get("Data/RentPropertyData.json"));
         // Convert datas to Json file
         gson.toJson(propertyDatas, writerpropertyDatas);
         gson.toJson(rentPropertyDatas, writerRentPropertyDatas);
@@ -117,8 +110,7 @@ public class RentPropertFunction {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerRentPropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("Data/RentPropertyData.json"));
 
         // Convert JSON array to list of datas
         List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
@@ -140,8 +132,7 @@ public class RentPropertFunction {
 
         // Write data
         // Create writer
-        Writer writerRentPropertyDatas = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
+        Writer writerRentPropertyDatas = Files.newBufferedWriter(Paths.get("Data/RentPropertyData.json"));
         // Convert datas to Json file
         gson.toJson(rentPropertyDatas, writerRentPropertyDatas);
         writerRentPropertyDatas.close();
@@ -152,10 +143,8 @@ public class RentPropertFunction {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerRentPropertyDatas = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
-        Reader readerWaitRateList = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+        Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("Data/RentPropertyData.json"));
+        Reader readerWaitRateList = Files.newBufferedReader(Paths.get("Data/WaitRateList.json"));
         // Convert JSON array to list of datas
         List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
                 new TypeToken<List<RentPropertyData>>() {
@@ -179,10 +168,8 @@ public class RentPropertFunction {
 
         // Write data
         // Create writer
-        Writer writerRentPropertyDatas = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/RentPropertyData.json"));
-        Writer writerWaitRateList = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/WaitRateList.json"));
+        Writer writerRentPropertyDatas = Files.newBufferedWriter(Paths.get("Data/RentPropertyData.json"));
+        Writer writerWaitRateList = Files.newBufferedWriter(Paths.get("Data/WaitRateList.json"));
         // Convert datas to Json file
         gson.toJson(rentPropertyDatas, writerRentPropertyDatas);
         gson.toJson(waitRateList, writerWaitRateList);
@@ -194,8 +181,7 @@ public class RentPropertFunction {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/PropertyRateData.json"));
         List<PropertyRateData> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRateData>>() {
         }.getType());
 
@@ -219,8 +205,7 @@ public class RentPropertFunction {
         }
 
         // Create writer
-        Writer writer = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/PropertyRateData.json"));
+        Writer writer = Files.newBufferedWriter(Paths.get("Data/PropertyRateData.json"));
         gson.toJson(propertyRateDatas, writer);
         writer.close();
     }

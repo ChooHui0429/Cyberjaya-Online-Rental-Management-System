@@ -34,8 +34,7 @@ public class ApproveUser {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
         // Convert JSON array to list of account datas
         List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -97,8 +96,7 @@ public class ApproveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
             // Convert JSON array to list of account datas
             List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -110,8 +108,7 @@ public class ApproveUser {
             accountDatas.add(new_accountData);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/accountData.json"));
             // Convert account datas to Json file
             gson.toJson(accountDatas, writer);
             writer.close();
@@ -127,8 +124,7 @@ public class ApproveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/registerData.json"));
 
             // Convert JSON array to list of register datas
             List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
@@ -146,8 +142,7 @@ public class ApproveUser {
             registerDatas.removeAll(approvedRegisterDatas);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/registerData.json"));
             // Convert register datas to Json file
             gson.toJson(registerDatas, writer);
             writer.close();
@@ -163,8 +158,7 @@ public class ApproveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rejectedData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/rejectedData.json"));
 
             // Convert JSON array to list of rejected datas
             List<RegisterData> rejectedDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
@@ -176,8 +170,7 @@ public class ApproveUser {
             rejectedDatas.add(new_rejectData);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rejectedData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/rejectedData.json"));
             // Convert rejected datas to Json file
             gson.toJson(rejectedDatas, writer);
             writer.close();
@@ -193,8 +186,7 @@ public class ApproveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/registerData.json"));
 
             // Convert JSON array to list of register datas
             List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
@@ -212,8 +204,7 @@ public class ApproveUser {
             registerDatas.removeAll(approvedRegisterDatas);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/registerData.json"));
             // Convert register datas to Json file
             gson.toJson(registerDatas, writer);
             writer.close();

@@ -12,7 +12,7 @@ public class LoginPanel extends JPanel {
         this.setLayout(new GridLayout(6, 1, 0, 0));
 
         // Resize logo
-        ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
+        ImageIcon logo = new ImageIcon("Icons/Logo.png");
         Image logo_image = logo.getImage();
         Image logo_resize = logo_image.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
         logo = new ImageIcon(logo_resize);

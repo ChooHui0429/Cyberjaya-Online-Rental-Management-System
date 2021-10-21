@@ -32,8 +32,7 @@ public class RemoveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/removedData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/removedData.json"));
 
             // Convert JSON array to list of removed datas
             List<AccountData> removedDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -44,8 +43,7 @@ public class RemoveUser {
             removedDatas.add(accountData);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/removedData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/removedData.json"));
             // Convert removed account data to Json file
             gson.toJson(removedDatas, writer);
             writer.close();
@@ -63,8 +61,7 @@ public class RemoveUser {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
             // Convert JSON array to list of account datas
             List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -82,8 +79,7 @@ public class RemoveUser {
             accountDatas.removeAll(selectedAccountDatas);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/accountData.json"));
             // Convert register datas to Json file
             gson.toJson(accountDatas, writer);
             writer.close();

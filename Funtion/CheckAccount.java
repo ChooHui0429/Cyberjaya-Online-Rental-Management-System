@@ -16,14 +16,10 @@ public class CheckAccount {
         // Create Json instance
         Gson gson = new Gson();
         // Create reader
-        Reader readerRegister = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
-        Reader readerAccount = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
-        Reader readerReject = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rejectedData.json"));
-        Reader readerRemove = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/removedData.json"));
+        Reader readerRegister = Files.newBufferedReader(Paths.get("Data/registerData.json"));
+        Reader readerAccount = Files.newBufferedReader(Paths.get("Data/accountData.json"));
+        Reader readerReject = Files.newBufferedReader(Paths.get("Data/rejectedData.json"));
+        Reader readerRemove = Files.newBufferedReader(Paths.get("Data/removedData.json"));
 
         // Convert JSON array to list
         List<RegisterData> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<RegisterData>>() {
@@ -83,8 +79,7 @@ public class CheckAccount {
                         selectedrejectedDatas.add(rejectedData);
                         rejectedDatas.removeAll(selectedrejectedDatas);
                         // Create writer
-                        Writer writer = Files.newBufferedWriter(
-                                Paths.get("Cyberjaya-Online-Rental-Management-System/Data/rejectedData.json"));
+                        Writer writer = Files.newBufferedWriter(Paths.get("Data/rejectedData.json"));
                         // Convert rejected datas to Json file
                         gson.toJson(rejectedDatas, writer);
                         writer.close();
@@ -108,8 +103,7 @@ public class CheckAccount {
                         selectedremovedDatas.add(removedData);
                         removedDatas.removeAll(selectedremovedDatas);
                         // Create writer
-                        Writer writer = Files.newBufferedWriter(
-                                Paths.get("Cyberjaya-Online-Rental-Management-System/Data/removedData.json"));
+                        Writer writer = Files.newBufferedWriter(Paths.get("Data/removedData.json"));
                         // Convert rejected datas to Json file
                         gson.toJson(removedDatas, writer);
                         writer.close();

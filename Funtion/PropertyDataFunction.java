@@ -16,8 +16,7 @@ public class PropertyDataFunction {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
 
         // Convert JSON array to list of property datas
         List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
@@ -69,8 +68,7 @@ public class PropertyDataFunction {
         propertyDatas.add(new_data);
 
         // Create writer
-        Writer writer = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Writer writer = Files.newBufferedWriter(Paths.get("Data/propertyData.json"));
         // Convert property datas to Json file
         gson.toJson(propertyDatas, writer);
         writer.close();
@@ -80,8 +78,7 @@ public class PropertyDataFunction {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
 
         // Convert JSON array to list of property datas
         List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
@@ -106,8 +103,7 @@ public class PropertyDataFunction {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/propertyData.json"));
 
         // Convert JSON array to list of property datas
         List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
@@ -132,8 +128,7 @@ public class PropertyDataFunction {
         }
 
         // Create writer
-        Writer writer = Files
-                .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/propertyData.json"));
+        Writer writer = Files.newBufferedWriter(Paths.get("Data/propertyData.json"));
         // Convert property datas to Json file
         gson.toJson(propertyDatas, writer);
         writer.close();

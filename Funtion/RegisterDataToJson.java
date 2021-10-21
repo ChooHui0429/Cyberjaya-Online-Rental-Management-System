@@ -17,8 +17,7 @@ public class RegisterDataToJson {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/registerData.json"));
 
             // Convert JSON array to list of register datas
             List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
@@ -31,8 +30,7 @@ public class RegisterDataToJson {
             registerDatas.add(new_registerData);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/registerData.json"));
             // Convert register datas to Json file
             gson.toJson(registerDatas, writer);
             writer.close();
@@ -60,8 +58,7 @@ public class RegisterDataToJson {
             Gson gson = new Gson();
 
             // Create a reader
-            Reader reader = Files
-                    .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
             // Convert JSON array to list of account datas
             List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -73,8 +70,7 @@ public class RegisterDataToJson {
             accountDatas.add(new_accountData);
 
             // Create writer
-            Writer writer = Files
-                    .newBufferedWriter(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+            Writer writer = Files.newBufferedWriter(Paths.get("Data/accountData.json"));
             // Convert register datas to Json file
             gson.toJson(accountDatas, writer);
             writer.close();
@@ -98,8 +94,7 @@ public class RegisterDataToJson {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader reader = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+        Reader reader = Files.newBufferedReader(Paths.get("Data/accountData.json"));
 
         // Convert JSON array to list of account datas
         List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
@@ -146,10 +141,8 @@ public class RegisterDataToJson {
         Gson gson = new Gson();
 
         // Create a reader
-        Reader readerRegister = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/registerData.json"));
-        Reader readerAccount = Files
-                .newBufferedReader(Paths.get("Cyberjaya-Online-Rental-Management-System/Data/accountData.json"));
+        Reader readerRegister = Files.newBufferedReader(Paths.get("Data/registerData.json"));
+        Reader readerAccount = Files.newBufferedReader(Paths.get("Data/accountData.json"));
         // Convert JSON array to list
         List<RegisterData> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<RegisterData>>() {
         }.getType());

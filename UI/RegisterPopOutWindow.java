@@ -10,7 +10,7 @@ public class RegisterPopOutWindow extends JFrame {
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setSize(750, 700);
-        ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
+        ImageIcon logo = new ImageIcon("Icons/Logo.png");
         this.setIconImage(logo.getImage());
 
         // Panel for all the notice
@@ -27,7 +27,7 @@ public class RegisterPopOutWindow extends JFrame {
         this.add(notice_panel);
 
         // Resize image
-        ImageIcon Notice_image = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/PopOutRegister.jpg");
+        ImageIcon Notice_image = new ImageIcon("Icons/PopOutRegister.jpg");
         Image Image_Get_image = Notice_image.getImage();
         Image Notice_image_resize = Image_Get_image.getScaledInstance(320, 220, java.awt.Image.SCALE_SMOOTH);
         Notice_image = new ImageIcon(Notice_image_resize);
