@@ -1,18 +1,14 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminPage extends JPanel{
-    public AdminPage(
-        JButton approveRegister, 
-        JButton createAdmin, 
-        JButton removeAccount,  
-        JButton viewReport, 
-        JButton Logout,
-        JLabel welcome_name){
-            
+public class AdminPage extends JPanel {
+    public AdminPage(JButton approveRegister, JButton createAdmin, JButton removeAccount, JButton viewReport,
+            JButton Logout, JLabel welcome_name) {
+
         // UI for Admin home page
-        this.setLayout(new GridLayout(3,1,1,1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
 
         // Title for Admin home Page
         JLabel title = new JLabel("ADMIN");
@@ -35,15 +31,15 @@ public class AdminPage extends JPanel{
 
         // Button for admin home page
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3,1,1,1));
+        buttonPanel.setLayout(new GridLayout(3, 1, 1, 1));
 
         JPanel buttonPanel1 = new JPanel();
-        buttonPanel1.setLayout(new GridLayout(2,1,1,1));
+        buttonPanel1.setLayout(new GridLayout(2, 1, 1, 1));
         buttonPanel1.add(approveRegister);
         buttonPanel1.add(createAdmin);
 
         JPanel buttonPanel2 = new JPanel();
-        buttonPanel2.setLayout(new GridLayout(2,1,1,1));
+        buttonPanel2.setLayout(new GridLayout(2, 1, 1, 1));
         buttonPanel2.add(removeAccount);
         buttonPanel2.add(viewReport);
 
@@ -58,5 +54,5 @@ public class AdminPage extends JPanel{
         buttonPanel.add(buttonRow2);
 
         this.add(buttonPanel);
-    }   
+    }
 }

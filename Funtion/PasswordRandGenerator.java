@@ -1,4 +1,5 @@
 package Funtion;
+
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,8 +12,7 @@ public class PasswordRandGenerator {
     private static final String DIGIT = "0123456789";
     private static final int PASSWORD_LENGTH = 20;
 
-    private static final String PASSWORD_ALLOW =
-            CHAR_LOWERCASE + CHAR_UPPERCASE + DIGIT;
+    private static final String PASSWORD_ALLOW = CHAR_LOWERCASE + CHAR_UPPERCASE + DIGIT;
 
     private static SecureRandom random = new SecureRandom();
 
@@ -40,12 +40,14 @@ public class PasswordRandGenerator {
 
         return shuffleString(password);
     }
+
     // generate a random char[], based on `input`
     private static String generateRandomString(String input, int size) {
 
         if (input == null || input.length() <= 0)
             throw new IllegalArgumentException("Invalid input.");
-        if (size < 1) throw new IllegalArgumentException("Invalid size.");
+        if (size < 1)
+            throw new IllegalArgumentException("Invalid size.");
 
         StringBuilder result = new StringBuilder(size);
         for (int i = 0; i < size; i++) {
@@ -55,6 +57,7 @@ public class PasswordRandGenerator {
         }
         return result.toString();
     }
+
     // for final password, make it more random
     public static String shuffleString(String input) {
         List<String> result = Arrays.asList(input.split(""));
@@ -63,4 +66,3 @@ public class PasswordRandGenerator {
     }
 
 }
-

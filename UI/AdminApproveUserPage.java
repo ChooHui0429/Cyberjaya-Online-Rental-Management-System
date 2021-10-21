@@ -1,20 +1,21 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-
-public class AdminApproveUserPage extends JPanel{
-    public AdminApproveUserPage(JButton back, JButton rejectUserBtn, JButton approveUserBtn, JTable data_display, JLabel notice){
+public class AdminApproveUserPage extends JPanel {
+    public AdminApproveUserPage(JButton back, JButton rejectUserBtn, JButton approveUserBtn, JTable data_display,
+            JLabel notice) {
 
         // Approve User Page UI
-        this.setLayout(new GridLayout(3,1,0,0));
+        this.setLayout(new GridLayout(3, 1, 0, 0));
 
         // Table display for registrater data
         data_display.getTableHeader().setReorderingAllowed(false);
         data_display.setAutoCreateRowSorter(true);
         JScrollPane scrollPane = new JScrollPane(data_display);
         this.add(scrollPane);
-        
+
         // Notice label
         notice.setHorizontalAlignment(JLabel.CENTER);
         notice.setForeground(Color.red);

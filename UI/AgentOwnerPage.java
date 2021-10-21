@@ -1,17 +1,13 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class AgentOwnerPage extends JPanel{
-    public AgentOwnerPage(
-        JButton uploadProperty, 
-        JButton modifiedProperties, 
-        JButton rentedProperties, 
-        JButton logout, 
-        JLabel title, 
-        JLabel welcome_name){
+public class AgentOwnerPage extends JPanel {
+    public AgentOwnerPage(JButton uploadProperty, JButton modifiedProperties, JButton rentedProperties, JButton logout,
+            JLabel title, JLabel welcome_name) {
         // UI for Agent and Owner Home Page
-        this.setLayout(new GridLayout(3,1,1,1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
 
         // Title for Agent and Owner Home Page
         title.setHorizontalAlignment(JLabel.CENTER);
@@ -33,7 +29,7 @@ public class AgentOwnerPage extends JPanel{
 
         // Button for Agent and Owner Home Page
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3,1,1,1));
+        buttonPanel.setLayout(new GridLayout(3, 1, 1, 1));
 
         JPanel buttonRow1 = new JPanel();
         buttonRow1.add(uploadProperty);

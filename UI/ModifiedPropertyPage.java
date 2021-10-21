@@ -1,11 +1,12 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ModifiedPropertyPage extends JPanel{
-    public ModifiedPropertyPage(JButton back, JTable data_display, JLabel notice){
+public class ModifiedPropertyPage extends JPanel {
+    public ModifiedPropertyPage(JButton back, JTable data_display, JLabel notice) {
         // Modified Property Page UI
-        this.setLayout(new GridLayout(4,1,1,1));
+        this.setLayout(new GridLayout(4, 1, 1, 1));
 
         // Title for Modified Property Page
         JLabel title = new JLabel("MODIFIED PROPERTY");
@@ -18,7 +19,7 @@ public class ModifiedPropertyPage extends JPanel{
         data_display.setAutoCreateRowSorter(true);
         JScrollPane scrollPane = new JScrollPane(data_display);
         this.add(scrollPane);
-        
+
         // Notice label
         notice.setHorizontalAlignment(JLabel.CENTER);
         notice.setForeground(Color.red);

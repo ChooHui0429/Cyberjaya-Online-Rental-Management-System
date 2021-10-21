@@ -4,10 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class UserViewProperty extends JPanel{
-    public UserViewProperty(JButton back, JTable data_display, JLabel title){
+public class UserViewProperty extends JPanel {
+    public UserViewProperty(JButton back, JTable data_display, JLabel title) {
         // User View Property UI
-        this.setLayout(new GridLayout(4,1,1,1));
+        this.setLayout(new GridLayout(4, 1, 1, 1));
 
         // Title for View Property Page
         title.setHorizontalAlignment(JLabel.CENTER);
@@ -18,7 +18,8 @@ public class UserViewProperty extends JPanel{
         data_display.getTableHeader().setReorderingAllowed(false);
         data_display.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         data_display.setAutoCreateRowSorter(true);
-        JScrollPane scrollPane = new JScrollPane(data_display, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane = new JScrollPane(data_display, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane);
 
         // Button for Modified Property Page
@@ -27,5 +28,5 @@ public class UserViewProperty extends JPanel{
         this.add(buttonPanel);
 
     }
-    
+
 }

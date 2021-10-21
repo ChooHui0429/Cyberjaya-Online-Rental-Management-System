@@ -6,35 +6,35 @@ public class RentPropertyData {
     private String ownerAgentID;
     private String status;
 
-    public String getUserID(){
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID){
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public String getPropertyID(){
+    public String getPropertyID() {
         return propertyID;
     }
 
-    public void setPropertyID(String propertyID){
+    public void setPropertyID(String propertyID) {
         this.propertyID = propertyID;
     }
 
-    public String getOwnerAgentID(){
+    public String getOwnerAgentID() {
         return ownerAgentID;
     }
 
-    public void setOwnerAgentID(String ownerAgentID){
+    public void setOwnerAgentID(String ownerAgentID) {
         this.ownerAgentID = ownerAgentID;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         this.status = status;
     }
 }

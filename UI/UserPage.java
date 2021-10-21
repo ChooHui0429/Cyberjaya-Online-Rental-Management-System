@@ -1,11 +1,13 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class UserPage extends JPanel {
-    public UserPage(JButton viewProperties, JButton rentedProperty, JButton logout, JButton editProfile,JLabel welcome_name){
+    public UserPage(JButton viewProperties, JButton rentedProperty, JButton logout, JButton editProfile,
+            JLabel welcome_name) {
         // UI for User Home Page
-        this.setLayout(new GridLayout(3,1,1,1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
 
         // Title for User home Page
         JLabel title = new JLabel("POTENTIAL TENANT");
@@ -28,7 +30,7 @@ public class UserPage extends JPanel {
 
         // Button for User home Page
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3,1,1,1));
+        buttonPanel.setLayout(new GridLayout(3, 1, 1, 1));
 
         JPanel buttonRow1 = new JPanel();
         buttonRow1.add(viewProperties);

@@ -1,11 +1,12 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class UserViewRent extends JPanel{
-    public UserViewRent(JButton back, JLabel notice, JTable data_display){
+public class UserViewRent extends JPanel {
+    public UserViewRent(JButton back, JLabel notice, JTable data_display) {
         // User View Rented Property UI
-        this.setLayout(new GridLayout(4,1,1,1));
+        this.setLayout(new GridLayout(4, 1, 1, 1));
 
         // Title for View Rented Property Page
         JLabel title = new JLabel("PROPERTY RENTED");

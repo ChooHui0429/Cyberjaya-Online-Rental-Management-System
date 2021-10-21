@@ -1,23 +1,26 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class RegisterPopOutWindow extends JFrame{
-    public RegisterPopOutWindow(JButton ok){
+public class RegisterPopOutWindow extends JFrame {
+    public RegisterPopOutWindow(JButton ok) {
         // Pop Out Notice for Successful register
-        this.setLayout(new GridLayout(3,1,5,5));
+        this.setLayout(new GridLayout(3, 1, 5, 5));
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setSize(750,700);
+        this.setSize(750, 700);
         ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
         this.setIconImage(logo.getImage());
 
-        // Panel for all the notice 
+        // Panel for all the notice
         JPanel notice_panel = new JPanel();
-        notice_panel.setLayout(new GridLayout(2,1,1,1));
-        JLabel notice1 = new JLabel("Please always check at the 'check user ID and password' for the registration status by using Email and Security Password");
+        notice_panel.setLayout(new GridLayout(2, 1, 1, 1));
+        JLabel notice1 = new JLabel(
+                "Please always check at the 'check user ID and password' for the registration status by using Email and Security Password");
         notice1.setHorizontalAlignment(JLabel.CENTER);
-        JLabel notice2 = new JLabel("Once the account is approved by admin, the User ID and password will be given there");
+        JLabel notice2 = new JLabel(
+                "Once the account is approved by admin, the User ID and password will be given there");
         notice2.setHorizontalAlignment(JLabel.CENTER);
         notice_panel.add(notice1);
         notice_panel.add(notice2);

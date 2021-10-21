@@ -1,27 +1,21 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class AgentOwnerRentWindow extends JFrame{
-    public AgentOwnerRentWindow(
-        JButton back,
-        JButton rent,
-        JButton reject,
-        JLabel title_ID,
-        JLabel userID,
-        JLabel userContact,
-        JLabel email,
-        String selected_user){
+public class AgentOwnerRentWindow extends JFrame {
+    public AgentOwnerRentWindow(JButton back, JButton rent, JButton reject, JLabel title_ID, JLabel userID,
+            JLabel userContact, JLabel email, String selected_user) {
 
         // Main Frame for Agent/Owner Property Rent Window
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setSize(500,500);
+        this.setSize(500, 500);
         ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
         this.setIconImage(logo.getImage());
         this.setResizable(false);
 
-        this.setLayout(new GridLayout(3,1,1,1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
 
         // ID for Agent/Owner Property Rent Window
         title_ID.setHorizontalAlignment(JLabel.CENTER);
@@ -29,14 +23,14 @@ public class AgentOwnerRentWindow extends JFrame{
         this.add(title_ID);
 
         JPanel info_display = new JPanel();
-        info_display.setLayout(new GridLayout(3,1,1,1));
+        info_display.setLayout(new GridLayout(3, 1, 1, 1));
         info_display.add(userID);
         info_display.add(userContact);
         info_display.add(email);
 
         this.add(info_display);
 
-        // Button for Agent/Owner  Property Rent Window
+        // Button for Agent/Owner Property Rent Window
         JPanel button_panel = new JPanel();
         button_panel.add(back);
         button_panel.add(reject);
@@ -44,5 +38,5 @@ public class AgentOwnerRentWindow extends JFrame{
         this.add(button_panel);
 
     }
-    
+
 }

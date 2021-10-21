@@ -1,32 +1,21 @@
 package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class UserPropertyRentWindow extends JFrame{
-    public UserPropertyRentWindow(
-        JButton back,
-        JButton rent,
-        JLabel title_ID,
-        JLabel rentalFee, 
-        JLabel size, 
-        JLabel NumRoom, 
-        JLabel NumBathroom,
-        JLabel Condition,
-        JLabel ContactNum,
-        JLabel address,
-        JLabel facilities,
-        JLabel rentalAskFor,
-        JLabel propertyType,
-        JLabel owner){
+public class UserPropertyRentWindow extends JFrame {
+    public UserPropertyRentWindow(JButton back, JButton rent, JLabel title_ID, JLabel rentalFee, JLabel size,
+            JLabel NumRoom, JLabel NumBathroom, JLabel Condition, JLabel ContactNum, JLabel address, JLabel facilities,
+            JLabel rentalAskFor, JLabel propertyType, JLabel owner) {
         // Main Frame for User Property Rent Window
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setSize(850,850);
+        this.setSize(850, 850);
         ImageIcon logo = new ImageIcon("Cyberjaya-Online-Rental-Management-System/Icons/Logo.png");
         this.setIconImage(logo.getImage());
         this.setResizable(false);
 
-        this.setLayout(new GridLayout(3,1,1,1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
 
         // ID for User Property Rent Window
         title_ID.setHorizontalAlignment(JLabel.CENTER);
@@ -34,7 +23,7 @@ public class UserPropertyRentWindow extends JFrame{
         this.add(title_ID);
 
         JPanel info_display = new JPanel();
-        info_display.setLayout(new GridLayout(11,1,1,1));
+        info_display.setLayout(new GridLayout(11, 1, 1, 1));
         info_display.add(size);
         info_display.add(NumRoom);
         info_display.add(NumBathroom);
@@ -53,7 +42,7 @@ public class UserPropertyRentWindow extends JFrame{
         JPanel button_panel = new JPanel();
         button_panel.add(back);
         button_panel.add(rent);
-        this.add(button_panel); 
+        this.add(button_panel);
 
     }
 }
