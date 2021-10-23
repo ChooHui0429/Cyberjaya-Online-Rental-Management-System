@@ -1,4 +1,4 @@
-package DataClass;
+package dataclass;
 
 // Create Account Data Class
 public class AccountData {

@@ -1,4 +1,4 @@
-package DataClass;
+package dataclass;
 
 // Create Property Rate Class
 public class PropertyRateData {

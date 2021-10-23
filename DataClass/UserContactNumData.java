@@ -1,4 +1,4 @@
-package DataClass;
+package dataclass;
 
 // Create User Contact Number Data Class
 public class UserContactNumData {

@@ -1,4 +1,4 @@
-package DataClass;
+package dataclass;
 
 // Create Register Data Class
 public class RegisterData {

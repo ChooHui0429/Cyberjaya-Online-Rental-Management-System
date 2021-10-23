@@ -1,4 +1,4 @@
-package DataClass;
+package dataclass;
 
 public class RentPropertyData {
     private String userID;
