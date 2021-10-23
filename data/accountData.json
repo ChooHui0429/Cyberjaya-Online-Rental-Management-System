@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "securityPassword": "123456",
+    "acc_type": "Admin",
+    "userID": "Admin#0128_Admin",
+    "loginPassword": "123456"
+  },
+  {
+    "name": "LimJiaJia",
+    "email": "limJJ@gmail.com",
+    "securityPassword": "123",
+    "acc_type": "Potential Tenant",
+    "userID": "LimJiaJia#7949_Potential Tenant",
+    "loginPassword": "123456"
+  },
+  {
+    "name": "LoyMeiYi",
+    "email": "LoyMY@gmail.com",
+    "securityPassword": "002",
+    "acc_type": "Agent",
+    "userID": "LoyMeiYi#4682_Agent",
+    "loginPassword": "123456"
+  },
+  {
+    "name": "TanYuXuan",
+    "email": "tanYX@gmail.com",
+    "securityPassword": "00001",
+    "acc_type": "Owner",
+    "userID": "TanYuXuan#8626_Owner",
+    "loginPassword": "123456"
+  }
+]
