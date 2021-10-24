@@ -10,7 +10,7 @@ public class CheckResultPopOut extends JFrame {
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setSize(750, 250);
-        ImageIcon logo = new ImageIcon("icons/Logo.png");
+        ImageIcon logo = new ImageIcon("icons/appLogo.png");
         this.setIconImage(logo.getImage());
 
         // Notice Label

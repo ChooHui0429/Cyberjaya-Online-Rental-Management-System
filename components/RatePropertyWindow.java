@@ -9,7 +9,7 @@ public class RatePropertyWindow extends JFrame {
         this.setTitle("Cyberjaya Online Rental Management System");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setSize(500, 500);
-        ImageIcon logo = new ImageIcon("icons/Logo.png");
+        ImageIcon logo = new ImageIcon("icons/appLogo.png");
         this.setIconImage(logo.getImage());
         this.setResizable(false);
 
