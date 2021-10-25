@@ -13,8 +13,8 @@ public class Main {
         ImageIcon logo = new ImageIcon("icons/appLogo.png");
         frame.setIconImage(logo.getImage());
 
-        Function_UI main_UI = new Function_UI(frame);
-        frame.add(main_UI);
+        RootUI rootUI = new RootUI(frame);
+        frame.add(rootUI);
         frame.setVisible(true);
     }
 }

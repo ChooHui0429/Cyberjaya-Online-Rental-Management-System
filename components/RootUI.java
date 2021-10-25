@@ -41,7 +41,7 @@ import util.RemoveUser;
 import util.RentPropertFunction;
 import util.UserProfileUpdate;
 
-public class Function_UI extends JPanel implements ActionListener, MouseListener {
+public class RootUI extends JPanel implements ActionListener, MouseListener {
 
     // Main Frame
     JFrame frame = new JFrame();
@@ -111,10 +111,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton viewReport_AdminPage = new JButton("View Report");
     JButton Logout_AdminPage = new JButton("Logout");
 
-    JLabel welcome_name_AdminPage = new JLabel();
+    JLabel welcomeLabel_AdminPage = new JLabel();
 
     AdminPage adminUI = new AdminPage(approveRegister_AdminPage, createAdmin_AdminPage, removeAccount_AdminPage,
-            viewReport_AdminPage, Logout_AdminPage, welcome_name_AdminPage);
+            viewReport_AdminPage, Logout_AdminPage, welcomeLabel_AdminPage);
 
     // Create Admin Register Panel
     JButton register_AdminRegPage = new JButton("Register");
@@ -165,12 +165,12 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_adminAprUI = new JTable(tableModel_adminAprUI);
+    JTable dataTable_adminAprUI = new JTable(tableModel_adminAprUI);
 
     JLabel notice_adminAprUI = new JLabel("");
 
     AdminApproveUserPage adminAprUI = new AdminApproveUserPage(back_adminAprUI, rejectUserBtn_adminAprUI,
-            approveUserBtn_adminAprUI, data_display_adminAprUI, notice_adminAprUI);
+            approveUserBtn_adminAprUI, dataTable_adminAprUI, notice_adminAprUI);
 
     // Create Admin Remove User Page panel
     JButton back_adminRemoveUI = new JButton("back");
@@ -202,11 +202,11 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_adminRemoveUI = new JTable(tableModel_adminRemoveUI);
+    JTable dataTable_adminRemoveUI = new JTable(tableModel_adminRemoveUI);
     JLabel notice_adminRemoveUI = new JLabel("");
 
     AdminRemoveUserPage adminRemoveUI = new AdminRemoveUserPage(back_adminRemoveUI, removeUserBtn_adminRemoveUI,
-            data_display_adminRemoveUI, notice_adminRemoveUI);
+            dataTable_adminRemoveUI, notice_adminRemoveUI);
 
     // Create Admin Report Window
     JButton listProperty_reportListUI = new JButton("List of All Properties");
@@ -219,10 +219,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     // Create empty Report Display Panel
     JButton back_adminemptyReportUI = new JButton("back");
-    JTable data_display_adminemptyReportUI = new JTable();
+    JTable dataTable_adminemptyReportUI = new JTable();
     JLabel title_adminemptyReportUI = new JLabel();
 
-    UserViewProperty adminemptyReportUI = new UserViewProperty(back_adminemptyReportUI, data_display_adminemptyReportUI,
+    UserViewProperty adminemptyReportUI = new UserViewProperty(back_adminemptyReportUI, dataTable_adminemptyReportUI,
             title_adminemptyReportUI);
 
     // Create All Properties Report Display Panel
@@ -231,10 +231,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             "Number of Bathroom", "Facilities", "Condition", "Rental Fee", "Contact Number", "Rental Ask For",
             "Agent / Owner Account", "Status" };
     DefaultTableModel tableModel_adminAllReportUI = new DefaultTableModel(columnNames_adminAllReportUI, 0);
-    JTable data_display_adminAllReportUI = new JTable(tableModel_adminAllReportUI);
+    JTable dataTable_adminAllReportUI = new JTable(tableModel_adminAllReportUI);
     JLabel title_adminAllReportUI = new JLabel("ALL PROPERTIES REPORT");
 
-    UserViewProperty adminAllReportUI = new UserViewProperty(back_adminAllReportUI, data_display_adminAllReportUI,
+    UserViewProperty adminAllReportUI = new UserViewProperty(back_adminAllReportUI, dataTable_adminAllReportUI,
             title_adminAllReportUI);
 
     // Create Active or Inactive Properties Report Display Panel
@@ -243,22 +243,22 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             "Number of Bathroom", "Facilities", "Condition", "Rental Fee", "Contact Number", "Rental Ask For",
             "Agent / Owner Account" };
     DefaultTableModel tableModel_adminStatusReportUI = new DefaultTableModel(columnNames_adminStatusReportUI, 0);
-    JTable data_display_adminStatusReportUI = new JTable(tableModel_adminStatusReportUI);
+    JTable dataTable_adminStatusReportUI = new JTable(tableModel_adminStatusReportUI);
     JLabel title_adminStatusReportUI = new JLabel();
 
-    UserViewProperty adminStatusReportUI = new UserViewProperty(back_adminStatusReportUI,
-            data_display_adminStatusReportUI, title_adminStatusReportUI);
+    UserViewProperty adminStatusReportUI = new UserViewProperty(back_adminStatusReportUI, dataTable_adminStatusReportUI,
+            title_adminStatusReportUI);
 
     // Create Active or Inactive Properties Report Display Panel
     JButton back_adminPropertyRateReportUI = new JButton("back");
     Object[] columnNames_adminPropertyRateReportUI = { "Property ID", "Total Rental", "Average Rental Rate" };
     DefaultTableModel tableModel_adminPropertyRateReportUI = new DefaultTableModel(
             columnNames_adminPropertyRateReportUI, 0);
-    JTable data_display_adminPropertyRateReportUI = new JTable(tableModel_adminPropertyRateReportUI);
+    JTable dataTable_adminPropertyRateReportUI = new JTable(tableModel_adminPropertyRateReportUI);
     JLabel title_adminPropertyRateReportUI = new JLabel("ALL PROPERTIES RENTAL RATE");
 
     UserViewProperty adminPropertyRateReportUI = new UserViewProperty(back_adminPropertyRateReportUI,
-            data_display_adminPropertyRateReportUI, title_adminPropertyRateReportUI);
+            dataTable_adminPropertyRateReportUI, title_adminPropertyRateReportUI);
 
     // Create Rate Property Window
     JButton one_ratePropertyWindow = new JButton("1");
@@ -277,10 +277,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton logout_userUI = new JButton("Logout");
     JButton editProfile_userUI = new JButton("Edit Profile");
 
-    JLabel welcome_name_userUI = new JLabel();
+    JLabel welcomeLabel_userUI = new JLabel();
 
     UserPage userUI = new UserPage(viewProperties_userUI, rentedProperty_userUI, logout_userUI, editProfile_userUI,
-            welcome_name_userUI);
+            welcomeLabel_userUI);
 
     // Create User Edit Profile Panel
     JButton update_userEditProfileUI = new JButton("Update");
@@ -314,10 +314,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_userViewProperty = new JTable(tableModel_userViewProperty);
+    JTable dataTable_userViewProperty = new JTable(tableModel_userViewProperty);
     JLabel title_userViewProperty = new JLabel("AVAILABLE PROPERTY");
 
-    UserViewProperty userViewProperty = new UserViewProperty(back_userViewProperty, data_display_userViewProperty,
+    UserViewProperty userViewProperty = new UserViewProperty(back_userViewProperty, dataTable_userViewProperty,
             title_userViewProperty);
 
     // Create User Rent Property Window
@@ -363,10 +363,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_userViewRentUI = new JTable(tableModel_userViewRentUI);
+    JTable dataTable_userViewRentUI = new JTable(tableModel_userViewRentUI);
 
     UserViewRent userViewRentUI = new UserViewRent(back_userViewRentUI, notice_userViewRentUI,
-            data_display_userViewRentUI);
+            dataTable_userViewRentUI);
 
     // Create Agent or Owner Home Page panel
     JButton uploadProperty_agentOwnerUI = new JButton("Upload New Property");
@@ -374,10 +374,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
     JButton rentedPropertie_agentOwnerUI = new JButton("Rented Propertie");
     JButton logout_agentOwnerUI = new JButton("Logout");
     JLabel title_agentOwnerUI = new JLabel("");
-    JLabel welcome_name_agentOwnerUI = new JLabel("");
+    JLabel welcomeLabel_agentOwnerUI = new JLabel("");
 
     AgentOwnerPage agentOwnerUI = new AgentOwnerPage(uploadProperty_agentOwnerUI, modifiedProperties_agentOwnerUI,
-            rentedPropertie_agentOwnerUI, logout_agentOwnerUI, title_agentOwnerUI, welcome_name_agentOwnerUI);
+            rentedPropertie_agentOwnerUI, logout_agentOwnerUI, title_agentOwnerUI, welcomeLabel_agentOwnerUI);
 
     // Create Upload New Property Page panel
     JButton back_uploadpropertyUI = new JButton("Back");
@@ -430,12 +430,12 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_modifiedPropertyUI = new JTable(tableModel_modifiedPropertyUI);
+    JTable dataTable_modifiedPropertyUI = new JTable(tableModel_modifiedPropertyUI);
 
     JLabel notice_modifiedPropertyUI = new JLabel();
 
     ModifiedPropertyPage modifiedPropertyUI = new ModifiedPropertyPage(back_modifiedPropertyUI,
-            data_display_modifiedPropertyUI, notice_modifiedPropertyUI);
+            dataTable_modifiedPropertyUI, notice_modifiedPropertyUI);
 
     // Create Selected Modified Property Window
     JLabel title_ID_modifiedPropertyWindow = new JLabel();
@@ -490,10 +490,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
             }
         }
     };
-    JTable data_display_agentOwnerViewRentUI = new JTable(tableModel_agentOwnerViewRentUI);
+    JTable dataTable_agentOwnerViewRentUI = new JTable(tableModel_agentOwnerViewRentUI);
 
     UserViewRent agentOwnerViewRentUI = new UserViewRent(back_agentOwnerViewRentUI, notice_agentOwnerViewRentUI,
-            data_display_agentOwnerViewRentUI);
+            dataTable_agentOwnerViewRentUI);
 
     // Create Agent/Owner Rent Property Window
     JButton back_agentOwnerRentWindow = new JButton("back");
@@ -512,7 +512,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
     JPanel empty = new JPanel();
 
-    public Function_UI(JFrame frame) {
+    public RootUI(JFrame frame) {
 
         frame = this.frame;
         // Add all UI in one card layout panel
@@ -544,13 +544,13 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         find_acc_LoginPage.addMouseListener(this);
 
         // Table for User View Property Menu
-        data_display_userViewProperty.addMouseListener(this);
+        dataTable_userViewProperty.addMouseListener(this);
 
         // Table for Modified Property Menu
-        data_display_modifiedPropertyUI.addMouseListener(this);
+        dataTable_modifiedPropertyUI.addMouseListener(this);
 
         // Table for Agent/Owner View Property Menu
-        data_display_agentOwnerViewRentUI.addMouseListener(this);
+        dataTable_agentOwnerViewRentUI.addMouseListener(this);
 
         // Add action listener to all button
         // Button for Login page
@@ -686,13 +686,13 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                             password_enterField_LoginPage.getText());
                     if (acc_type_or_invalid.equals("Admin")) {
                         String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
-                        welcome_name_AdminPage.setText(name);
+                        welcomeLabel_AdminPage.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");
                     } else if (acc_type_or_invalid.equals("Potential Tenant")) {
                         String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
-                        welcome_name_userUI.setText(name);
+                        welcomeLabel_userUI.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         // Switch to User home page
                         main_UI.show(this, "userUI");
@@ -719,7 +719,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
 
                     } else if (acc_type_or_invalid.equals("Owner")) {
                         String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
-                        welcome_name_agentOwnerUI.setText(name);
+                        welcomeLabel_agentOwnerUI.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         title_agentOwnerUI.setText("Owner");
                         // Switch to Agent or Owner Home page
@@ -728,7 +728,7 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
                         String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
                         title_agentOwnerUI.setText("Agent");
                         login_acc = id_enterField_LoginPage.getText();
-                        welcome_name_agentOwnerUI.setText(name);
+                        welcomeLabel_agentOwnerUI.setText(name);
                         // Switch to Agent or Owner Home page
                         main_UI.show(this, "agentOwnerUI");
                     } else {
@@ -1737,8 +1737,8 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         }
 
         // Mouse event for User View Property Menu
-        else if (e.getSource() == data_display_userViewProperty) {
-            Integer selectedRow = data_display_userViewProperty.getSelectedRow();
+        else if (e.getSource() == dataTable_userViewProperty) {
+            Integer selectedRow = dataTable_userViewProperty.getSelectedRow();
             String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
 
             try {
@@ -1784,10 +1784,10 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         }
 
         // Mouse event for Modified Property Page Panel
-        else if (e.getSource() == data_display_modifiedPropertyUI) {
+        else if (e.getSource() == dataTable_modifiedPropertyUI) {
             errorMessage_modifiedPropertyWindow.setText("");
 
-            Integer selectedRow = data_display_modifiedPropertyUI.getSelectedRow();
+            Integer selectedRow = dataTable_modifiedPropertyUI.getSelectedRow();
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
 
             try {
@@ -1815,8 +1815,8 @@ public class Function_UI extends JPanel implements ActionListener, MouseListener
         }
 
         // Mouse event for Agent/Owner View Property Page Panel
-        else if (e.getSource() == data_display_agentOwnerViewRentUI) {
-            Integer selectedRow = data_display_agentOwnerViewRentUI.getSelectedRow();
+        else if (e.getSource() == dataTable_agentOwnerViewRentUI) {
+            Integer selectedRow = dataTable_agentOwnerViewRentUI.getSelectedRow();
             String selectedPropertyID = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 0).toString();
             title_ID_agentOwnerRentWindow.setText(selectedPropertyID);
             selected_user_agentOwnerRentWindow = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 1).toString();
