@@ -764,10 +764,10 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 // Check email to prevent duplication
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.RegistrationEmailChecker(email_enterField_RegisterPage.getText());
+                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_RegisterPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        RegisterDataToJson.RegUserdataToJson(name_enterField_RegisterPage.getText(),
+                        RegisterDataToJson.regUserdataToJson(name_enterField_RegisterPage.getText(),
                                 email_enterField_RegisterPage.getText(),
                                 securityPassword_enterField_RegisterPage.getText(),
                                 acc_type_selection_RegisterPage.getSelectedItem().toString());
@@ -811,7 +811,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             // Account Checking
             else {
                 try {
-                    String check_result = CheckAccount.AccountChecker(email_enterField_checkAccUI.getText(),
+                    String check_result = CheckAccount.accountChecker(email_enterField_checkAccUI.getText(),
                             password_enterField_checkAccUI.getText());
                     notice_checkResultPopOut.setText(check_result);
                 } catch (IOException e1) {
@@ -953,18 +953,18 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             } else {
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.RegistrationEmailChecker(email_enterField_AdminRegPage.getText());
+                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
                         AccountData newAccData = new AccountData();
                         try {
-                            newAccData = RegisterDataToJson.RegAdmingetObjectData(newAccData,
+                            newAccData = RegisterDataToJson.regAdmingetObjectData(newAccData,
                                     name_enterField_AdminRegPage.getText(), email_enterField_AdminRegPage.getText(),
                                     securityPassword_enterField_AdminRegPage.getText());
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        RegisterDataToJson.RegAdmindataToJson(newAccData);
+                        RegisterDataToJson.regAdmindataToJson(newAccData);
 
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");
@@ -1011,7 +1011,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         String securityPassword = tableModel_adminAprUI.getValueAt(i, 2).toString();
                         String acc_type = tableModel_adminAprUI.getValueAt(i, 3).toString();
                         try {
-                            ApproveUser.ApproveUserData(name, email, securityPassword, acc_type);
+                            ApproveUser.approveUserData(name, email, securityPassword, acc_type);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -1048,7 +1048,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         String securityPassword = tableModel_adminAprUI.getValueAt(i, 2).toString();
                         String acc_type = tableModel_adminAprUI.getValueAt(i, 3).toString();
                         try {
-                            ApproveUser.RejectUserData(name, email, securityPassword, acc_type);
+                            ApproveUser.rejectUserData(name, email, securityPassword, acc_type);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -1088,7 +1088,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     String securityPassword = tableModel_adminRemoveUI.getValueAt(i, 4).toString();
                     String acc_type = tableModel_adminRemoveUI.getValueAt(i, 5).toString();
                     try {
-                        RemoveUser.RejectUserData(name, email, securityPassword, acc_type, userID, loginPassword);
+                        RemoveUser.rejectUserData(name, email, securityPassword, acc_type, userID, loginPassword);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -1443,7 +1443,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             userPropertyRentWindow.setVisible(false);
         } else if (e.getSource() == rent_userPropertyRentWindow) {
             try {
-                RentPropertFunction.NewRentData(login_acc, title_ID_userPropertyRentWindow.getText());
+                RentPropertFunction.newRentData(login_acc, title_ID_userPropertyRentWindow.getText());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1469,7 +1469,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 error_message_userEditProfileUI.setText("Please Complete all your information.");
             } else {
                 try {
-                    UserProfileUpdate.SaveupdateData(login_acc, name_enterField_userEditProfileUI.getText(),
+                    UserProfileUpdate.saveUpdateData(login_acc, name_enterField_userEditProfileUI.getText(),
                             email_enterField_userEditProfileUI.getText(),
                             contactNumber_enterField_userEditProfileUI.getText());
                 } catch (IOException e1) {
@@ -1610,7 +1610,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 error_message_uploadpropertyUI.setText("Please Complete all your new property information.");
             } else {
                 try {
-                    PropertyDataFunction.NewPropertyUpload(login_acc,
+                    PropertyDataFunction.newPropertyUpload(login_acc,
                             Integer.parseInt(rentalFee_enterField_uploadpropertyUI.getText()),
                             size_enterField_uploadpropertyUI.getText(),
                             Integer.parseInt(NumRoom_enterField_uploadpropertyUI.getText()),
@@ -1657,7 +1657,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 errorMessage_modifiedPropertyWindow.setText("Please Complete all your property information.");
             } else {
                 try {
-                    PropertyDataFunction.PropertyUpdate(title_ID_modifiedPropertyWindow.getText(),
+                    PropertyDataFunction.propertyUpdate(title_ID_modifiedPropertyWindow.getText(),
                             size_enterField_modifiedPropertyWindow.getText(),
                             Integer.parseInt(rentalFee_enterField_modifiedPropertyWindow.getText()),
                             Integer.parseInt(NumRoom_enterField_modifiedPropertyWindow.getText()),
@@ -1742,7 +1742,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
+                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
                 title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
                 rentalFee_userPropertyRentWindow
                         .setText("                                                      Rental Fee : RM "
@@ -1791,7 +1791,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.GetSelectedProperty(selectedPropertyID);
+                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
                 status_before_modifiedPropertyWindow = selected_data.getStatus();
 
                 title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());

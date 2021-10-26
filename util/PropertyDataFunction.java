@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class PropertyDataFunction {
-    public static void NewPropertyUpload(String owner_name, Integer rentalFee, String size, Integer NumRoom,
+    public static void newPropertyUpload(String owner_name, Integer rentalFee, String size, Integer NumRoom,
             Integer NumBathroom, String condition, String contactNum, String address, String facilities,
             String rentalAskFor, String propertyType, String status) throws IOException {
 
@@ -74,7 +74,7 @@ public class PropertyDataFunction {
         writer.close();
     }
 
-    public static PropertyData GetSelectedProperty(String propertyID) throws IOException {
+    public static PropertyData getSelectedProperty(String propertyID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
@@ -96,7 +96,7 @@ public class PropertyDataFunction {
         return selected_data;
     }
 
-    public static void PropertyUpdate(String propertyID, String size, Integer rentalfee, Integer NumRoom,
+    public static void propertyUpdate(String propertyID, String size, Integer rentalfee, Integer NumRoom,
             Integer NumBathroom, String condition, String contactNum, String address, String facilities,
             String rentalAskFor, String propertyType, String status) throws IOException {
 

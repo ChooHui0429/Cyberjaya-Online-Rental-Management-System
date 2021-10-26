@@ -11,7 +11,7 @@ import com.google.gson.reflect.TypeToken;
 public class RegisterDataToJson {
 
     // Import User Registration for pending
-    public static void RegUserdataToJson(String name, String email, String securityPassword, String acc_type) {
+    public static void regUserdataToJson(String name, String email, String securityPassword, String acc_type) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -26,7 +26,7 @@ public class RegisterDataToJson {
 
             // Add new register data into created list
             RegisterData new_registerData = new RegisterData();
-            new_registerData = RegUsergetObjectData(new_registerData, name, email, securityPassword, acc_type);
+            new_registerData = regUsergetObjectData(new_registerData, name, email, securityPassword, acc_type);
             registerDatas.add(new_registerData);
 
             // Create writer
@@ -40,7 +40,7 @@ public class RegisterDataToJson {
     }
 
     // Get all the data from user input for user registration
-    public static RegisterData RegUsergetObjectData(RegisterData registerData, String name, String email,
+    public static RegisterData regUsergetObjectData(RegisterData registerData, String name, String email,
             String securityPassword, String acc_type) throws IOException {
 
         registerData.setName(name);
@@ -52,7 +52,7 @@ public class RegisterDataToJson {
     }
 
     // Import New Admin to Account Data
-    public static void RegAdmindataToJson(AccountData newAccData) {
+    public static void regAdmindataToJson(AccountData newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -80,7 +80,7 @@ public class RegisterDataToJson {
     }
 
     // Get all the data from user input
-    public static AccountData RegAdmingetObjectData(AccountData accountData, String name, String email,
+    public static AccountData regAdmingetObjectData(AccountData accountData, String name, String email,
             String securityPassword) throws IOException {
 
         accountData.setName(name);
@@ -133,7 +133,7 @@ public class RegisterDataToJson {
     }
 
     // Email Checker to prevent multiple account with a single email address.
-    public static String RegistrationEmailChecker(String email) throws IOException {
+    public static String registrationEmailChecker(String email) throws IOException {
         String exist_notify = new String();
         // Check exist of email
         Boolean exist_email = false;

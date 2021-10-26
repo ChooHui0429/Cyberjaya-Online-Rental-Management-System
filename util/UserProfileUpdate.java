@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class UserProfileUpdate {
 
-    public static void SaveupdateData(String userID, String new_Name, String new_Email, String new_ContactNumber)
+    public static void saveUpdateData(String userID, String new_Name, String new_Email, String new_ContactNumber)
             throws IOException {
 
         // Create Json instance

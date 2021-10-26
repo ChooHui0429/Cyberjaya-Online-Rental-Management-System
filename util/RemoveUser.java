@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import dataclass.AccountData;
 
 public class RemoveUser {
-    public static void RejectUserData(String name, String email, String securityPassword, String acc_type,
+    public static void rejectUserData(String name, String email, String securityPassword, String acc_type,
             String userID, String loginPassword) throws IOException {
 
         // Removed account data
@@ -51,11 +51,11 @@ public class RemoveUser {
             e.printStackTrace();
         }
 
-        DeleteAccountData(accountData);
+        deleteAccountData(accountData);
 
     }
 
-    public static void DeleteAccountData(AccountData removeData) {
+    public static void deleteAccountData(AccountData removeData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
