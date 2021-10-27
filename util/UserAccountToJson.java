@@ -8,7 +8,7 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class RegisterDataToJson {
+public class UserAccountToJson {
 
     // Import User Registration for pending
     public static void regUserdataToJson(String name, String email, String securityPassword, String acc_type) {
@@ -20,12 +20,12 @@ public class RegisterDataToJson {
             Reader reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
 
             // Convert JSON array to list of register datas
-            List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+            List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
             }.getType());
             reader.close();
 
             // Add new register data into created list
-            RegisterData new_registerData = new RegisterData();
+            UserAccount new_registerData = new UserAccount();
             new_registerData = regUsergetObjectData(new_registerData, name, email, securityPassword, acc_type);
             registerDatas.add(new_registerData);
 
@@ -40,7 +40,7 @@ public class RegisterDataToJson {
     }
 
     // Get all the data from user input for user registration
-    public static RegisterData regUsergetObjectData(RegisterData registerData, String name, String email,
+    public static UserAccount regUsergetObjectData(UserAccount registerData, String name, String email,
             String securityPassword, String acc_type) throws IOException {
 
         registerData.setName(name);
@@ -144,7 +144,7 @@ public class RegisterDataToJson {
         Reader readerRegister = Files.newBufferedReader(Paths.get("data/registerData.json"));
         Reader readerAccount = Files.newBufferedReader(Paths.get("data/accountData.json"));
         // Convert JSON array to list
-        List<RegisterData> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<RegisterData>>() {
+        List<UserAccount> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<UserAccount>>() {
         }.getType());
         List<AccountData> accountDatas = gson.fromJson(readerAccount, new TypeToken<List<AccountData>>() {
         }.getType());
@@ -152,7 +152,7 @@ public class RegisterDataToJson {
         readerAccount.close();
 
         // Check email exist or not in database
-        for (RegisterData registerData : registerDatas) {
+        for (UserAccount registerData : registerDatas) {
             if (email.equals(registerData.getEmail())) {
                 exist_email = true;
                 exist_notify = "The email is registed in system. Please register with another email.";

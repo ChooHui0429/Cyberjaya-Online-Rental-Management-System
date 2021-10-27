@@ -29,14 +29,14 @@ import com.google.gson.reflect.TypeToken;
 import dataclass.AccountData;
 import dataclass.PropertyData;
 import dataclass.PropertyRateData;
-import dataclass.RegisterData;
+import dataclass.UserAccount;
 import dataclass.RentPropertyData;
 import dataclass.UserContactNumData;
 import util.ApproveUser;
 import util.CheckAccount;
 import util.LoginChecking;
 import util.PropertyDataFunction;
-import util.RegisterDataToJson;
+import util.UserAccountToJson;
 import util.RemoveUser;
 import util.RentPropertFunction;
 import util.UserProfileUpdate;
@@ -764,10 +764,10 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 // Check email to prevent duplication
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_RegisterPage.getText());
+                    exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_RegisterPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        RegisterDataToJson.regUserdataToJson(name_enterField_RegisterPage.getText(),
+                        UserAccountToJson.regUserdataToJson(name_enterField_RegisterPage.getText(),
                                 email_enterField_RegisterPage.getText(),
                                 securityPassword_enterField_RegisterPage.getText(),
                                 acc_type_selection_RegisterPage.getSelectedItem().toString());
@@ -842,7 +842,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
                 // Convert JSON array to list of register datas
-                List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+                List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
                 }.getType());
                 reader.close();
 
@@ -859,7 +859,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                             tableModel_adminAprUI.removeRow(0);
                         }
                     }
-                    for (RegisterData registerData : registerDatas) {
+                    for (UserAccount registerData : registerDatas) {
                         Object[] data = new Object[5];
                         data[0] = registerData.getName();
                         data[1] = registerData.getEmail();
@@ -953,18 +953,18 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             } else {
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
+                    exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
                         AccountData newAccData = new AccountData();
                         try {
-                            newAccData = RegisterDataToJson.regAdmingetObjectData(newAccData,
+                            newAccData = UserAccountToJson.regAdmingetObjectData(newAccData,
                                     name_enterField_AdminRegPage.getText(), email_enterField_AdminRegPage.getText(),
                                     securityPassword_enterField_AdminRegPage.getText());
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                        RegisterDataToJson.regAdmindataToJson(newAccData);
+                        UserAccountToJson.regAdmindataToJson(newAccData);
 
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");

@@ -22,11 +22,11 @@ public class CheckAccount {
         Reader readerRemove = Files.newBufferedReader(Paths.get("data/removedData.json"));
 
         // Convert JSON array to list
-        List<RegisterData> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<RegisterData>>() {
+        List<UserAccount> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<UserAccount>>() {
         }.getType());
         List<AccountData> accountDatas = gson.fromJson(readerAccount, new TypeToken<List<AccountData>>() {
         }.getType());
-        List<RegisterData> rejectedDatas = gson.fromJson(readerReject, new TypeToken<List<RegisterData>>() {
+        List<UserAccount> rejectedDatas = gson.fromJson(readerReject, new TypeToken<List<UserAccount>>() {
         }.getType());
         List<AccountData> removedDatas = gson.fromJson(readerRemove, new TypeToken<List<AccountData>>() {
         }.getType());
@@ -39,7 +39,7 @@ public class CheckAccount {
         Boolean acc_exist = false;
 
         // Check Status of respective email account
-        for (RegisterData registerData : registerDatas) {
+        for (UserAccount registerData : registerDatas) {
             if (email.equals(registerData.getEmail())) {
                 if (password.equals(registerData.getSecurityPassword())) {
                     acc_exist = true;
@@ -69,13 +69,13 @@ public class CheckAccount {
             }
         }
         if (!acc_exist) {
-            for (RegisterData rejectedData : rejectedDatas) {
+            for (UserAccount rejectedData : rejectedDatas) {
                 if (email.equals(rejectedData.getEmail())) {
                     if (password.equals(rejectedData.getSecurityPassword())) {
                         acc_exist = true;
                         result = "Your registration is rejected by admin. Please register again with correct information required.";
                         // Remove rejected data for new registration
-                        List<RegisterData> selectedrejectedDatas = new ArrayList<RegisterData>();
+                        List<UserAccount> selectedrejectedDatas = new ArrayList<UserAccount>();
                         selectedrejectedDatas.add(rejectedData);
                         rejectedDatas.removeAll(selectedrejectedDatas);
                         // Create writer

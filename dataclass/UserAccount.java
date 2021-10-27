@@ -1,7 +1,7 @@
 package dataclass;
 
 // Create Register Data Class
-public class RegisterData {
+public class UserAccount {
     // Create properties of Register Data Class
     private String name;
     private String email;

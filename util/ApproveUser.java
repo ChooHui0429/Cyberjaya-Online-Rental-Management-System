@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import dataclass.AccountData;
-import dataclass.RegisterData;
+import dataclass.UserAccount;
 
 public class ApproveUser {
 
@@ -78,7 +78,7 @@ public class ApproveUser {
             throws IOException {
 
         // Collect register data
-        RegisterData registerData = new RegisterData();
+        UserAccount registerData = new UserAccount();
 
         registerData.setName(name);
         registerData.setEmail(email);
@@ -127,19 +127,19 @@ public class ApproveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
 
             // Convert JSON array to list of register datas
-            List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+            List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
             }.getType());
             reader.close();
 
             // Remove approved register data
-            List<RegisterData> approvedRegisterDatas = new ArrayList<RegisterData>();
+            List<UserAccount> approvedUserAccounts = new ArrayList<UserAccount>();
             String approvedDataEmail = newAccData.getEmail();
-            for (RegisterData registerData : registerDatas) {
+            for (UserAccount registerData : registerDatas) {
                 if (registerData.getEmail().equals(approvedDataEmail)) {
-                    approvedRegisterDatas.add(registerData);
+                    approvedUserAccounts.add(registerData);
                 }
             }
-            registerDatas.removeAll(approvedRegisterDatas);
+            registerDatas.removeAll(approvedUserAccounts);
 
             // Create writer
             Writer writer = Files.newBufferedWriter(Paths.get("data/registerData.json"));
@@ -152,7 +152,7 @@ public class ApproveUser {
     }
 
     // Add new rejected data
-    public static void rejectUserDataToJson(RegisterData newRejectData) {
+    public static void rejectUserDataToJson(UserAccount newRejectData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -161,12 +161,12 @@ public class ApproveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/rejectedData.json"));
 
             // Convert JSON array to list of rejected datas
-            List<RegisterData> rejectedDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+            List<UserAccount> rejectedDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
             }.getType());
             reader.close();
 
             // Add new rejected data into created list
-            RegisterData new_rejectData = newRejectData;
+            UserAccount new_rejectData = newRejectData;
             rejectedDatas.add(new_rejectData);
 
             // Create writer
@@ -180,7 +180,7 @@ public class ApproveUser {
     }
 
     // Remove rejected register data
-    public static void deleteRejectedData(RegisterData newRejectData) {
+    public static void deleteRejectedData(UserAccount newRejectData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -189,19 +189,19 @@ public class ApproveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
 
             // Convert JSON array to list of register datas
-            List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+            List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
             }.getType());
             reader.close();
 
             // Remove rejected register data
-            List<RegisterData> approvedRegisterDatas = new ArrayList<RegisterData>();
+            List<UserAccount> approvedUserAccounts = new ArrayList<UserAccount>();
             String approvedDataEmail = newRejectData.getEmail();
-            for (RegisterData registerData : registerDatas) {
+            for (UserAccount registerData : registerDatas) {
                 if (registerData.getEmail().equals(approvedDataEmail)) {
-                    approvedRegisterDatas.add(registerData);
+                    approvedUserAccounts.add(registerData);
                 }
             }
-            registerDatas.removeAll(approvedRegisterDatas);
+            registerDatas.removeAll(approvedUserAccounts);
 
             // Create writer
             Writer writer = Files.newBufferedWriter(Paths.get("data/registerData.json"));
