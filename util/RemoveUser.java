@@ -11,14 +11,14 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import dataclass.AccountData;
+import dataclass.VerifiedUser;
 
 public class RemoveUser {
     public static void rejectUserData(String name, String email, String securityPassword, String acc_type,
             String userID, String loginPassword) throws IOException {
 
         // Removed account data
-        AccountData accountData = new AccountData();
+        VerifiedUser accountData = new VerifiedUser();
 
         accountData.setName(name);
         accountData.setEmail(email);
@@ -35,7 +35,7 @@ public class RemoveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/removedData.json"));
 
             // Convert JSON array to list of removed datas
-            List<AccountData> removedDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+            List<VerifiedUser> removedDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
             }.getType());
             reader.close();
 
@@ -51,11 +51,11 @@ public class RemoveUser {
             e.printStackTrace();
         }
 
-        deleteAccountData(accountData);
+        deleteVerifiedUser(accountData);
 
     }
 
-    public static void deleteAccountData(AccountData removeData) {
+    public static void deleteVerifiedUser(VerifiedUser removeData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -64,19 +64,19 @@ public class RemoveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
             // Convert JSON array to list of account datas
-            List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+            List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
             }.getType());
             reader.close();
 
             // Remove account data
-            List<AccountData> selectedAccountDatas = new ArrayList<AccountData>();
+            List<VerifiedUser> selectedVerifiedUsers = new ArrayList<VerifiedUser>();
             String removeDataEmail = removeData.getEmail();
-            for (AccountData accountData : accountDatas) {
+            for (VerifiedUser accountData : accountDatas) {
                 if (accountData.getEmail().equals(removeDataEmail)) {
-                    selectedAccountDatas.add(accountData);
+                    selectedVerifiedUsers.add(accountData);
                 }
             }
-            accountDatas.removeAll(selectedAccountDatas);
+            accountDatas.removeAll(selectedVerifiedUsers);
 
             // Create writer
             Writer writer = Files.newBufferedWriter(Paths.get("data/accountData.json"));

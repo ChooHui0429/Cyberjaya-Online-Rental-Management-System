@@ -1,7 +1,7 @@
 package dataclass;
 
 // Create Account Data Class
-public class AccountData {
+public class VerifiedUser {
     // Create properties of Admin Data Class
     private String name;
     private String email;

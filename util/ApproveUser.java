@@ -11,7 +11,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import dataclass.AccountData;
+import dataclass.VerifiedUser;
 import dataclass.UserAccount;
 
 public class ApproveUser {
@@ -21,7 +21,7 @@ public class ApproveUser {
             throws IOException {
 
         // New account data
-        AccountData accountData = new AccountData();
+        VerifiedUser accountData = new VerifiedUser();
 
         accountData.setName(name);
         accountData.setEmail(email);
@@ -37,7 +37,7 @@ public class ApproveUser {
         Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
@@ -90,7 +90,7 @@ public class ApproveUser {
     }
 
     // Add new account data
-    public static void approveUserDataToJson(AccountData newAccData) {
+    public static void approveUserDataToJson(VerifiedUser newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -99,12 +99,12 @@ public class ApproveUser {
             Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
             // Convert JSON array to list of account datas
-            List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+            List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
             }.getType());
             reader.close();
 
             // Add new account data into created list
-            AccountData new_accountData = newAccData;
+            VerifiedUser new_accountData = newAccData;
             accountDatas.add(new_accountData);
 
             // Create writer
@@ -118,7 +118,7 @@ public class ApproveUser {
     }
 
     // Remove approved register data
-    public static void deleteApprovedData(AccountData newAccData) {
+    public static void deleteApprovedData(VerifiedUser newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();

@@ -21,7 +21,7 @@ public class UserProfileUpdate {
         Reader readerContactNum = Files.newBufferedReader(Paths.get("data/userContactNumber.json"));
 
         // Convert JSON array to list
-        List<AccountData> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         readerAcc.close();
         List<UserContactNumData> userContactDatas = gson.fromJson(readerContactNum,
@@ -30,7 +30,7 @@ public class UserProfileUpdate {
         readerContactNum.close();
 
         // Update Account Data
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 accountData.setName(new_Name);
                 accountData.setEmail(new_Email);
@@ -58,8 +58,8 @@ public class UserProfileUpdate {
 
     }
 
-    public static AccountData getAccData(String userID) throws IOException {
-        AccountData acc_data = new AccountData();
+    public static VerifiedUser getAccData(String userID) throws IOException {
+        VerifiedUser acc_data = new VerifiedUser();
         // Create Json instance
         Gson gson = new Gson();
 
@@ -67,12 +67,12 @@ public class UserProfileUpdate {
         Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
         // Find related account data for login account
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 acc_data = accountData;
                 break;

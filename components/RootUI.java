@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import dataclass.AccountData;
+import dataclass.VerifiedUser;
 import dataclass.PropertyData;
 import dataclass.PropertyRateData;
 import dataclass.UserAccount;
@@ -900,7 +900,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
                 // Convert JSON array to list of account datas
-                List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+                List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
                 }.getType());
                 reader.close();
 
@@ -913,7 +913,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 }
 
                 // insert data into table
-                for (AccountData accountData : accountDatas) {
+                for (VerifiedUser accountData : accountDatas) {
                     Object[] data = new Object[7];
                     data[0] = accountData.getuserID();
                     data[1] = accountData.getloginPassword();
@@ -956,7 +956,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        AccountData newAccData = new AccountData();
+                        VerifiedUser newAccData = new VerifiedUser();
                         try {
                             newAccData = UserAccountToJson.regAdmingetObjectData(newAccData,
                                     name_enterField_AdminRegPage.getText(), email_enterField_AdminRegPage.getText(),
@@ -1327,7 +1327,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
         // Button event for User Home page
         else if (e.getSource() == editProfile_userUI) {
             try {
-                AccountData acc_data = UserProfileUpdate.getAccData(login_acc);
+                VerifiedUser acc_data = UserProfileUpdate.getAccData(login_acc);
                 UserContactNumData contact_data = UserProfileUpdate.getContactData(login_acc);
 
                 name_enterField_userEditProfileUI.setText(acc_data.getName());
@@ -1823,7 +1823,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
 
             try {
                 UserContactNumData selected_data = UserProfileUpdate.getContactData(selected_user_agentOwnerRentWindow);
-                AccountData selected_acc = UserProfileUpdate.getAccData(selected_user_agentOwnerRentWindow);
+                VerifiedUser selected_acc = UserProfileUpdate.getAccData(selected_user_agentOwnerRentWindow);
                 userID_agentOwnerRentWindow
                         .setText("                                        User Account : " + selected_data.getUserID());
                 userContact_agentOwnerRentWindow

@@ -19,12 +19,12 @@ public class LoginChecking {
         Reader reader = Files.newBufferedReader(Paths.get("./data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
         // Check the login validity
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 if (password.equals(accountData.getloginPassword())) {
                     acc_type_or_invalid = accountData.getAccType();
@@ -49,11 +49,11 @@ public class LoginChecking {
         Reader reader = Files.newBufferedReader(Paths.get("./data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 name = accountData.getName();
             }
