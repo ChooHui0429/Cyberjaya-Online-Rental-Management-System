@@ -956,12 +956,13 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        // TODO: test
                         VerifiedUser newAccData = new VerifiedUser();
-                        newAccData = UserAccountToJson.regAdmingetObjectData(newAccData,
-                                name_enterField_AdminRegPage.getText(), email_enterField_AdminRegPage.getText(),
-                                securityPassword_enterField_AdminRegPage.getText());
-                        UserAccountToJson.regAdminToJson(newAccData);
+                        newAccData.setName(name_enterField_AdminRegPage.getText());
+                        newAccData.setEmail(email_enterField_AdminRegPage.getText());
+                        newAccData.setSecurityPassword(securityPassword_enterField_AdminRegPage.getText());
+                        newAccData.setAccType("Admin");
+
+                        newAccData = UserAccountToJson.regAdminToJson(newAccData);
 
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");

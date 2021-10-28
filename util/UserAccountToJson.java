@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,44 +44,7 @@ public class UserAccountToJson {
     }
 
     // Import New Admin to Account Data
-    public static void regAdminToJson(VerifiedUser newAccData) {
-        try {
-            // Create Json instance
-            Gson gson = new Gson();
-
-            // Create a reader
-            Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
-
-            // Convert JSON array to list of account datas
-            List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
-            }.getType());
-            reader.close();
-
-            // Add new account data into created list
-            VerifiedUser new_accountData = newAccData;
-            accountDatas.add(new_accountData);
-
-            // Create writer
-            Writer writer = Files.newBufferedWriter(Paths.get("data/accountData.json"));
-            // Convert register datas to Json file
-            gson.toJson(accountDatas, writer);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Get all the data from user input
-    // TODO: combine with regAdminToJson
-    public static VerifiedUser regAdmingetObjectData(VerifiedUser accountData, String name, String email,
-            String securityPassword) throws IOException {
-
-        accountData.setName(name);
-        accountData.setEmail(email);
-        accountData.setSecurityPassword(securityPassword);
-        accountData.setAccType("Admin");
-
-        Boolean validUserID = false;
+    public static VerifiedUser regAdminToJson(VerifiedUser newAccData) throws IOException {
 
         // Create Json instance
         Gson gson = new Gson();
@@ -93,14 +57,15 @@ public class UserAccountToJson {
         }.getType());
         reader.close();
 
+        Boolean validUserID = false;
         String userID = new String();
 
         // Check database to prevent duplicate user ID
         while (validUserID == false) {
-            java.util.Random rndGenerator = new java.util.Random();
+            Random rndGenerator = new Random();
             int id = rndGenerator.nextInt(10000);
             String string_id = String.format("%04d", id);
-            String pre_userID = name.replace(" ", "") + "#" + string_id + "_Admin";
+            String pre_userID = newAccData.getName().replace(" ", "") + "#" + string_id + "_Admin";
 
             if (accountDatas.size() == 0) {
                 validUserID = true;
@@ -118,10 +83,18 @@ public class UserAccountToJson {
             }
         }
 
-        accountData.setuserID(userID);
-        accountData.setloginPassword(PasswordRandGenerator.generateStrongPassword());
+        newAccData.setuserID(userID);
+        newAccData.setloginPassword(PasswordRandGenerator.generateStrongPassword());
 
-        return accountData;
+        // Add new account data into created list
+        accountDatas.add(newAccData);
+
+        // Create writer
+        Writer writer = Files.newBufferedWriter(Paths.get("data/accountData.json"));
+        // Convert register datas to Json file
+        gson.toJson(accountDatas, writer);
+        writer.close();
+        return newAccData;
     }
 
     // Email Checker to prevent multiple account with a single email address.
