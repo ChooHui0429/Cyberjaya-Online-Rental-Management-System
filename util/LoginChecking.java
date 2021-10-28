@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class LoginChecking {
-    public static String loginChecker(String userID, String password) throws IOException {
+    public static String checkLogin(String userID, String password) throws IOException {
         String acc_type_or_invalid = new String();
 
         // Create Json instance
@@ -19,12 +19,12 @@ public class LoginChecking {
         Reader reader = Files.newBufferedReader(Paths.get("./data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
         // Check the login validity
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 if (password.equals(accountData.getloginPassword())) {
                     acc_type_or_invalid = accountData.getAccType();
@@ -40,7 +40,7 @@ public class LoginChecking {
         return acc_type_or_invalid;
     }
 
-    public static String userNameReturn(String userID) throws IOException {
+    public static String getUsername(String userID) throws IOException {
         String name = new String();
         // Create Json instance
         Gson gson = new Gson();
@@ -49,11 +49,11 @@ public class LoginChecking {
         Reader reader = Files.newBufferedReader(Paths.get("./data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 name = accountData.getName();
             }

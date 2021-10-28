@@ -1,14 +1,12 @@
 package dataclass;
 
-// Create Account Data Class
-public class AccountData {
-    // Create properties of Admin Data Class
+// Create Register Data Class
+public class UserAccount {
+    // Create properties of Register Data Class
     private String name;
     private String email;
     private String securityPassword;
     private String acc_type;
-    private String userID;
-    private String loginPassword;
 
     public String getName() {
         return name;
@@ -40,21 +38,5 @@ public class AccountData {
 
     public void setAccType(String acc_type) {
         this.acc_type = acc_type;
-    }
-
-    public String getuserID() {
-        return userID;
-    }
-
-    public void setuserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getloginPassword() {
-        return loginPassword;
-    }
-
-    public void setloginPassword(String loginPassword) {
-        this.loginPassword = loginPassword;
     }
 }

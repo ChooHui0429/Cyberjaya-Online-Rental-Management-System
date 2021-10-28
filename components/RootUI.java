@@ -26,20 +26,20 @@ import javax.swing.table.DefaultTableModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import dataclass.AccountData;
-import dataclass.PropertyData;
-import dataclass.PropertyRateData;
-import dataclass.RegisterData;
-import dataclass.RentPropertyData;
-import dataclass.UserContactNumData;
-import util.ApproveUser;
-import util.CheckAccount;
+import dataclass.VerifiedUser;
+import dataclass.Property;
+import dataclass.PropertyRating;
+import dataclass.UserAccount;
+import dataclass.PropertyRent;
+import dataclass.UserContactNumber;
+import util.UserApproval;
+import util.AccountChecking;
 import util.LoginChecking;
-import util.PropertyDataFunction;
-import util.RegisterDataToJson;
+import util.ManageProperty;
+import util.UserAccountToJson;
 import util.RemoveUser;
-import util.RentPropertFunction;
-import util.UserProfileUpdate;
+import util.ManageRent;
+import util.ManageProfile;
 
 public class RootUI extends JPanel implements ActionListener, MouseListener {
 
@@ -682,16 +682,16 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             // Account type and login to respective menu
             else {
                 try {
-                    String acc_type_or_invalid = LoginChecking.loginChecker(id_enterField_LoginPage.getText(),
+                    String acc_type_or_invalid = LoginChecking.checkLogin(id_enterField_LoginPage.getText(),
                             password_enterField_LoginPage.getText());
                     if (acc_type_or_invalid.equals("Admin")) {
-                        String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
+                        String name = LoginChecking.getUsername(id_enterField_LoginPage.getText());
                         welcomeLabel_AdminPage.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");
                     } else if (acc_type_or_invalid.equals("Potential Tenant")) {
-                        String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
+                        String name = LoginChecking.getUsername(id_enterField_LoginPage.getText());
                         welcomeLabel_userUI.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         // Switch to User home page
@@ -700,11 +700,11 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         // Create Json instance
                         Gson gson = new Gson();
                         Reader readerWaitRateList = Files.newBufferedReader(Paths.get("data/waitRateList.json"));
-                        List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList,
-                                new TypeToken<List<RentPropertyData>>() {
+                        List<PropertyRent> waitRateList = gson.fromJson(readerWaitRateList,
+                                new TypeToken<List<PropertyRent>>() {
                                 }.getType());
-                        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
-                        for (RentPropertyData waitRateData : waitRateList) {
+                        List<PropertyRent> garbage_data = new ArrayList<PropertyRent>();
+                        for (PropertyRent waitRateData : waitRateList) {
                             if (waitRateData.getUserID().equals(login_acc)) {
                                 garbage_data.add(waitRateData);
                                 title_ID_ratePropertyWindow.setText(waitRateData.getPropertyID());
@@ -718,14 +718,14 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         writerWaitRateList.close();
 
                     } else if (acc_type_or_invalid.equals("Owner")) {
-                        String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
+                        String name = LoginChecking.getUsername(id_enterField_LoginPage.getText());
                         welcomeLabel_agentOwnerUI.setText(name);
                         login_acc = id_enterField_LoginPage.getText();
                         title_agentOwnerUI.setText("Owner");
                         // Switch to Agent or Owner Home page
                         main_UI.show(this, "agentOwnerUI");
                     } else if (acc_type_or_invalid.equals("Agent")) {
-                        String name = LoginChecking.userNameReturn(id_enterField_LoginPage.getText());
+                        String name = LoginChecking.getUsername(id_enterField_LoginPage.getText());
                         title_agentOwnerUI.setText("Agent");
                         login_acc = id_enterField_LoginPage.getText();
                         welcomeLabel_agentOwnerUI.setText(name);
@@ -764,10 +764,10 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 // Check email to prevent duplication
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_RegisterPage.getText());
+                    exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_RegisterPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        RegisterDataToJson.regUserdataToJson(name_enterField_RegisterPage.getText(),
+                        UserAccountToJson.regUserToJson(name_enterField_RegisterPage.getText(),
                                 email_enterField_RegisterPage.getText(),
                                 securityPassword_enterField_RegisterPage.getText(),
                                 acc_type_selection_RegisterPage.getSelectedItem().toString());
@@ -811,7 +811,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             // Account Checking
             else {
                 try {
-                    String check_result = CheckAccount.accountChecker(email_enterField_checkAccUI.getText(),
+                    String check_result = AccountChecking.getAccountStatusMessage(email_enterField_checkAccUI.getText(),
                             password_enterField_checkAccUI.getText());
                     notice_checkResultPopOut.setText(check_result);
                 } catch (IOException e1) {
@@ -842,7 +842,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
                 // Convert JSON array to list of register datas
-                List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+                List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
                 }.getType());
                 reader.close();
 
@@ -859,7 +859,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                             tableModel_adminAprUI.removeRow(0);
                         }
                     }
-                    for (RegisterData registerData : registerDatas) {
+                    for (UserAccount registerData : registerDatas) {
                         Object[] data = new Object[5];
                         data[0] = registerData.getName();
                         data[1] = registerData.getEmail();
@@ -900,7 +900,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
                 // Convert JSON array to list of account datas
-                List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+                List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
                 }.getType());
                 reader.close();
 
@@ -913,7 +913,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 }
 
                 // insert data into table
-                for (AccountData accountData : accountDatas) {
+                for (VerifiedUser accountData : accountDatas) {
                     Object[] data = new Object[7];
                     data[0] = accountData.getuserID();
                     data[1] = accountData.getloginPassword();
@@ -953,18 +953,16 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             } else {
                 String exist_email;
                 try {
-                    exist_email = RegisterDataToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
+                    exist_email = UserAccountToJson.registrationEmailChecker(email_enterField_AdminRegPage.getText());
                     if (exist_email.equals("")) {
                         // Register new data
-                        AccountData newAccData = new AccountData();
-                        try {
-                            newAccData = RegisterDataToJson.regAdmingetObjectData(newAccData,
-                                    name_enterField_AdminRegPage.getText(), email_enterField_AdminRegPage.getText(),
-                                    securityPassword_enterField_AdminRegPage.getText());
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        RegisterDataToJson.regAdmindataToJson(newAccData);
+                        VerifiedUser newAccData = new VerifiedUser();
+                        newAccData.setName(name_enterField_AdminRegPage.getText());
+                        newAccData.setEmail(email_enterField_AdminRegPage.getText());
+                        newAccData.setSecurityPassword(securityPassword_enterField_AdminRegPage.getText());
+                        newAccData.setAccType("Admin");
+
+                        newAccData = UserAccountToJson.regAdminToJson(newAccData);
 
                         // Switch to Admin home page
                         main_UI.show(this, "AdminUI");
@@ -1011,7 +1009,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         String securityPassword = tableModel_adminAprUI.getValueAt(i, 2).toString();
                         String acc_type = tableModel_adminAprUI.getValueAt(i, 3).toString();
                         try {
-                            ApproveUser.approveUserData(name, email, securityPassword, acc_type);
+                            UserApproval.approveUser(name, email, securityPassword, acc_type);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -1048,7 +1046,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         String securityPassword = tableModel_adminAprUI.getValueAt(i, 2).toString();
                         String acc_type = tableModel_adminAprUI.getValueAt(i, 3).toString();
                         try {
-                            ApproveUser.rejectUserData(name, email, securityPassword, acc_type);
+                            UserApproval.rejectUser(name, email, securityPassword, acc_type);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -1088,7 +1086,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     String securityPassword = tableModel_adminRemoveUI.getValueAt(i, 4).toString();
                     String acc_type = tableModel_adminRemoveUI.getValueAt(i, 5).toString();
                     try {
-                        RemoveUser.rejectUserData(name, email, securityPassword, acc_type, userID, loginPassword);
+                        RemoveUser.removeUserFromData(name, email, securityPassword, acc_type, userID, loginPassword);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -1135,12 +1133,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     Object[] data = new Object[13];
                     data[0] = propertyData.getPropertyID();
                     data[1] = propertyData.getCategory();
@@ -1179,12 +1177,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Active")) {
                         Object[] data = new Object[12];
                         data[0] = propertyData.getPropertyID();
@@ -1224,12 +1222,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Inactive")) {
                         Object[] data = new Object[12];
                         data[0] = propertyData.getPropertyID();
@@ -1266,13 +1264,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             Reader reader;
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyRateData.json"));
-                List<PropertyRateData> propertyRateDatas = gson.fromJson(reader,
-                        new TypeToken<List<PropertyRateData>>() {
-                        }.getType());
+                List<PropertyRating> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRating>>() {
+                }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyRateData propertyRateData : propertyRateDatas) {
+                for (PropertyRating propertyRateData : propertyRateDatas) {
                     Object[] data = new Object[3];
                     data[0] = propertyRateData.getPropertyID();
                     data[1] = propertyRateData.getRentedNum();
@@ -1289,35 +1286,35 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
         // Button event for rate property window
         else if (e.getSource() == one_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 1);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 1);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == two_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 2);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 2);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == three_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 3);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 3);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == four_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 4);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 4);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == five_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 5);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 5);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1327,8 +1324,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
         // Button event for User Home page
         else if (e.getSource() == editProfile_userUI) {
             try {
-                AccountData acc_data = UserProfileUpdate.getAccData(login_acc);
-                UserContactNumData contact_data = UserProfileUpdate.getContactData(login_acc);
+                VerifiedUser acc_data = ManageProfile.getAccData(login_acc);
+                UserContactNumber contact_data = ManageProfile.getContactData(login_acc);
 
                 name_enterField_userEditProfileUI.setText(acc_data.getName());
                 email_enterField_userEditProfileUI.setText(acc_data.getEmail());
@@ -1350,7 +1347,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
@@ -1362,7 +1359,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Active")) {
                         Object[] data = new Object[3];
                         data[0] = propertyData.getPropertyID();
@@ -1387,9 +1384,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
                 // Convert JSON array to list of rented property datas
-                List<RentPropertyData> rentedpropertyDatas = gson.fromJson(reader,
-                        new TypeToken<List<RentPropertyData>>() {
-                        }.getType());
+                List<PropertyRent> rentedpropertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyRent>>() {
+                }.getType());
                 reader.close();
 
                 // Makesure table empty
@@ -1400,7 +1396,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (RentPropertyData rentedpropertyData : rentedpropertyDatas) {
+                for (PropertyRent rentedpropertyData : rentedpropertyDatas) {
                     if (rentedpropertyData.getUserID().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = rentedpropertyData.getPropertyID();
@@ -1443,7 +1439,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             userPropertyRentWindow.setVisible(false);
         } else if (e.getSource() == rent_userPropertyRentWindow) {
             try {
-                RentPropertFunction.newRentData(login_acc, title_ID_userPropertyRentWindow.getText());
+                ManageRent.newRentData(login_acc, title_ID_userPropertyRentWindow.getText());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1469,7 +1465,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 error_message_userEditProfileUI.setText("Please Complete all your information.");
             } else {
                 try {
-                    UserProfileUpdate.saveUpdateData(login_acc, name_enterField_userEditProfileUI.getText(),
+                    ManageProfile.updateProfile(login_acc, name_enterField_userEditProfileUI.getText(),
                             email_enterField_userEditProfileUI.getText(),
                             contactNumber_enterField_userEditProfileUI.getText());
                 } catch (IOException e1) {
@@ -1510,7 +1506,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
@@ -1522,7 +1518,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getAgentOwnerAcc().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = propertyData.getPropertyID();
@@ -1551,9 +1547,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
                 // Convert JSON array to list of rent property datas
-                List<RentPropertyData> rentpropertyDatas = gson.fromJson(reader,
-                        new TypeToken<List<RentPropertyData>>() {
-                        }.getType());
+                List<PropertyRent> rentpropertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyRent>>() {
+                }.getType());
                 reader.close();
 
                 // Makesure table empty
@@ -1564,7 +1559,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (RentPropertyData rentPropertyData : rentpropertyDatas) {
+                for (PropertyRent rentPropertyData : rentpropertyDatas) {
                     if (rentPropertyData.getOwnerAgentID().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = rentPropertyData.getPropertyID();
@@ -1610,7 +1605,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 error_message_uploadpropertyUI.setText("Please Complete all your new property information.");
             } else {
                 try {
-                    PropertyDataFunction.newPropertyUpload(login_acc,
+                    ManageProperty.uploadNewProperty(login_acc,
                             Integer.parseInt(rentalFee_enterField_uploadpropertyUI.getText()),
                             size_enterField_uploadpropertyUI.getText(),
                             Integer.parseInt(NumRoom_enterField_uploadpropertyUI.getText()),
@@ -1657,7 +1652,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 errorMessage_modifiedPropertyWindow.setText("Please Complete all your property information.");
             } else {
                 try {
-                    PropertyDataFunction.propertyUpdate(title_ID_modifiedPropertyWindow.getText(),
+                    ManageProperty.updateProperty(title_ID_modifiedPropertyWindow.getText(),
                             size_enterField_modifiedPropertyWindow.getText(),
                             Integer.parseInt(rentalFee_enterField_modifiedPropertyWindow.getText()),
                             Integer.parseInt(NumRoom_enterField_modifiedPropertyWindow.getText()),
@@ -1673,7 +1668,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     // Reset all property data from incative to active
                     if (status_before_modifiedPropertyWindow.equals("Inactive")
                             && status_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("Active")) {
-                        RentPropertFunction.resetProperty(title_ID_modifiedPropertyWindow.getText());
+                        ManageRent.resetProperty(title_ID_modifiedPropertyWindow.getText());
                     }
                 } catch (NumberFormatException e1) {
                     e1.printStackTrace();
@@ -1699,8 +1694,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             agentOwnerRentWindow.setVisible(false);
         } else if (e.getSource() == rent_agentOwnerRentWindow) {
             try {
-                RentPropertFunction.rentProperty(title_ID_agentOwnerRentWindow.getText(),
-                        selected_user_agentOwnerRentWindow);
+                ManageRent.rentProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1710,8 +1704,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             main_UI.show(this, "agentOwnerUI");
         } else if (e.getSource() == reject_agentOwnerRentWindow) {
             try {
-                RentPropertFunction.rejectProperty(title_ID_agentOwnerRentWindow.getText(),
-                        selected_user_agentOwnerRentWindow);
+                ManageRent.rejectProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1742,7 +1735,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = ManageProperty.getPropertyById(selectedPropertyID);
                 title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
                 rentalFee_userPropertyRentWindow
                         .setText("                                                      Rental Fee : RM "
@@ -1791,7 +1784,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = ManageProperty.getPropertyById(selectedPropertyID);
                 status_before_modifiedPropertyWindow = selected_data.getStatus();
 
                 title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());
@@ -1822,8 +1815,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             selected_user_agentOwnerRentWindow = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 1).toString();
 
             try {
-                UserContactNumData selected_data = UserProfileUpdate.getContactData(selected_user_agentOwnerRentWindow);
-                AccountData selected_acc = UserProfileUpdate.getAccData(selected_user_agentOwnerRentWindow);
+                UserContactNumber selected_data = ManageProfile.getContactData(selected_user_agentOwnerRentWindow);
+                VerifiedUser selected_acc = ManageProfile.getAccData(selected_user_agentOwnerRentWindow);
                 userID_agentOwnerRentWindow
                         .setText("                                        User Account : " + selected_data.getUserID());
                 userContact_agentOwnerRentWindow

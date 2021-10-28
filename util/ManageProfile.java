@@ -8,9 +8,9 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class UserProfileUpdate {
+public class ManageProfile {
 
-    public static void saveUpdateData(String userID, String new_Name, String new_Email, String new_ContactNumber)
+    public static void updateProfile(String userID, String new_Name, String new_Email, String new_ContactNumber)
             throws IOException {
 
         // Create Json instance
@@ -21,16 +21,16 @@ public class UserProfileUpdate {
         Reader readerContactNum = Files.newBufferedReader(Paths.get("data/userContactNumber.json"));
 
         // Convert JSON array to list
-        List<AccountData> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         readerAcc.close();
-        List<UserContactNumData> userContactDatas = gson.fromJson(readerContactNum,
-                new TypeToken<List<UserContactNumData>>() {
+        List<UserContactNumber> userContactDatas = gson.fromJson(readerContactNum,
+                new TypeToken<List<UserContactNumber>>() {
                 }.getType());
         readerContactNum.close();
 
         // Update Account Data
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 accountData.setName(new_Name);
                 accountData.setEmail(new_Email);
@@ -38,7 +38,7 @@ public class UserProfileUpdate {
         }
 
         // Update User Contact Data
-        for (UserContactNumData userContactData : userContactDatas) {
+        for (UserContactNumber userContactData : userContactDatas) {
             if (userID.equals(userContactData.getUserID())) {
                 userContactData.setContactNumber(new_ContactNumber);
             }
@@ -58,8 +58,8 @@ public class UserProfileUpdate {
 
     }
 
-    public static AccountData getAccData(String userID) throws IOException {
-        AccountData acc_data = new AccountData();
+    public static VerifiedUser getAccData(String userID) throws IOException {
+        VerifiedUser acc_data = new VerifiedUser();
         // Create Json instance
         Gson gson = new Gson();
 
@@ -67,12 +67,12 @@ public class UserProfileUpdate {
         Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
         // Find related account data for login account
-        for (AccountData accountData : accountDatas) {
+        for (VerifiedUser accountData : accountDatas) {
             if (userID.equals(accountData.getuserID())) {
                 acc_data = accountData;
                 break;
@@ -82,8 +82,8 @@ public class UserProfileUpdate {
         return acc_data;
     }
 
-    public static UserContactNumData getContactData(String userID) throws IOException {
-        UserContactNumData contact_data = new UserContactNumData();
+    public static UserContactNumber getContactData(String userID) throws IOException {
+        UserContactNumber contact_data = new UserContactNumber();
         contact_data.setContactNumber("");
         contact_data.setUserID("");
         // Create Json instance
@@ -93,12 +93,12 @@ public class UserProfileUpdate {
         Reader reader = Files.newBufferedReader(Paths.get("data/userContactNumber.json"));
 
         // Convert JSON array to list of user contact datas
-        List<UserContactNumData> userContactDatas = gson.fromJson(reader, new TypeToken<List<UserContactNumData>>() {
+        List<UserContactNumber> userContactDatas = gson.fromJson(reader, new TypeToken<List<UserContactNumber>>() {
         }.getType());
         reader.close();
 
         // Find related user contact number data for login account
-        for (UserContactNumData userContactData : userContactDatas) {
+        for (UserContactNumber userContactData : userContactDatas) {
             if (userID.equals(userContactData.getUserID())) {
                 contact_data = userContactData;
                 break;

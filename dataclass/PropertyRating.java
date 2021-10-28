@@ -1,7 +1,7 @@
 package dataclass;
 
 // Create Property Rate Class
-public class PropertyRateData {
+public class PropertyRating {
     private String propertyID;
     private Integer rentedNum;
     private Integer rateMark;

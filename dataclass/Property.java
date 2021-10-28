@@ -1,7 +1,7 @@
 package dataclass;
 
 // Create Property Data Class
-public class PropertyData {
+public class Property {
     private String propertyID;
     private String category;
     private String status;

@@ -4,14 +4,15 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class RegisterDataToJson {
+public class UserAccountToJson {
 
     // Import User Registration for pending
-    public static void regUserdataToJson(String name, String email, String securityPassword, String acc_type) {
+    public static void regUserToJson(String name, String email, String securityPassword, String acc_type) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -20,13 +21,16 @@ public class RegisterDataToJson {
             Reader reader = Files.newBufferedReader(Paths.get("data/registerData.json"));
 
             // Convert JSON array to list of register datas
-            List<RegisterData> registerDatas = gson.fromJson(reader, new TypeToken<List<RegisterData>>() {
+            List<UserAccount> registerDatas = gson.fromJson(reader, new TypeToken<List<UserAccount>>() {
             }.getType());
             reader.close();
 
             // Add new register data into created list
-            RegisterData new_registerData = new RegisterData();
-            new_registerData = regUsergetObjectData(new_registerData, name, email, securityPassword, acc_type);
+            UserAccount new_registerData = new UserAccount();
+            new_registerData.setName(name);
+            new_registerData.setEmail(email);
+            new_registerData.setSecurityPassword(securityPassword);
+            new_registerData.setAccType(acc_type);
             registerDatas.add(new_registerData);
 
             // Create writer
@@ -39,56 +43,8 @@ public class RegisterDataToJson {
         }
     }
 
-    // Get all the data from user input for user registration
-    public static RegisterData regUsergetObjectData(RegisterData registerData, String name, String email,
-            String securityPassword, String acc_type) throws IOException {
-
-        registerData.setName(name);
-        registerData.setEmail(email);
-        registerData.setSecurityPassword(securityPassword);
-        registerData.setAccType(acc_type);
-
-        return registerData;
-    }
-
     // Import New Admin to Account Data
-    public static void regAdmindataToJson(AccountData newAccData) {
-        try {
-            // Create Json instance
-            Gson gson = new Gson();
-
-            // Create a reader
-            Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
-
-            // Convert JSON array to list of account datas
-            List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
-            }.getType());
-            reader.close();
-
-            // Add new account data into created list
-            AccountData new_accountData = newAccData;
-            accountDatas.add(new_accountData);
-
-            // Create writer
-            Writer writer = Files.newBufferedWriter(Paths.get("data/accountData.json"));
-            // Convert register datas to Json file
-            gson.toJson(accountDatas, writer);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Get all the data from user input
-    public static AccountData regAdmingetObjectData(AccountData accountData, String name, String email,
-            String securityPassword) throws IOException {
-
-        accountData.setName(name);
-        accountData.setEmail(email);
-        accountData.setSecurityPassword(securityPassword);
-        accountData.setAccType("Admin");
-
-        Boolean validUserID = false;
+    public static VerifiedUser regAdminToJson(VerifiedUser newAccData) throws IOException {
 
         // Create Json instance
         Gson gson = new Gson();
@@ -97,18 +53,19 @@ public class RegisterDataToJson {
         Reader reader = Files.newBufferedReader(Paths.get("data/accountData.json"));
 
         // Convert JSON array to list of account datas
-        List<AccountData> accountDatas = gson.fromJson(reader, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(reader, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         reader.close();
 
+        Boolean validUserID = false;
         String userID = new String();
 
         // Check database to prevent duplicate user ID
         while (validUserID == false) {
-            java.util.Random rndGenerator = new java.util.Random();
+            Random rndGenerator = new Random();
             int id = rndGenerator.nextInt(10000);
             String string_id = String.format("%04d", id);
-            String pre_userID = name.replace(" ", "") + "#" + string_id + "_Admin";
+            String pre_userID = newAccData.getName().replace(" ", "") + "#" + string_id + "_Admin";
 
             if (accountDatas.size() == 0) {
                 validUserID = true;
@@ -126,10 +83,18 @@ public class RegisterDataToJson {
             }
         }
 
-        accountData.setuserID(userID);
-        accountData.setloginPassword(PasswordRandGenerator.generateStrongPassword());
+        newAccData.setuserID(userID);
+        newAccData.setloginPassword(PasswordRandGenerator.generateStrongPassword());
 
-        return accountData;
+        // Add new account data into created list
+        accountDatas.add(newAccData);
+
+        // Create writer
+        Writer writer = Files.newBufferedWriter(Paths.get("data/accountData.json"));
+        // Convert register datas to Json file
+        gson.toJson(accountDatas, writer);
+        writer.close();
+        return newAccData;
     }
 
     // Email Checker to prevent multiple account with a single email address.
@@ -144,15 +109,15 @@ public class RegisterDataToJson {
         Reader readerRegister = Files.newBufferedReader(Paths.get("data/registerData.json"));
         Reader readerAccount = Files.newBufferedReader(Paths.get("data/accountData.json"));
         // Convert JSON array to list
-        List<RegisterData> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<RegisterData>>() {
+        List<UserAccount> registerDatas = gson.fromJson(readerRegister, new TypeToken<List<UserAccount>>() {
         }.getType());
-        List<AccountData> accountDatas = gson.fromJson(readerAccount, new TypeToken<List<AccountData>>() {
+        List<VerifiedUser> accountDatas = gson.fromJson(readerAccount, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         readerRegister.close();
         readerAccount.close();
 
         // Check email exist or not in database
-        for (RegisterData registerData : registerDatas) {
+        for (UserAccount registerData : registerDatas) {
             if (email.equals(registerData.getEmail())) {
                 exist_email = true;
                 exist_notify = "The email is registed in system. Please register with another email.";
@@ -160,7 +125,7 @@ public class RegisterDataToJson {
             }
         }
         if (!exist_email) {
-            for (AccountData accountData : accountDatas) {
+            for (VerifiedUser accountData : accountDatas) {
                 if (email.equals(accountData.getEmail())) {
                     exist_email = true;
                     exist_notify = "The email is registed in system. Please register with another email.";

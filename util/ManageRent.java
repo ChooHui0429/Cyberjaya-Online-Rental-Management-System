@@ -8,13 +8,13 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import dataclass.PropertyData;
-import dataclass.PropertyRateData;
-import dataclass.RentPropertyData;
+import dataclass.Property;
+import dataclass.PropertyRating;
+import dataclass.PropertyRent;
 
-public class RentPropertFunction {
+public class ManageRent {
     public static void newRentData(String acc_ID, String propertyID) throws IOException {
-        RentPropertyData new_data = new RentPropertyData();
+        PropertyRent new_data = new PropertyRent();
         new_data.setUserID(acc_ID);
         new_data.setPropertyID(propertyID);
 
@@ -27,11 +27,11 @@ public class RentPropertFunction {
         Reader readerpropertyDatas = Files.newBufferedReader(Paths.get("data/propertyData.json"));
 
         // Convert JSON array to list of property datas
-        List<PropertyData> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<PropertyData>>() {
+        List<Property> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<Property>>() {
         }.getType());
         readerpropertyDatas.close();
 
-        for (PropertyData propertyData : propertyDatas) {
+        for (Property propertyData : propertyDatas) {
             if (propertyData.getPropertyID().equals(propertyID)) {
                 new_data.setOwnerAgentID(propertyData.getAgentOwnerAcc());
                 break;
@@ -42,8 +42,8 @@ public class RentPropertFunction {
         Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
 
         // Convert JSON array to list of Rent Property datas
-        List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
-                new TypeToken<List<RentPropertyData>>() {
+        List<PropertyRent> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
+                new TypeToken<List<PropertyRent>>() {
                 }.getType());
         readerRentPropertyDatas.close();
 
@@ -66,17 +66,17 @@ public class RentPropertFunction {
         Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
 
         // Convert JSON array to list of datas
-        List<PropertyData> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<PropertyData>>() {
+        List<Property> propertyDatas = gson.fromJson(readerpropertyDatas, new TypeToken<List<Property>>() {
         }.getType());
         readerpropertyDatas.close();
-        List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
-                new TypeToken<List<RentPropertyData>>() {
+        List<PropertyRent> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
+                new TypeToken<List<PropertyRent>>() {
                 }.getType());
         readerRentPropertyDatas.close();
 
         // Remove other rent request and change status for rented person data
-        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
-        for (RentPropertyData rentPropertyData : rentPropertyDatas) {
+        List<PropertyRent> garbage_data = new ArrayList<PropertyRent>();
+        for (PropertyRent rentPropertyData : rentPropertyDatas) {
             if (rentPropertyData.getPropertyID().equals(propertyID)) {
                 if (rentPropertyData.getUserID().equals(userID)) {
                     rentPropertyData.setStatus("Rented");
@@ -88,7 +88,7 @@ public class RentPropertFunction {
         rentPropertyDatas.removeAll(garbage_data);
 
         // Change status for property data
-        for (PropertyData propertyData : propertyDatas) {
+        for (Property propertyData : propertyDatas) {
             if (propertyData.getPropertyID().equals(propertyID)) {
                 propertyData.setStatus("Inactive");
             }
@@ -113,14 +113,14 @@ public class RentPropertFunction {
         Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
 
         // Convert JSON array to list of datas
-        List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
-                new TypeToken<List<RentPropertyData>>() {
+        List<PropertyRent> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
+                new TypeToken<List<PropertyRent>>() {
                 }.getType());
         readerRentPropertyDatas.close();
 
         // Remove rent request
-        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
-        for (RentPropertyData rentPropertyData : rentPropertyDatas) {
+        List<PropertyRent> garbage_data = new ArrayList<PropertyRent>();
+        for (PropertyRent rentPropertyData : rentPropertyDatas) {
             if (rentPropertyData.getPropertyID().equals(propertyID)) {
                 if (rentPropertyData.getUserID().equals(userID)) {
                     garbage_data.add(rentPropertyData);
@@ -146,18 +146,17 @@ public class RentPropertFunction {
         Reader readerRentPropertyDatas = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
         Reader readerWaitRateList = Files.newBufferedReader(Paths.get("data/waitRateList.json"));
         // Convert JSON array to list of datas
-        List<RentPropertyData> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
-                new TypeToken<List<RentPropertyData>>() {
+        List<PropertyRent> rentPropertyDatas = gson.fromJson(readerRentPropertyDatas,
+                new TypeToken<List<PropertyRent>>() {
                 }.getType());
-        List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList,
-                new TypeToken<List<RentPropertyData>>() {
-                }.getType());
+        List<PropertyRent> waitRateList = gson.fromJson(readerWaitRateList, new TypeToken<List<PropertyRent>>() {
+        }.getType());
         readerWaitRateList.close();
         readerRentPropertyDatas.close();
 
         // Remove rent data
-        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
-        for (RentPropertyData rentPropertyData : rentPropertyDatas) {
+        List<PropertyRent> garbage_data = new ArrayList<PropertyRent>();
+        for (PropertyRent rentPropertyData : rentPropertyDatas) {
             if (rentPropertyData.getPropertyID().equals(propertyID)) {
                 garbage_data.add(rentPropertyData);
                 waitRateList.add(rentPropertyData);
@@ -182,11 +181,11 @@ public class RentPropertFunction {
         Gson gson = new Gson();
         // Create a reader
         Reader reader = Files.newBufferedReader(Paths.get("data/propertyRateData.json"));
-        List<PropertyRateData> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRateData>>() {
+        List<PropertyRating> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRating>>() {
         }.getType());
 
         Boolean property_exist = false;
-        for (PropertyRateData propertyRateData : propertyRateDatas) {
+        for (PropertyRating propertyRateData : propertyRateDatas) {
             if (propertyRateData.getPropertyID().equals(propertyID)) {
                 Integer new_mark = propertyRateData.getRateMark() + mark;
                 Integer newTotalRent = propertyRateData.getRentedNum() + 1;
@@ -197,7 +196,7 @@ public class RentPropertFunction {
             }
         }
         if (!property_exist) {
-            PropertyRateData new_data = new PropertyRateData();
+            PropertyRating new_data = new PropertyRating();
             new_data.setPropertyID(propertyID);
             new_data.setRateMark(mark);
             new_data.setRentedNum(1);
