@@ -8,7 +8,7 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class PropertyDataFunction {
+public class ManageProperty {
     public static void newPropertyUpload(String owner_name, Integer rentalFee, String size, Integer NumRoom,
             Integer NumBathroom, String condition, String contactNum, String address, String facilities,
             String rentalAskFor, String propertyType, String status) throws IOException {

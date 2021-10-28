@@ -35,7 +35,7 @@ import dataclass.UserContactNumData;
 import util.ApproveUser;
 import util.CheckAccount;
 import util.LoginChecking;
-import util.PropertyDataFunction;
+import util.ManageProperty;
 import util.UserAccountToJson;
 import util.RemoveUser;
 import util.RentPropertFunction;
@@ -1610,7 +1610,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 error_message_uploadpropertyUI.setText("Please Complete all your new property information.");
             } else {
                 try {
-                    PropertyDataFunction.newPropertyUpload(login_acc,
+                    ManageProperty.newPropertyUpload(login_acc,
                             Integer.parseInt(rentalFee_enterField_uploadpropertyUI.getText()),
                             size_enterField_uploadpropertyUI.getText(),
                             Integer.parseInt(NumRoom_enterField_uploadpropertyUI.getText()),
@@ -1657,7 +1657,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                 errorMessage_modifiedPropertyWindow.setText("Please Complete all your property information.");
             } else {
                 try {
-                    PropertyDataFunction.propertyUpdate(title_ID_modifiedPropertyWindow.getText(),
+                    ManageProperty.propertyUpdate(title_ID_modifiedPropertyWindow.getText(),
                             size_enterField_modifiedPropertyWindow.getText(),
                             Integer.parseInt(rentalFee_enterField_modifiedPropertyWindow.getText()),
                             Integer.parseInt(NumRoom_enterField_modifiedPropertyWindow.getText()),
@@ -1742,7 +1742,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
 
             try {
-                Property selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = ManageProperty.getSelectedProperty(selectedPropertyID);
                 title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
                 rentalFee_userPropertyRentWindow
                         .setText("                                                      Rental Fee : RM "
@@ -1791,7 +1791,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
 
             try {
-                Property selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = ManageProperty.getSelectedProperty(selectedPropertyID);
                 status_before_modifiedPropertyWindow = selected_data.getStatus();
 
                 title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());
