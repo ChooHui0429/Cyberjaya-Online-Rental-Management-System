@@ -30,7 +30,7 @@ import dataclass.VerifiedUser;
 import dataclass.Property;
 import dataclass.PropertyRating;
 import dataclass.UserAccount;
-import dataclass.RentPropertyData;
+import dataclass.PropertyRent;
 import dataclass.UserContactNumData;
 import util.ApproveUser;
 import util.CheckAccount;
@@ -700,11 +700,11 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                         // Create Json instance
                         Gson gson = new Gson();
                         Reader readerWaitRateList = Files.newBufferedReader(Paths.get("data/waitRateList.json"));
-                        List<RentPropertyData> waitRateList = gson.fromJson(readerWaitRateList,
-                                new TypeToken<List<RentPropertyData>>() {
+                        List<PropertyRent> waitRateList = gson.fromJson(readerWaitRateList,
+                                new TypeToken<List<PropertyRent>>() {
                                 }.getType());
-                        List<RentPropertyData> garbage_data = new ArrayList<RentPropertyData>();
-                        for (RentPropertyData waitRateData : waitRateList) {
+                        List<PropertyRent> garbage_data = new ArrayList<PropertyRent>();
+                        for (PropertyRent waitRateData : waitRateList) {
                             if (waitRateData.getUserID().equals(login_acc)) {
                                 garbage_data.add(waitRateData);
                                 title_ID_ratePropertyWindow.setText(waitRateData.getPropertyID());
@@ -1386,9 +1386,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
                 // Convert JSON array to list of rented property datas
-                List<RentPropertyData> rentedpropertyDatas = gson.fromJson(reader,
-                        new TypeToken<List<RentPropertyData>>() {
-                        }.getType());
+                List<PropertyRent> rentedpropertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyRent>>() {
+                }.getType());
                 reader.close();
 
                 // Makesure table empty
@@ -1399,7 +1398,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (RentPropertyData rentedpropertyData : rentedpropertyDatas) {
+                for (PropertyRent rentedpropertyData : rentedpropertyDatas) {
                     if (rentedpropertyData.getUserID().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = rentedpropertyData.getPropertyID();
@@ -1550,9 +1549,8 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/rentPropertyData.json"));
                 // Convert JSON array to list of rent property datas
-                List<RentPropertyData> rentpropertyDatas = gson.fromJson(reader,
-                        new TypeToken<List<RentPropertyData>>() {
-                        }.getType());
+                List<PropertyRent> rentpropertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyRent>>() {
+                }.getType());
                 reader.close();
 
                 // Makesure table empty
@@ -1563,7 +1561,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (RentPropertyData rentPropertyData : rentpropertyDatas) {
+                for (PropertyRent rentPropertyData : rentpropertyDatas) {
                     if (rentPropertyData.getOwnerAgentID().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = rentPropertyData.getPropertyID();

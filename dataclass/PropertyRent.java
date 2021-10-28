@@ -1,6 +1,6 @@
 package dataclass;
 
-public class RentPropertyData {
+public class PropertyRent {
     private String userID;
     private String propertyID;
     private String ownerAgentID;
