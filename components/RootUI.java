@@ -38,7 +38,7 @@ import util.LoginChecking;
 import util.ManageProperty;
 import util.UserAccountToJson;
 import util.RemoveUser;
-import util.RentPropertFunction;
+import util.ManageRent;
 import util.UserProfileUpdate;
 
 public class RootUI extends JPanel implements ActionListener, MouseListener {
@@ -1288,35 +1288,35 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
         // Button event for rate property window
         else if (e.getSource() == one_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 1);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 1);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == two_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 2);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 2);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == three_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 3);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 3);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == four_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 4);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 4);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             ratePropertyWindow.setVisible(false);
         } else if (e.getSource() == five_ratePropertyWindow) {
             try {
-                RentPropertFunction.rateProperty(title_ID_ratePropertyWindow.getText(), 5);
+                ManageRent.rateProperty(title_ID_ratePropertyWindow.getText(), 5);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1441,7 +1441,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             userPropertyRentWindow.setVisible(false);
         } else if (e.getSource() == rent_userPropertyRentWindow) {
             try {
-                RentPropertFunction.newRentData(login_acc, title_ID_userPropertyRentWindow.getText());
+                ManageRent.newRentData(login_acc, title_ID_userPropertyRentWindow.getText());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1670,7 +1670,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     // Reset all property data from incative to active
                     if (status_before_modifiedPropertyWindow.equals("Inactive")
                             && status_selection_modifiedPropertyWindow.getSelectedItem().toString().equals("Active")) {
-                        RentPropertFunction.resetProperty(title_ID_modifiedPropertyWindow.getText());
+                        ManageRent.resetProperty(title_ID_modifiedPropertyWindow.getText());
                     }
                 } catch (NumberFormatException e1) {
                     e1.printStackTrace();
@@ -1696,8 +1696,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             agentOwnerRentWindow.setVisible(false);
         } else if (e.getSource() == rent_agentOwnerRentWindow) {
             try {
-                RentPropertFunction.rentProperty(title_ID_agentOwnerRentWindow.getText(),
-                        selected_user_agentOwnerRentWindow);
+                ManageRent.rentProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -1707,8 +1706,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             main_UI.show(this, "agentOwnerUI");
         } else if (e.getSource() == reject_agentOwnerRentWindow) {
             try {
-                RentPropertFunction.rejectProperty(title_ID_agentOwnerRentWindow.getText(),
-                        selected_user_agentOwnerRentWindow);
+                ManageRent.rejectProperty(title_ID_agentOwnerRentWindow.getText(), selected_user_agentOwnerRentWindow);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

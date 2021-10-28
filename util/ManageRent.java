@@ -12,7 +12,7 @@ import dataclass.Property;
 import dataclass.PropertyRating;
 import dataclass.PropertyRent;
 
-public class RentPropertFunction {
+public class ManageRent {
     public static void newRentData(String acc_ID, String propertyID) throws IOException {
         PropertyRent new_data = new PropertyRent();
         new_data.setUserID(acc_ID);
