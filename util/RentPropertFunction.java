@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import dataclass.Property;
-import dataclass.PropertyRateData;
+import dataclass.PropertyRating;
 import dataclass.RentPropertyData;
 
 public class RentPropertFunction {
@@ -182,11 +182,11 @@ public class RentPropertFunction {
         Gson gson = new Gson();
         // Create a reader
         Reader reader = Files.newBufferedReader(Paths.get("data/propertyRateData.json"));
-        List<PropertyRateData> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRateData>>() {
+        List<PropertyRating> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRating>>() {
         }.getType());
 
         Boolean property_exist = false;
-        for (PropertyRateData propertyRateData : propertyRateDatas) {
+        for (PropertyRating propertyRateData : propertyRateDatas) {
             if (propertyRateData.getPropertyID().equals(propertyID)) {
                 Integer new_mark = propertyRateData.getRateMark() + mark;
                 Integer newTotalRent = propertyRateData.getRentedNum() + 1;
@@ -197,7 +197,7 @@ public class RentPropertFunction {
             }
         }
         if (!property_exist) {
-            PropertyRateData new_data = new PropertyRateData();
+            PropertyRating new_data = new PropertyRating();
             new_data.setPropertyID(propertyID);
             new_data.setRateMark(mark);
             new_data.setRentedNum(1);

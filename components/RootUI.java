@@ -28,7 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import dataclass.VerifiedUser;
 import dataclass.Property;
-import dataclass.PropertyRateData;
+import dataclass.PropertyRating;
 import dataclass.UserAccount;
 import dataclass.RentPropertyData;
 import dataclass.UserContactNumData;
@@ -1266,13 +1266,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             Reader reader;
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyRateData.json"));
-                List<PropertyRateData> propertyRateDatas = gson.fromJson(reader,
-                        new TypeToken<List<PropertyRateData>>() {
-                        }.getType());
+                List<PropertyRating> propertyRateDatas = gson.fromJson(reader, new TypeToken<List<PropertyRating>>() {
+                }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyRateData propertyRateData : propertyRateDatas) {
+                for (PropertyRating propertyRateData : propertyRateDatas) {
                     Object[] data = new Object[3];
                     data[0] = propertyRateData.getPropertyID();
                     data[1] = propertyRateData.getRentedNum();
