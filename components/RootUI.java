@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import dataclass.VerifiedUser;
-import dataclass.PropertyData;
+import dataclass.Property;
 import dataclass.PropertyRateData;
 import dataclass.UserAccount;
 import dataclass.RentPropertyData;
@@ -1135,12 +1135,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     Object[] data = new Object[13];
                     data[0] = propertyData.getPropertyID();
                     data[1] = propertyData.getCategory();
@@ -1179,12 +1179,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Active")) {
                         Object[] data = new Object[12];
                         data[0] = propertyData.getPropertyID();
@@ -1224,12 +1224,12 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
                 // insert data into table
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Inactive")) {
                         Object[] data = new Object[12];
                         data[0] = propertyData.getPropertyID();
@@ -1350,7 +1350,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
@@ -1362,7 +1362,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getStatus().equals("Active")) {
                         Object[] data = new Object[3];
                         data[0] = propertyData.getPropertyID();
@@ -1510,7 +1510,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             try {
                 reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
                 // Convert JSON array to list of property datas
-                List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+                List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
                 }.getType());
                 reader.close();
 
@@ -1522,7 +1522,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
                     }
                 }
 
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getAgentOwnerAcc().equals(login_acc)) {
                         Object[] data = new Object[3];
                         data[0] = propertyData.getPropertyID();
@@ -1742,7 +1742,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_userViewProperty.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
                 title_ID_userPropertyRentWindow.setText(selected_data.getPropertyID());
                 rentalFee_userPropertyRentWindow
                         .setText("                                                      Rental Fee : RM "
@@ -1791,7 +1791,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             String selectedPropertyID = tableModel_modifiedPropertyUI.getValueAt(selectedRow, 0).toString();
 
             try {
-                PropertyData selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
+                Property selected_data = PropertyDataFunction.getSelectedProperty(selectedPropertyID);
                 status_before_modifiedPropertyWindow = selected_data.getStatus();
 
                 title_ID_modifiedPropertyWindow.setText(selected_data.getPropertyID());

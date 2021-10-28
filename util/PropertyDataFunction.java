@@ -19,12 +19,12 @@ public class PropertyDataFunction {
         Reader reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
 
         // Convert JSON array to list of property datas
-        List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+        List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
         }.getType());
         reader.close();
 
         // Create new property data
-        PropertyData new_data = new PropertyData();
+        Property new_data = new Property();
         Integer id_Num = 0;
         Boolean id_valid = false;
 
@@ -34,7 +34,7 @@ public class PropertyDataFunction {
                 Boolean id_exist = false;
                 String id_string = String.format("%04d", id_Num);
                 String new_ID = owner_name + "#" + id_string;
-                for (PropertyData propertyData : propertyDatas) {
+                for (Property propertyData : propertyDatas) {
                     if (propertyData.getPropertyID().equals(new_ID)) {
                         id_Num = id_Num + 1;
                         id_exist = true;
@@ -74,19 +74,19 @@ public class PropertyDataFunction {
         writer.close();
     }
 
-    public static PropertyData getSelectedProperty(String propertyID) throws IOException {
+    public static Property getSelectedProperty(String propertyID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
         // Create a reader
         Reader reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
 
         // Convert JSON array to list of property datas
-        List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+        List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
         }.getType());
         reader.close();
 
-        PropertyData selected_data = new PropertyData();
-        for (PropertyData propertyData : propertyDatas) {
+        Property selected_data = new Property();
+        for (Property propertyData : propertyDatas) {
             if (propertyData.getPropertyID().equals(propertyID)) {
                 selected_data = propertyData;
                 break;
@@ -106,12 +106,12 @@ public class PropertyDataFunction {
         Reader reader = Files.newBufferedReader(Paths.get("data/propertyData.json"));
 
         // Convert JSON array to list of property datas
-        List<PropertyData> propertyDatas = gson.fromJson(reader, new TypeToken<List<PropertyData>>() {
+        List<Property> propertyDatas = gson.fromJson(reader, new TypeToken<List<Property>>() {
         }.getType());
         reader.close();
 
         // Update property Data
-        for (PropertyData propertyData : propertyDatas) {
+        for (Property propertyData : propertyDatas) {
             if (propertyData.getPropertyID().equals(propertyID)) {
                 propertyData.setCategory(propertyType);
                 propertyData.setStatus(status);
