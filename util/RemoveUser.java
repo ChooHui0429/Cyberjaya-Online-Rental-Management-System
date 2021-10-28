@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import dataclass.VerifiedUser;
 
 public class RemoveUser {
-    public static void rejectUserData(String name, String email, String securityPassword, String acc_type,
+    public static void removeUserFromData(String name, String email, String securityPassword, String acc_type,
             String userID, String loginPassword) throws IOException {
 
         // Removed account data

@@ -14,10 +14,10 @@ import com.google.gson.reflect.TypeToken;
 import dataclass.VerifiedUser;
 import dataclass.UserAccount;
 
-public class ApproveUser {
+public class UserApproval {
 
     // Get all the data from table for add new account data
-    public static void approveUserData(String name, String email, String securityPassword, String acc_type)
+    public static void approveUser(String name, String email, String securityPassword, String acc_type)
             throws IOException {
 
         // New account data
@@ -68,13 +68,13 @@ public class ApproveUser {
 
         accountData.setuserID(userID);
         accountData.setloginPassword(PasswordRandGenerator.generateStrongPassword());
-        approveUserDataToJson(accountData);
-        deleteApprovedData(accountData);
+        approveUserToJson(accountData);
+        deleteApprovedUser(accountData);
 
     }
 
     // Get all the data from table for add new rejected data
-    public static void rejectUserData(String name, String email, String securityPassword, String acc_type)
+    public static void rejectUser(String name, String email, String securityPassword, String acc_type)
             throws IOException {
 
         // Collect register data
@@ -85,12 +85,12 @@ public class ApproveUser {
         registerData.setSecurityPassword(securityPassword);
         registerData.setAccType(acc_type);
 
-        rejectUserDataToJson(registerData);
-        deleteRejectedData(registerData);
+        rejectUserToJson(registerData);
+        deleteRejectedUser(registerData);
     }
 
     // Add new account data
-    public static void approveUserDataToJson(VerifiedUser newAccData) {
+    public static void approveUserToJson(VerifiedUser newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -118,7 +118,7 @@ public class ApproveUser {
     }
 
     // Remove approved register data
-    public static void deleteApprovedData(VerifiedUser newAccData) {
+    public static void deleteApprovedUser(VerifiedUser newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -152,7 +152,7 @@ public class ApproveUser {
     }
 
     // Add new rejected data
-    public static void rejectUserDataToJson(UserAccount newRejectData) {
+    public static void rejectUserToJson(UserAccount newRejectData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -180,7 +180,7 @@ public class ApproveUser {
     }
 
     // Remove rejected register data
-    public static void deleteRejectedData(UserAccount newRejectData) {
+    public static void deleteRejectedUser(UserAccount newRejectData) {
         try {
             // Create Json instance
             Gson gson = new Gson();

@@ -8,9 +8,9 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class UserProfileUpdate {
+public class ManageProfile {
 
-    public static void saveUpdateData(String userID, String new_Name, String new_Email, String new_ContactNumber)
+    public static void updateProfile(String userID, String new_Name, String new_Email, String new_ContactNumber)
             throws IOException {
 
         // Create Json instance

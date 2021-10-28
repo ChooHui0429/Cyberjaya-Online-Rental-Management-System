@@ -9,8 +9,8 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class CheckAccount {
-    public static String accountChecker(String email, String password) throws IOException {
+public class AccountChecking {
+    public static String getAccountStatusMessage(String email, String password) throws IOException {
         String result = new String();
 
         // Create Json instance

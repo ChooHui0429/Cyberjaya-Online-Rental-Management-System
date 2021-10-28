@@ -11,7 +11,7 @@ import com.google.gson.reflect.TypeToken;
 public class UserAccountToJson {
 
     // Import User Registration for pending
-    public static void regUserdataToJson(String name, String email, String securityPassword, String acc_type) {
+    public static void regUserToJson(String name, String email, String securityPassword, String acc_type) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -26,7 +26,10 @@ public class UserAccountToJson {
 
             // Add new register data into created list
             UserAccount new_registerData = new UserAccount();
-            new_registerData = regUsergetObjectData(new_registerData, name, email, securityPassword, acc_type);
+            new_registerData.setName(name);
+            new_registerData.setEmail(email);
+            new_registerData.setSecurityPassword(securityPassword);
+            new_registerData.setAccType(acc_type);
             registerDatas.add(new_registerData);
 
             // Create writer
@@ -39,20 +42,8 @@ public class UserAccountToJson {
         }
     }
 
-    // Get all the data from user input for user registration
-    public static UserAccount regUsergetObjectData(UserAccount registerData, String name, String email,
-            String securityPassword, String acc_type) throws IOException {
-
-        registerData.setName(name);
-        registerData.setEmail(email);
-        registerData.setSecurityPassword(securityPassword);
-        registerData.setAccType(acc_type);
-
-        return registerData;
-    }
-
     // Import New Admin to Account Data
-    public static void regAdmindataToJson(VerifiedUser newAccData) {
+    public static void regAdminToJson(VerifiedUser newAccData) {
         try {
             // Create Json instance
             Gson gson = new Gson();
@@ -80,6 +71,7 @@ public class UserAccountToJson {
     }
 
     // Get all the data from user input
+    // TODO: combine with regAdminToJson
     public static VerifiedUser regAdmingetObjectData(VerifiedUser accountData, String name, String email,
             String securityPassword) throws IOException {
 
