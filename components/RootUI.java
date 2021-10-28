@@ -31,7 +31,7 @@ import dataclass.Property;
 import dataclass.PropertyRating;
 import dataclass.UserAccount;
 import dataclass.PropertyRent;
-import dataclass.UserContactNumData;
+import dataclass.UserContactNumber;
 import util.ApproveUser;
 import util.CheckAccount;
 import util.LoginChecking;
@@ -1327,7 +1327,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
         else if (e.getSource() == editProfile_userUI) {
             try {
                 VerifiedUser acc_data = UserProfileUpdate.getAccData(login_acc);
-                UserContactNumData contact_data = UserProfileUpdate.getContactData(login_acc);
+                UserContactNumber contact_data = UserProfileUpdate.getContactData(login_acc);
 
                 name_enterField_userEditProfileUI.setText(acc_data.getName());
                 email_enterField_userEditProfileUI.setText(acc_data.getEmail());
@@ -1817,7 +1817,7 @@ public class RootUI extends JPanel implements ActionListener, MouseListener {
             selected_user_agentOwnerRentWindow = tableModel_agentOwnerViewRentUI.getValueAt(selectedRow, 1).toString();
 
             try {
-                UserContactNumData selected_data = UserProfileUpdate.getContactData(selected_user_agentOwnerRentWindow);
+                UserContactNumber selected_data = UserProfileUpdate.getContactData(selected_user_agentOwnerRentWindow);
                 VerifiedUser selected_acc = UserProfileUpdate.getAccData(selected_user_agentOwnerRentWindow);
                 userID_agentOwnerRentWindow
                         .setText("                                        User Account : " + selected_data.getUserID());

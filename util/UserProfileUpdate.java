@@ -24,8 +24,8 @@ public class UserProfileUpdate {
         List<VerifiedUser> accountDatas = gson.fromJson(readerAcc, new TypeToken<List<VerifiedUser>>() {
         }.getType());
         readerAcc.close();
-        List<UserContactNumData> userContactDatas = gson.fromJson(readerContactNum,
-                new TypeToken<List<UserContactNumData>>() {
+        List<UserContactNumber> userContactDatas = gson.fromJson(readerContactNum,
+                new TypeToken<List<UserContactNumber>>() {
                 }.getType());
         readerContactNum.close();
 
@@ -38,7 +38,7 @@ public class UserProfileUpdate {
         }
 
         // Update User Contact Data
-        for (UserContactNumData userContactData : userContactDatas) {
+        for (UserContactNumber userContactData : userContactDatas) {
             if (userID.equals(userContactData.getUserID())) {
                 userContactData.setContactNumber(new_ContactNumber);
             }
@@ -82,8 +82,8 @@ public class UserProfileUpdate {
         return acc_data;
     }
 
-    public static UserContactNumData getContactData(String userID) throws IOException {
-        UserContactNumData contact_data = new UserContactNumData();
+    public static UserContactNumber getContactData(String userID) throws IOException {
+        UserContactNumber contact_data = new UserContactNumber();
         contact_data.setContactNumber("");
         contact_data.setUserID("");
         // Create Json instance
@@ -93,12 +93,12 @@ public class UserProfileUpdate {
         Reader reader = Files.newBufferedReader(Paths.get("data/userContactNumber.json"));
 
         // Convert JSON array to list of user contact datas
-        List<UserContactNumData> userContactDatas = gson.fromJson(reader, new TypeToken<List<UserContactNumData>>() {
+        List<UserContactNumber> userContactDatas = gson.fromJson(reader, new TypeToken<List<UserContactNumber>>() {
         }.getType());
         reader.close();
 
         // Find related user contact number data for login account
-        for (UserContactNumData userContactData : userContactDatas) {
+        for (UserContactNumber userContactData : userContactDatas) {
             if (userID.equals(userContactData.getUserID())) {
                 contact_data = userContactData;
                 break;

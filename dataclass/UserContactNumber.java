@@ -1,7 +1,7 @@
 package dataclass;
 
 // Create User Contact Number Data Class
-public class UserContactNumData {
+public class UserContactNumber {
     private String userID;
     private String contactNumber;
 
