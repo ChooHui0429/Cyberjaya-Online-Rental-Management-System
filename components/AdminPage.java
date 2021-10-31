@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for admin main page
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AdminPage extends JPanel {
     public AdminPage(JButton approveRegister, JButton createAdmin, JButton removeAccount, JButton viewReport,
             JButton Logout, JLabel welcome_name) {

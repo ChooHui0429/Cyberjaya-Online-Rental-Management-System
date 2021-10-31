@@ -8,7 +8,23 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Methods involving account login verification
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class LoginChecking {
+    /**
+     * Verify user login info
+     * 
+     * @param userID   String
+     * @param password String
+     * @return String - verification message
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static String checkLogin(String userID, String password) throws IOException {
         String acc_type_or_invalid = new String();
 
@@ -40,6 +56,15 @@ public class LoginChecking {
         return acc_type_or_invalid;
     }
 
+    /**
+     * Gets username by user id
+     * 
+     * @param userID String
+     * @return String - username
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static String getUsername(String userID) throws IOException {
         String name = new String();
         // Create Json instance

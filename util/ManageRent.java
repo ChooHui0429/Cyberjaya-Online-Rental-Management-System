@@ -13,6 +13,15 @@ import dataclass.PropertyRating;
 import dataclass.PropertyRent;
 
 public class ManageRent {
+    /**
+     * Adds new rent request from user
+     * 
+     * @param acc_ID     String
+     * @param propertyID String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void newRentData(String acc_ID, String propertyID) throws IOException {
         PropertyRent new_data = new PropertyRent();
         new_data.setUserID(acc_ID);
@@ -57,6 +66,15 @@ public class ManageRent {
         writer.close();
     }
 
+    /**
+     * Rent out a property, changes rent request to rented state
+     * 
+     * @param propertyID String
+     * @param userID     String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void rentProperty(String propertyID, String userID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
@@ -105,6 +123,15 @@ public class ManageRent {
         writerRentPropertyDatas.close();
     }
 
+    /**
+     * Rejects a property rent request
+     * 
+     * @param propertyID String
+     * @param userID     String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void rejectProperty(String propertyID, String userID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
@@ -138,6 +165,14 @@ public class ManageRent {
         writerRentPropertyDatas.close();
     }
 
+    /**
+     * Reset rent status of property when tenant checks out
+     * 
+     * @param propertyID String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void resetProperty(String propertyID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
@@ -176,6 +211,15 @@ public class ManageRent {
         writerWaitRateList.close();
     }
 
+    /**
+     * Rate a property
+     * 
+     * @param propertyID String
+     * @param mark       Integer
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void rateProperty(String propertyID, Integer mark) throws IOException {
         // Create Json instance
         Gson gson = new Gson();

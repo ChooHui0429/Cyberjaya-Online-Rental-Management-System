@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Popup layout for admin registration status
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AdminRegistrationPopOut extends JFrame {
     public AdminRegistrationPopOut(JButton ok, JLabel notice_id, JLabel notice_password) {
         // Pop Out Notice for Successful register

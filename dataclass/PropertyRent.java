@@ -1,5 +1,11 @@
 package dataclass;
 
+/**
+ * Property Rent Data class
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class PropertyRent {
     private String userID;
     private String propertyID;

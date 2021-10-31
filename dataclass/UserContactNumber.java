@@ -1,6 +1,11 @@
 package dataclass;
 
-// Create User Contact Number Data Class
+/**
+ * User contact data class
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserContactNumber {
     private String userID;
     private String contactNumber;

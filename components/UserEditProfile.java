@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to edit profile info
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserEditProfile extends JPanel {
     public UserEditProfile(JButton update, JTextField name_enterField, JTextField email_enterField,
             JTextField contactNumber_enterField, JLabel error_message) {

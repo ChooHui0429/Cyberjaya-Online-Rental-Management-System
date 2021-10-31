@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Popup layout for agent and owner to update property details
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class ModifiedPropertyWindow extends JFrame {
     public ModifiedPropertyWindow(JLabel title_ID, JLabel error_message, JButton update,
             JTextField rentalFee_enterField, JTextField size_enterField, JTextField NumRoom_enterField,

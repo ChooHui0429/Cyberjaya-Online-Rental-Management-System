@@ -1,6 +1,11 @@
 package dataclass;
 
-// Create Register Data Class
+/**
+ * User Account class, includes unverified account
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserAccount {
     // Create properties of Register Data Class
     private String name;

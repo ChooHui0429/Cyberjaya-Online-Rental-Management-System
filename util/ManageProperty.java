@@ -8,7 +8,32 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Methods involving properties
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class ManageProperty {
+    /**
+     * Adds a new property
+     * 
+     * @param owner_name   String
+     * @param rentalFee    Integer
+     * @param size         String
+     * @param NumRoom      Integer
+     * @param NumBathroom  Integer
+     * @param condition    String
+     * @param contactNum   String
+     * @param address      String
+     * @param facilities   String
+     * @param rentalAskFor String
+     * @param propertyType String
+     * @param status       String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void uploadNewProperty(String owner_name, Integer rentalFee, String size, Integer NumRoom,
             Integer NumBathroom, String condition, String contactNum, String address, String facilities,
             String rentalAskFor, String propertyType, String status) throws IOException {
@@ -74,6 +99,15 @@ public class ManageProperty {
         writer.close();
     }
 
+    /**
+     * Get property by id
+     * 
+     * @param propertyID String
+     * @return Property - Property info
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static Property getPropertyById(String propertyID) throws IOException {
         // Create Json instance
         Gson gson = new Gson();
@@ -96,6 +130,25 @@ public class ManageProperty {
         return selected_data;
     }
 
+    /**
+     * Update existing property
+     * 
+     * @param propertyID   String
+     * @param size         String
+     * @param rentalfee    Integer
+     * @param NumRoom      Integer
+     * @param NumBathroom  Integer
+     * @param condition    String
+     * @param contactNum   String
+     * @param address      String
+     * @param facilities   String
+     * @param rentalAskFor String
+     * @param propertyType String
+     * @param status       String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void updateProperty(String propertyID, String size, Integer rentalfee, Integer NumRoom,
             Integer NumBathroom, String condition, String contactNum, String address, String facilities,
             String rentalAskFor, String propertyType, String status) throws IOException {

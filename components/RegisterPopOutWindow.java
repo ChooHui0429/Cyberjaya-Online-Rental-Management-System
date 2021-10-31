@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Popup layout to show instruction after registration
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RegisterPopOutWindow extends JFrame {
     public RegisterPopOutWindow(JButton ok) {
         // Pop Out Notice for Successful register

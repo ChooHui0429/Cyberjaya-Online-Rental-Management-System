@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Popup layout for potential tenants to rate property
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RatePropertyWindow extends JFrame {
     public RatePropertyWindow(JButton one, JButton two, JButton three, JButton four, JButton five, JLabel title_ID) {
         // Main Frame for Rate Property Window

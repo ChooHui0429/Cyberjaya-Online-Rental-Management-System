@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for account registraion
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RegisterPanel extends JPanel {
     public RegisterPanel(JButton register, JButton back, JTextField name_enterField, JTextField email_enterField,
             JTextField securityPassword_enterField, JLabel error_message, JComboBox<String> acc_type_selection) {

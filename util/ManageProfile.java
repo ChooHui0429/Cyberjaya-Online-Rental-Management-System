@@ -8,8 +8,24 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Methods involving user profile
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class ManageProfile {
-
+    /**
+     * Updates user profile
+     * 
+     * @param userID            String
+     * @param new_Name          String
+     * @param new_Email         String
+     * @param new_ContactNumber String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void updateProfile(String userID, String new_Name, String new_Email, String new_ContactNumber)
             throws IOException {
 
@@ -58,6 +74,15 @@ public class ManageProfile {
 
     }
 
+    /**
+     * Get user account data by id
+     * 
+     * @param userID String
+     * @return VerifiedUser
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static VerifiedUser getAccData(String userID) throws IOException {
         VerifiedUser acc_data = new VerifiedUser();
         // Create Json instance
@@ -82,6 +107,15 @@ public class ManageProfile {
         return acc_data;
     }
 
+    /**
+     * Get user's contact info
+     * 
+     * @param userID String
+     * @return UserContactNumber
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static UserContactNumber getContactData(String userID) throws IOException {
         UserContactNumber contact_data = new UserContactNumber();
         contact_data.setContactNumber("");

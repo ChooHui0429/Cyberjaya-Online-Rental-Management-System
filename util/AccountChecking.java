@@ -9,7 +9,23 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Methods involving account verification
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AccountChecking {
+    /**
+     * Check account status
+     * 
+     * @param email    String
+     * @param password String
+     * @return String - account status as message
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static String getAccountStatusMessage(String email, String password) throws IOException {
         String result = new String();
 

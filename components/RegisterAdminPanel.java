@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for admin registration
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RegisterAdminPanel extends JPanel {
     public RegisterAdminPanel(JButton register, JButton back, JTextField name_enterField, JTextField email_enterField,
             JTextField securityPassword_enterField, JLabel error_message) {

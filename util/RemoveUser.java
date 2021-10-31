@@ -13,7 +13,26 @@ import com.google.gson.reflect.TypeToken;
 
 import dataclass.VerifiedUser;
 
+/**
+ * Methods involving removing users
+ *
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RemoveUser {
+    /**
+     * Adds user to removed user list
+     * 
+     * @param name             String
+     * @param email            String
+     * @param securityPassword String
+     * @param acc_type         String
+     * @param userID           String
+     * @param loginPassword    String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void removeUserFromData(String name, String email, String securityPassword, String acc_type,
             String userID, String loginPassword) throws IOException {
 
@@ -55,6 +74,14 @@ public class RemoveUser {
 
     }
 
+    /**
+     * Remove user from account list
+     * 
+     * @param removeData VerifiedUser
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void deleteVerifiedUser(VerifiedUser removeData) {
         try {
             // Create Json instance
