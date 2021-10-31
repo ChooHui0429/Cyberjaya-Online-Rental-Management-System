@@ -1,8 +1,1 @@
-[
-  {
-    "name": "123124",
-    "email": "333@gmail.com",
-    "securityPassword": "0909",
-    "acc_type": "Potential Tenant"
-  }
-]
+[{"name":"123124","email":"333@gmail.com","securityPassword":"0909","acc_type":"Potential Tenant"},{"name":"12","email":"12","securityPassword":"123","acc_type":"Potential Tenant"},{"name":"123","email":"123","securityPassword":"123","acc_type":"Potential Tenant"}]

@@ -1,10 +1,1 @@
-[
-  {
-    "name": "Ali",
-    "email": "ali@gmail.com",
-    "securityPassword": "12345",
-    "acc_type": "Potential Tenant",
-    "userID": "Ali#2944_Potential Tenant",
-    "loginPassword": "ZE4oRqKku6jP4APkBb"
-  }
-]
+[{"name":"Ali","email":"ali@gmail.com","securityPassword":"12345","acc_type":"Potential Tenant","userID":"Ali#2944_Potential Tenant","loginPassword":"ZE4oRqKku6jP4APkBb"},{"name":"YapHonZhi","email":"HonZhi@gmail.com","securityPassword":"0009","acc_type":"Potential Tenant","userID":"YapHonZhi#4538_Potential Tenant","loginPassword":"55SJCC5lnYJOlJg69c"}]
