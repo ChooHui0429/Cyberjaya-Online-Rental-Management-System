@@ -41,6 +41,12 @@ import util.RemoveUser;
 import util.ManageRent;
 import util.ManageProfile;
 
+/**
+ * Root Layout, handles all scene changing and listener, calls component and methods
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class RootUI extends JPanel implements ActionListener, MouseListener {
 
     // Main Frame

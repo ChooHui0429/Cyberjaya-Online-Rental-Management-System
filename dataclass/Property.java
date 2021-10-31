@@ -1,6 +1,11 @@
 package dataclass;
 
-// Create Property Data Class
+/**
+ * Property class
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class Property {
     private String propertyID;
     private String category;

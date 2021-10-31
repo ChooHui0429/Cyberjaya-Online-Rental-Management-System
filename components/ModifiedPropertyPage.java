@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for agent and owner to view and select properties to modify
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class ModifiedPropertyPage extends JPanel {
     public ModifiedPropertyPage(JButton back, JTable data_display, JLabel notice) {
         // Modified Property Page UI

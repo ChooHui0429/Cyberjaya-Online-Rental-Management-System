@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to view property info when renting
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserPropertyRentWindow extends JFrame {
     public UserPropertyRentWindow(JButton back, JButton rent, JLabel title_ID, JLabel rentalFee, JLabel size,
             JLabel NumRoom, JLabel NumBathroom, JLabel Condition, JLabel ContactNum, JLabel address, JLabel facilities,

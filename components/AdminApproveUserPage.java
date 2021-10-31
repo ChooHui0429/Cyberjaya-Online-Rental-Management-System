@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for admin to approve user account registration
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AdminApproveUserPage extends JPanel {
     public AdminApproveUserPage(JButton back, JButton rejectUserBtn, JButton approveUserBtn, JTable data_display,
             JLabel notice) {

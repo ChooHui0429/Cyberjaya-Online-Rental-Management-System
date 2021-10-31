@@ -1,6 +1,11 @@
 package dataclass;
 
-// Create Account Data Class
+/**
+ * Verified user class, extends user account class
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class VerifiedUser extends UserAccount {
     // Create properties of Admin Data Class
     private String userID;

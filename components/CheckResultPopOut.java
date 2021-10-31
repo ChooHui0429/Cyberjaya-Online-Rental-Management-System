@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Popup Layout to show user account verification
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class CheckResultPopOut extends JFrame {
     public CheckResultPopOut(JButton ok, JLabel notice) {
         // Pop Out Notice for check account result

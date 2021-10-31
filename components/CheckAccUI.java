@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to check account verification
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class CheckAccUI extends JFrame {
     public CheckAccUI(JButton back, JButton check, JTextField email_enterField, JTextField password_enterField,
             JLabel error_message) {

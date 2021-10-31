@@ -4,6 +4,12 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to view the list of property
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserViewProperty extends JPanel {
     public UserViewProperty(JButton back, JTable data_display, JLabel title) {
         // User View Property UI

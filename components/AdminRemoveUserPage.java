@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for admin to remove user
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AdminRemoveUserPage extends JPanel {
     public AdminRemoveUserPage(JButton back, JButton removeUserBtn, JTable data_display, JLabel notice) {
 

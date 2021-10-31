@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for potential tenant main page
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserPage extends JPanel {
     public UserPage(JButton viewProperties, JButton rentedProperty, JButton logout, JButton editProfile,
             JLabel welcome_name) {

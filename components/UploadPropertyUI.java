@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for owner and agent to upload new property
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UploadPropertyUI extends JPanel {
     public UploadPropertyUI(JButton back, JButton upload, JTextField size_enterField, JTextField NumRoom_enterField,
             JTextField NumBathroom_enterField, JTextField Condition_enterField, JTextField ContactNum_enterField,

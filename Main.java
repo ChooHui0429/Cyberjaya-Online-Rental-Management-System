@@ -2,6 +2,11 @@ import javax.swing.*;
 import components.*;
 import java.io.*;
 
+/**
+ * Root of the program and Program launch directory
+ * 
+ * @author Tan Choo Hui
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException {

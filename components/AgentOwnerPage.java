@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for agent and owner main page
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AgentOwnerPage extends JPanel {
     public AgentOwnerPage(JButton uploadProperty, JButton modifiedProperties, JButton rentedProperties, JButton logout,
             JLabel title, JLabel welcome_name) {

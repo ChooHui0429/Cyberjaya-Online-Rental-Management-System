@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to view rented property
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserViewRent extends JPanel {
     public UserViewRent(JButton back, JLabel notice, JTable data_display) {
         // User View Rented Property UI

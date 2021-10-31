@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for agent and owner to accept or reject property renting
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class AgentOwnerRentWindow extends JFrame {
     public AgentOwnerRentWindow(JButton back, JButton rent, JButton reject, JLabel title_ID, JLabel userID,
             JLabel userContact, JLabel email, String selected_user) {

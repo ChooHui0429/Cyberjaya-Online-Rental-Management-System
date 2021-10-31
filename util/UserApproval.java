@@ -14,9 +14,24 @@ import com.google.gson.reflect.TypeToken;
 import dataclass.VerifiedUser;
 import dataclass.UserAccount;
 
+/**
+ * Methods involving user approval
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserApproval {
-
-    // Get all the data from table for add new account data
+    /**
+     * Approve a user registration, generates a verified account
+     * 
+     * @param name             String
+     * @param email            String
+     * @param securityPassword String
+     * @param acc_type         String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void approveUser(String name, String email, String securityPassword, String acc_type)
             throws IOException {
 
@@ -73,7 +88,17 @@ public class UserApproval {
 
     }
 
-    // Get all the data from table for add new rejected data
+    /**
+     * Reject a user registration
+     * 
+     * @param name             String
+     * @param email            String
+     * @param securityPassword String
+     * @param acc_type         String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void rejectUser(String name, String email, String securityPassword, String acc_type)
             throws IOException {
 
@@ -89,7 +114,14 @@ public class UserApproval {
         deleteRejectedUser(registerData);
     }
 
-    // Add new account data
+    /**
+     * Writes a user to verified user json
+     * 
+     * @param newAccData VerifiedUser
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void approveUserToJson(VerifiedUser newAccData) {
         try {
             // Create Json instance
@@ -117,7 +149,14 @@ public class UserApproval {
         }
     }
 
-    // Remove approved register data
+    /**
+     * Removes a user from verified user json
+     * 
+     * @param newAccData VerifiedUser
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void deleteApprovedUser(VerifiedUser newAccData) {
         try {
             // Create Json instance
@@ -151,7 +190,14 @@ public class UserApproval {
         }
     }
 
-    // Add new rejected data
+    /**
+     * Adds a user to rejected user json
+     * 
+     * @param newRejectData UserAccount
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void rejectUserToJson(UserAccount newRejectData) {
         try {
             // Create Json instance
@@ -179,7 +225,14 @@ public class UserApproval {
         }
     }
 
-    // Remove rejected register data
+    /**
+     * Remove a user from rejected user json
+     * 
+     * @param newRejectData UserAccount
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */// Remove rejected register data
     public static void deleteRejectedUser(UserAccount newRejectData) {
         try {
             // Create Json instance

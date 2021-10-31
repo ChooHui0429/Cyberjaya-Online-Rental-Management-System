@@ -1,6 +1,11 @@
 package dataclass;
 
-// Create Property Rate Class
+/**
+ * Property's rating class
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class PropertyRating {
     private String propertyID;
     private Integer rentedNum;

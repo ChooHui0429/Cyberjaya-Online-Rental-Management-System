@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for user to login
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class LoginPanel extends JPanel {
 
     public LoginPanel(JButton register, JButton login, JTextField id_enterField, JTextField password_enterField,

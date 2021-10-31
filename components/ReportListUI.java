@@ -3,6 +3,12 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Layout for report list
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class ReportListUI extends JFrame {
     public ReportListUI(JButton listProperty, JButton listActive, JButton listInactive, JButton listRate) {
 

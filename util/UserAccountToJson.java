@@ -9,9 +9,25 @@ import dataclass.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Methods involving read or writing account data
+ * 
+ * @author Tan Choo Hui
+ * @author Lim Tian Hee
+ */
 public class UserAccountToJson {
 
-    // Import User Registration for pending
+    /**
+     * Register new user to pending
+     * 
+     * @param name             String
+     * @param email            String
+     * @param securityPassword String
+     * @param acc_type         String
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static void regUserToJson(String name, String email, String securityPassword, String acc_type) {
         try {
             // Create Json instance
@@ -43,7 +59,14 @@ public class UserAccountToJson {
         }
     }
 
-    // Import New Admin to Account Data
+    /**
+     * Register new admin
+     * 
+     * @param newAccData VerifiedUser
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static VerifiedUser regAdminToJson(VerifiedUser newAccData) throws IOException {
 
         // Create Json instance
@@ -97,7 +120,15 @@ public class UserAccountToJson {
         return newAccData;
     }
 
-    // Email Checker to prevent multiple account with a single email address.
+    /**
+     * Check for identical existing email
+     * 
+     * @param newAccData VerifiedUser
+     * @return String - status of any identical existing email
+     * 
+     * @author Tan Choo Hui
+     * @author Lim Tian Hee
+     */
     public static String registrationEmailChecker(String email) throws IOException {
         String exist_notify = new String();
         // Check exist of email
